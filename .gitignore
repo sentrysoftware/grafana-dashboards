@@ -1,0 +1,5 @@
+target/
+*.bak
+.vscode
+.settings
+.project
