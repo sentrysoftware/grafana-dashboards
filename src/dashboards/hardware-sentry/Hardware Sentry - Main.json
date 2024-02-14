@@ -199,6 +199,7 @@
           "color": {
             "mode": "thresholds"
           },
+          "decimals": 0,
           "mappings": [],
           "noValue": "0%",
           "thresholds": {
@@ -2152,6 +2153,10 @@
               {
                 "id": "custom.align",
                 "value": "center"
+              },
+              {
+                "id": "decimals",
+                "value": 0
               }
             ]
           },
@@ -2245,7 +2250,7 @@
               {
                 "id": "color",
                 "value": {
-                  "mode": "continuous-RdYlGr"
+                  "mode": "thresholds"
                 }
               },
               {
@@ -2262,6 +2267,30 @@
               {
                 "id": "custom.align",
                 "value": "center"
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "red",
+                      "value": null
+                    },
+                    {
+                      "color": "green",
+                      "value": 5
+                    },
+                    {
+                      "color": "orange",
+                      "value": 10
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "decimals",
+                "value": 0
               }
             ]
           },
@@ -2274,6 +2303,10 @@
               {
                 "id": "custom.align",
                 "value": "center"
+              },
+              {
+                "id": "decimals",
+                "value": 0
               }
             ]
           },
@@ -2344,7 +2377,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "avg by (site) (hw_site_electricity_cost{site != \"\"})",
+          "expr": "avg by (site) (avg_over_time(hw_site_electricity_cost{site != \"\"}[1d]))",
           "format": "table",
           "instant": true,
           "interval": "",
@@ -2358,7 +2391,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "avg by (site) (hw_site_carbon_intensity_grams{site != \"\"})",
+          "expr": "avg by (site) (avg_over_time(hw_site_carbon_intensity_grams{site != \"\"}[1d]))",
           "format": "table",
           "hide": false,
           "instant": true,
@@ -2386,8 +2419,9 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
+          "editorMode": "code",
           "exemplar": false,
-          "expr": "sum by (site) (hw_host_power_watts{site != \"\"})",
+          "expr": "sum by (site) (avg_over_time(hw_host_power_watts{site != \"\"}[1d]))",
           "format": "table",
           "hide": false,
           "instant": true,
@@ -2400,8 +2434,9 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
+          "editorMode": "code",
           "exemplar": false,
-          "expr": "sum by (site) (hardware_sentry_host_up)",
+          "expr": "sum by (site) (avg_over_time(hardware_sentry_host_up[1d]))",
           "format": "table",
           "hide": false,
           "instant": true,
@@ -2414,8 +2449,9 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
+          "editorMode": "code",
           "exemplar": false,
-          "expr": "(sum by (site) (hardware_sentry_host_up)) / scalar(sum(hardware_sentry_host_up))",
+          "expr": "(sum by (site) (avg_over_time(hardware_sentry_host_up[1d]))) / scalar(sum(avg_over_time(hardware_sentry_host_up[1d])))",
           "format": "table",
           "hide": false,
           "instant": true,
@@ -2428,8 +2464,9 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
+          "editorMode": "code",
           "exemplar": false,
-          "expr": "avg by (site) (hw_host_ambient_temperature_celsius{site != \"\"})",
+          "expr": "avg by (site) (avg_over_time(hw_host_ambient_temperature_celsius{site != \"\"}[1d]))",
           "format": "table",
           "hide": false,
           "instant": true,
@@ -2442,8 +2479,9 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
+          "editorMode": "code",
           "exemplar": false,
-          "expr": "min by (site) (hw_host_heating_margin_celsius{site != \"\"})",
+          "expr": "min by (site) (min_over_time(hw_host_heating_margin_celsius{site != \"\"}[1d]))",
           "format": "table",
           "hide": false,
           "instant": true,
@@ -3342,12 +3380,14 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
+          "editorMode": "code",
           "exemplar": false,
           "expr": "topk(25, hw_host_ambient_temperature_celsius)",
           "format": "table",
           "instant": true,
           "interval": "",
           "legendFormat": "",
+          "range": false,
           "refId": "A"
         }
       ],
@@ -3476,12 +3516,14 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
+          "editorMode": "code",
           "exemplar": false,
           "expr": "topk(25, max by (site, host_name) (hw_temperature_celsius))",
           "format": "table",
           "instant": true,
           "interval": "",
           "legendFormat": "",
+          "range": false,
           "refId": "A"
         }
       ],
