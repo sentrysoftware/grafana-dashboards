@@ -240,6 +240,7 @@
           "color": {
             "mode": "thresholds"
           },
+          "decimals": 0,
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -2438,6 +2439,7 @@
           "color": {
             "mode": "thresholds"
           },
+          "decimals": 0,
           "links": [],
           "mappings": [],
           "max": 20,
@@ -2454,11 +2456,11 @@
                 "value": 0
               },
               {
-                "color": "orange",
+                "color": "green",
                 "value": 5
               },
               {
-                "color": "green",
+                "color": "orange",
                 "value": 10
               }
             ]
@@ -2498,7 +2500,8 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "min(hw_host_heating_margin_celsius{site=~\"$site\"})",
+          "expr": "min(min_over_time(hw_host_heating_margin_celsius{site=~\"$site\"}[1d]))",
+          "hide": false,
           "instant": true,
           "interval": "",
           "intervalFactor": 1,
@@ -2646,7 +2649,7 @@
             }
           },
           "mappings": [],
-          "max": 40,
+          "max": 15,
           "min": 0,
           "thresholds": {
             "mode": "absolute",
@@ -2862,13 +2865,11 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "exemplar": false,
-          "expr": "sum(hw_host_power_watts{site=~\"$site\"}) * (avg(hw_site_pue_ratio{site=~\"$site\"}) - 1.15) * 24 * 365 * (clamp_max(avg(hw_host_ambient_temperature_celsius{site=~\"$site\"}) + min(hw_host_heating_margin_celsius{site=~\"$site\"}) - 5 - ((avg(max_over_time(hw_host_ambient_temperature_celsius{site=~\"$site\"}[1d:1h])) - avg(hw_host_ambient_temperature_celsius{site=~\"$site\"}))), 29) - avg(hw_host_ambient_temperature_celsius{site=~\"$site\"})) * 0.05",
+          "expr": "sum(avg_over_time(hw_host_power_watts{site=~\"$site\"}[1d])) * (avg(avg_over_time(hw_site_pue_ratio{site=~\"$site\"}[1d])) - 1.15) * 24 * 365 * (clamp_max(avg(avg_over_time(hw_host_ambient_temperature_celsius{site=~\"$site\"}[1d])) + min(min_over_time(hw_host_heating_margin_celsius{site=~\"$site\"}[1d])) - 5 - ((avg(max_over_time(avg(hw_host_ambient_temperature_celsius{site=~\"$site\"})[1d:])) - avg(avg_over_time(hw_host_ambient_temperature_celsius{site=~\"$site\"}[1d])))), 29) - avg(avg_over_time(hw_host_ambient_temperature_celsius{site=~\"$site\"}[1d]))) * 0.05",
           "hide": false,
-          "instant": true,
-          "interval": "",
-          "legendFormat": "Potential Yearly Energy Savings",
-          "range": false,
+          "instant": false,
+          "legendFormat": "__auto",
+          "range": true,
           "refId": "A"
         }
       ],
@@ -2928,6 +2929,7 @@
         "y": 26
       },
       "id": 157,
+      "maxDataPoints": 1,
       "options": {
         "bucketOffset": 0,
         "bucketSize": 1,
@@ -2947,11 +2949,12 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "min by (host_name) (hw_host_heating_margin_celsius{site = \"$site\"})",
+          "expr": "min by (host_name) (min_over_time(hw_host_heating_margin_celsius{site=~\"$site\"}[1d]))",
+          "hide": false,
           "instant": true,
-          "interval": "",
-          "legendFormat": "{{hostname}}",
-          "refId": "A"
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "B"
         }
       ],
       "title": "Heating Margin Host Distribution",
@@ -3019,13 +3022,11 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "exemplar": false,
-          "expr": "sum(hw_host_power_watts{site=~\"$site\"}) * (avg(hw_site_pue_ratio{site=~\"$site\"}) - 1.15) * 24 * 365 * (clamp_max(avg(hw_host_ambient_temperature_celsius{site=~\"$site\"}) + min(hw_host_heating_margin_celsius{site=~\"$site\"}) - 5 - ((avg(max_over_time(hw_host_ambient_temperature_celsius{site=~\"$site\"}[1d:1h])) - avg(hw_host_ambient_temperature_celsius{site=~\"$site\"}))), 29) - avg(hw_host_ambient_temperature_celsius{site=~\"$site\"})) * 0.05 * avg(hw_site_electricity_cost{site=~\"$site\"}) / 1000",
+          "expr": "sum(avg_over_time(hw_host_power_watts{site=~\"$site\"}[1d])) * (avg(avg_over_time(hw_site_pue_ratio{site=~\"$site\"}[1d])) - 1.15) * 24 * 365 * (clamp_max(avg(avg_over_time(hw_host_ambient_temperature_celsius{site=~\"$site\"}[1d])) + min(min_over_time(hw_host_heating_margin_celsius{site=~\"$site\"}[1d])) - 5 - ((max_over_time(avg(hw_host_ambient_temperature_celsius{site=~\"$site\"})[1d:]) - avg(avg_over_time(hw_host_ambient_temperature_celsius{site=~\"$site\"}[1d])))), 29) - avg(avg_over_time(hw_host_ambient_temperature_celsius{site=~\"$site\"}[1d]))) * 0.05 * avg(avg_over_time(hw_site_electricity_cost{site=~\"$site\"}[1d])) / 1000",
           "hide": false,
-          "instant": true,
-          "interval": "",
-          "legendFormat": "Potential Yearly Savings",
-          "range": false,
+          "instant": false,
+          "legendFormat": "__auto",
+          "range": true,
           "refId": "A"
         }
       ],
@@ -3099,14 +3100,12 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "exemplar": false,
-          "expr": "clamp_min(clamp_max(avg(hw_host_ambient_temperature_celsius{site=~\"$site\"}) + (min(hw_host_heating_margin_celsius{site=~\"$site\"}) - 5) - (avg(max_over_time(hw_host_ambient_temperature_celsius{site=~\"$site\"}[1d:1h])) - avg(hw_host_ambient_temperature_celsius{site=~\"$site\"})), 29), 15)",
+          "expr": "clamp_min(clamp_max(avg(avg_over_time(hw_host_ambient_temperature_celsius{site=~\"$site\"}[1d])) * 2 + min(min_over_time(hw_host_heating_margin_celsius{site=~\"$site\"}[1d])) - max_over_time(avg(hw_host_ambient_temperature_celsius{site=~\"$site\"})[1d:]) - 5, 29), 15)",
           "hide": false,
-          "instant": true,
-          "interval": "",
-          "legendFormat": "Recommended Maximum Site Temperature",
-          "range": false,
-          "refId": "D"
+          "instant": false,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
         }
       ],
       "title": "Recommended Max Site Temperature",
@@ -3175,13 +3174,11 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "exemplar": false,
-          "expr": "sum(hw_host_power_watts{site=~\"$site\"}) * (avg(hw_site_pue_ratio{site=~\"$site\"}) - 1.15) * 24 * 365 * (clamp_max(avg(hw_host_ambient_temperature_celsius{site=~\"$site\"}) + min(hw_host_heating_margin_celsius{site=~\"$site\"}) - 5 - ((avg(max_over_time(hw_host_ambient_temperature_celsius{site=~\"$site\"}[1d:1h])) - avg(hw_host_ambient_temperature_celsius{site=~\"$site\"}))), 29) - avg(hw_host_ambient_temperature_celsius{site=~\"$site\"})) * 0.05 * avg(hw_site_carbon_intensity_grams{site=~\"$site\"}) / 1000 / 1000000",
+          "expr": "sum(avg_over_time(hw_host_power_watts{site=~\"$site\"}[1d])) * (avg(avg_over_time(hw_site_pue_ratio{site=~\"$site\"}[1d])) - 1.15) * 24 * 365 * (clamp_max(avg(avg_over_time(hw_host_ambient_temperature_celsius{site=~\"$site\"}[1d])) + min(min_over_time(hw_host_heating_margin_celsius{site=~\"$site\"}[1d])) - 5 - ((max_over_time(avg(hw_host_ambient_temperature_celsius{site=~\"$site\"})[1d:]) - avg(avg_over_time(hw_host_ambient_temperature_celsius{site=~\"$site\"}[1d])))), 29) - avg(avg_over_time(hw_host_ambient_temperature_celsius{site=~\"$site\"}[1d]))) * 0.05 * avg(avg_over_time(hw_site_carbon_intensity_grams{site=~\"$site\"}[1d])) / 1000 / 1000000",
           "hide": false,
-          "instant": true,
-          "interval": "",
-          "legendFormat": "Potential Yearly CO₂ Reduction",
-          "range": false,
+          "instant": false,
+          "legendFormat": "__auto",
+          "range": true,
           "refId": "A"
         }
       ],
@@ -3326,11 +3323,11 @@
                       "value": 0
                     },
                     {
-                      "color": "orange",
+                      "color": "green",
                       "value": 5
                     },
                     {
-                      "color": "green",
+                      "color": "orange",
                       "value": 10
                     }
                   ]
@@ -3498,8 +3495,8 @@
         "showHeader": true,
         "sortBy": [
           {
-            "desc": true,
-            "displayName": "Power Consumption"
+            "desc": false,
+            "displayName": "Heating Margin"
           }
         ]
       },
@@ -3524,8 +3521,9 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
+          "editorMode": "code",
           "exemplar": false,
-          "expr": "hw_host_heating_margin_celsius{site=~\"$site\"}",
+          "expr": "min_over_time(hw_host_heating_margin_celsius{site=~\"$site\"}[1d])",
           "format": "table",
           "hide": false,
           "instant": true,
@@ -3554,7 +3552,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "hw_host_ambient_temperature_celsius{site=~\"$site\"}",
+          "expr": "avg_over_time(hw_host_ambient_temperature_celsius{site=~\"$site\"}[1d])",
           "format": "table",
           "hide": false,
           "instant": true,
@@ -3786,7 +3784,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "blue"
+                "color": "blue",
+                "value": null
               }
             ]
           },
