@@ -599,7 +599,6 @@
             "mode": "fixed"
           },
           "custom": {
-            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisGridShow": false,
@@ -1293,7 +1292,6 @@
             "mode": "fixed"
           },
           "custom": {
-            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisGridShow": false,
@@ -2616,7 +2614,6 @@
             "mode": "thresholds"
           },
           "custom": {
-            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisGridShow": true,
@@ -3239,8 +3236,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               }
             ]
           },
@@ -3315,8 +3311,7 @@
                   "mode": "absolute",
                   "steps": [
                     {
-                      "color": "transparent",
-                      "value": null
+                      "color": "transparent"
                     },
                     {
                       "color": "red",
@@ -3358,10 +3353,6 @@
               "options": "Operating System"
             },
             "properties": [
-              {
-                "id": "custom.width",
-                "value": 153
-              },
               {
                 "id": "mappings",
                 "value": [
@@ -3411,6 +3402,39 @@
               {
                 "id": "unit",
                 "value": "dateTimeFromNow"
+              },
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "options": {
+                      "match": "null+nan",
+                      "result": {
+                        "color": "red",
+                        "index": 0,
+                        "text": "Unknown"
+                      }
+                    },
+                    "type": "special"
+                  }
+                ]
+              },
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "type": "color-background"
+                }
+              },
+              {
+                "id": "custom.align",
+                "value": "center"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "transparent",
+                  "mode": "fixed"
+                }
               }
             ]
           },
@@ -3447,8 +3471,7 @@
                   "mode": "absolute",
                   "steps": [
                     {
-                      "color": "transparent",
-                      "value": null
+                      "color": "transparent"
                     },
                     {
                       "color": "light-blue",
@@ -3470,11 +3493,51 @@
                 }
               }
             ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Connectors"
+            },
+            "properties": [
+              {
+                "id": "custom.align",
+                "value": "center"
+              },
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "type": "color-background"
+                }
+              },
+              {
+                "id": "color"
+              },
+              {
+                "id": "noValue",
+                "value": "0"
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "red"
+                    },
+                    {
+                      "color": "transparent",
+                      "value": 1
+                    }
+                  ]
+                }
+              }
+            ]
           }
         ]
       },
       "gridPos": {
-        "h": 12,
+        "h": 13,
         "w": 24,
         "x": 0,
         "y": 33
@@ -3495,8 +3558,8 @@
         "showHeader": true,
         "sortBy": [
           {
-            "desc": false,
-            "displayName": "Heating Margin"
+            "desc": true,
+            "displayName": "Power Consumption"
           }
         ]
       },
@@ -3507,8 +3570,9 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
+          "editorMode": "code",
           "exemplar": false,
-          "expr": "rate(hw_host_energy_joules_total{site=~\"$site\"}[1d])",
+          "expr": "round(rate(hw_host_energy_joules_total{site=~\"$site\"}[1d]))",
           "format": "table",
           "hide": false,
           "instant": true,
@@ -3558,6 +3622,36 @@
           "instant": true,
           "range": false,
           "refId": "D"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "hw_host_configured{site=~\"$site\"}",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "E"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "sum by (host_name) (hardware_sentry_connector_status{site=~\"$site\"})",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "F"
         }
       ],
       "transformations": [
@@ -3591,8 +3685,10 @@
               "Time 1": true,
               "Time 2": true,
               "Time 3": true,
+              "Time 6": true,
               "Value #A": false,
               "Value #C": true,
+              "Value #E": true,
               "__name__": true,
               "__name__ 1": true,
               "__name__ 2": true,
@@ -3600,12 +3696,14 @@
               "agent_host_name 2": true,
               "agent_host_name 3": true,
               "agent_host_name 4": true,
+              "agent_host_name 5": true,
               "fqdn": true,
               "host_id": true,
               "host_id 1": true,
               "host_id 2": true,
               "host_id 3": true,
               "host_id 4": true,
+              "host_id 5": true,
               "host_name 1": false,
               "host_name 2": true,
               "host_name 3": true,
@@ -3614,11 +3712,13 @@
               "host_type 2": true,
               "host_type 3": true,
               "host_type 4": true,
+              "host_type 5": true,
               "id": true,
               "id 1": true,
               "id 2": true,
               "id 3": true,
               "id 4": true,
+              "id 5": true,
               "instance 1": true,
               "instance 2": true,
               "instance 3": true,
@@ -3634,14 +3734,17 @@
               "location 2": true,
               "location 3": true,
               "location 4": true,
+              "location 5": true,
               "name 1": true,
               "name 2": true,
               "name 3": true,
               "name 4": true,
+              "name 5": true,
               "os_type 1": false,
               "os_type 2": true,
               "os_type 3": true,
               "os_type 4": true,
+              "os_type 5": true,
               "power_meter": true,
               "power_meter 1": true,
               "power_meter 2": true,
@@ -3653,58 +3756,70 @@
               "site 2": true,
               "site 3": true,
               "site 4": true,
+              "site 5": true,
               "zone": true,
               "zone 1": true,
               "zone 2": true,
               "zone 3": true
             },
             "indexByName": {
-              "Last Seen": 5,
-              "Time 1": 9,
-              "Time 2": 15,
-              "Time 3": 21,
+              "Last Seen": 6,
+              "Time 1": 10,
+              "Time 2": 16,
+              "Time 3": 22,
               "Time 4": 36,
+              "Time 5": 45,
+              "Time 6": 56,
               "Value #A": 2,
               "Value #B": 3,
-              "Value #C": 29,
+              "Value #C": 30,
               "Value #D": 4,
-              "__name__ 1": 32,
-              "__name__ 2": 37,
-              "agent_host_name 1": 6,
-              "agent_host_name 2": 7,
-              "agent_host_name 3": 22,
-              "agent_host_name 4": 38,
-              "host_id 1": 10,
-              "host_id 2": 16,
-              "host_id 3": 23,
-              "host_id 4": 39,
+              "Value #E": 55,
+              "Value #F": 5,
+              "__name__": 46,
+              "agent_host_name 1": 7,
+              "agent_host_name 2": 8,
+              "agent_host_name 3": 23,
+              "agent_host_name 4": 37,
+              "agent_host_name 5": 47,
+              "host_id 1": 11,
+              "host_id 2": 17,
+              "host_id 3": 24,
+              "host_id 4": 38,
+              "host_id 5": 48,
               "host_name": 0,
-              "host_type 1": 11,
-              "host_type 2": 17,
-              "host_type 3": 24,
-              "host_type 4": 40,
-              "id 1": 12,
-              "id 2": 18,
-              "id 3": 25,
-              "id 4": 41,
-              "location 1": 13,
-              "location 2": 19,
-              "location 3": 26,
-              "location 4": 42,
-              "name 1": 30,
+              "host_type 1": 12,
+              "host_type 2": 18,
+              "host_type 3": 25,
+              "host_type 4": 39,
+              "host_type 5": 49,
+              "id 1": 13,
+              "id 2": 19,
+              "id 3": 26,
+              "id 4": 40,
+              "id 5": 50,
+              "location 1": 14,
+              "location 2": 20,
+              "location 3": 27,
+              "location 4": 41,
+              "location 5": 51,
+              "name 1": 31,
               "name 2": 33,
               "name 3": 34,
-              "name 4": 43,
+              "name 4": 42,
+              "name 5": 52,
               "os_type 1": 1,
-              "os_type 2": 8,
-              "os_type 3": 27,
-              "os_type 4": 44,
+              "os_type 2": 9,
+              "os_type 3": 28,
+              "os_type 4": 43,
+              "os_type 5": 53,
               "protocol": 35,
-              "quality": 31,
-              "site 1": 14,
-              "site 2": 20,
-              "site 3": 28,
-              "site 4": 45
+              "quality": 32,
+              "site 1": 15,
+              "site 2": 21,
+              "site 3": 29,
+              "site 4": 44,
+              "site 5": 54
             },
             "renameByName": {
               "Time 1": "",
@@ -3713,6 +3828,7 @@
               "Value #C": "",
               "Value #C * 1000": "Last Seen",
               "Value #D": "Host Temperature",
+              "Value #F": "Connectors",
               "agent_host_name 1": "",
               "host_name": "Host",
               "host_name 1": "Host",
@@ -3737,7 +3853,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 45
+        "y": 46
       },
       "id": 42,
       "panels": [],
@@ -3757,7 +3873,6 @@
             "mode": "fixed"
           },
           "custom": {
-            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
@@ -3784,8 +3899,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "blue",
-                "value": null
+                "color": "blue"
               }
             ]
           },
@@ -3810,7 +3924,7 @@
         "h": 14,
         "w": 24,
         "x": 0,
-        "y": 46
+        "y": 47
       },
       "hideTimeOverride": true,
       "id": 156,
@@ -3920,7 +4034,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 60
+        "y": 61
       },
       "id": 40,
       "panels": [],
@@ -3970,7 +4084,7 @@
         "h": 3,
         "w": 3,
         "x": 0,
-        "y": 61
+        "y": 62
       },
       "id": 107,
       "interval": "1h",
@@ -4143,16 +4257,12 @@
             },
             "properties": [
               {
-                "id": "custom.width",
-                "value": 316
-              },
-              {
                 "id": "unit",
                 "value": "dateTimeFromNow"
               },
               {
                 "id": "custom.align",
-                "value": "right"
+                "value": "center"
               }
             ]
           },
@@ -4172,9 +4282,9 @@
       },
       "gridPos": {
         "h": 3,
-        "w": 21,
+        "w": 18,
         "x": 3,
-        "y": 61
+        "y": 62
       },
       "id": 89,
       "interval": "1h",
@@ -4330,10 +4440,59 @@
         }
       ],
       "type": "table"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "noValue": "2024.1",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "light-green"
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 3,
+        "x": 21,
+        "y": 62
+      },
+      "id": 159,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.2.0",
+      "title": "Dashboard Version",
+      "type": "stat"
     }
   ],
   "refresh": "30s",
   "schemaVersion": 38,
+  "style": "dark",
   "tags": [
     "hw_site"
   ],
@@ -4372,6 +4531,6 @@
   "timezone": "",
   "title": "Hardware Sentry - Site",
   "uid": "SHFBpSH7z",
-  "version": 9,
+  "version": 26,
   "weekStart": ""
 }
