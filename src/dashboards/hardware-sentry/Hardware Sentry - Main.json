@@ -829,7 +829,6 @@
             "mode": "fixed"
           },
           "custom": {
-            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisGridShow": false,
@@ -2554,7 +2553,6 @@
             "mode": "fixed"
           },
           "custom": {
-            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisGridShow": false,
@@ -2673,7 +2671,6 @@
             "mode": "fixed"
           },
           "custom": {
-            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisGridShow": false,
@@ -2791,7 +2788,6 @@
             "mode": "fixed"
           },
           "custom": {
-            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisGridShow": false,
@@ -3602,7 +3598,6 @@
             "mode": "fixed"
           },
           "custom": {
-            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
@@ -4046,7 +4041,7 @@
       },
       "gridPos": {
         "h": 5,
-        "w": 21,
+        "w": 18,
         "x": 3,
         "y": 71
       },
@@ -4207,10 +4202,59 @@
         }
       ],
       "type": "table"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "noValue": "2024.1",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "light-green"
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 3,
+        "x": 21,
+        "y": 71
+      },
+      "id": 369,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.1.5",
+      "title": "Dashboard Version",
+      "type": "stat"
     }
   ],
   "refresh": "30s",
   "schemaVersion": 38,
+  "style": "dark",
   "tags": [
     "hw_main"
   ],
@@ -4249,6 +4293,6 @@
   "timezone": "",
   "title": "Hardware Sentry - Main",
   "uid": "-GV2ChOnz",
-  "version": 9,
+  "version": 6,
   "weekStart": ""
 }

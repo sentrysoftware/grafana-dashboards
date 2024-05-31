@@ -1094,7 +1094,6 @@
             "mode": "fixed"
           },
           "custom": {
-            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisGridShow": false,
@@ -3407,7 +3406,6 @@
             "mode": "palette-classic"
           },
           "custom": {
-            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisGridShow": false,
@@ -3527,7 +3525,6 @@
             "mode": "palette-classic"
           },
           "custom": {
-            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisGridShow": false,
@@ -3805,7 +3802,6 @@
             "mode": "continuous-YlBl"
           },
           "custom": {
-            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisGridShow": false,
@@ -4382,7 +4378,6 @@
             "mode": "palette-classic"
           },
           "custom": {
-            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisGridShow": false,
@@ -4500,7 +4495,6 @@
             "mode": "palette-classic"
           },
           "custom": {
-            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisGridShow": false,
@@ -4642,7 +4636,6 @@
             "mode": "palette-classic"
           },
           "custom": {
-            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisGridShow": false,
@@ -4739,7 +4732,6 @@
             "mode": "palette-classic"
           },
           "custom": {
-            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisGridShow": false,
@@ -5006,7 +4998,6 @@
             "mode": "fixed"
           },
           "custom": {
-            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
@@ -5207,7 +5198,7 @@
       },
       "id": 193,
       "options": {
-        "colorMode": "none",
+        "colorMode": "background",
         "graphMode": "none",
         "justifyMode": "center",
         "orientation": "vertical",
@@ -5523,6 +5514,19 @@
       "type": "table"
     },
     {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 84
+      },
+      "id": 324,
+      "panels": [],
+      "title": "Hardware Sentry Agent Status",
+      "type": "row"
+    },
+    {
       "datasource": {
         "type": "prometheus",
         "uid": "${DS_PROMETHEUS}"
@@ -5562,10 +5566,10 @@
         ]
       },
       "gridPos": {
-        "h": 4,
+        "h": 3,
         "w": 3,
         "x": 0,
-        "y": 84
+        "y": 85
       },
       "id": 194,
       "interval": "1h",
@@ -5750,16 +5754,12 @@
             },
             "properties": [
               {
-                "id": "custom.width",
-                "value": 316
-              },
-              {
                 "id": "unit",
                 "value": "dateTimeFromNow"
               },
               {
                 "id": "custom.align",
-                "value": "right"
+                "value": "center"
               }
             ]
           },
@@ -5778,10 +5778,10 @@
         ]
       },
       "gridPos": {
-        "h": 4,
-        "w": 21,
+        "h": 3,
+        "w": 18,
         "x": 3,
-        "y": 84
+        "y": 85
       },
       "id": 138,
       "interval": "1h",
@@ -5819,7 +5819,6 @@
           "refId": "A"
         }
       ],
-      "title": "Hardware Sentry Agent",
       "transformations": [
         {
           "id": "calculateField",
@@ -5933,10 +5932,59 @@
         }
       ],
       "type": "table"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "noValue": "2024.1",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "light-green"
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 3,
+        "x": 21,
+        "y": 85
+      },
+      "id": 323,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.1.5",
+      "title": "Dashboard Version",
+      "type": "stat"
     }
   ],
   "refresh": "",
   "schemaVersion": 38,
+  "style": "dark",
   "tags": [
     "hw_host"
   ],
@@ -6043,6 +6091,6 @@
   "timezone": "",
   "title": "Hardware Sentry - Host",
   "uid": "c2K8skm4k",
-  "version": 9,
+  "version": 7,
   "weekStart": ""
 }
