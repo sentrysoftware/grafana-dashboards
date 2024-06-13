@@ -2,7 +2,7 @@
   "__inputs": [
     {
       "name": "DS_PROMETHEUS",
-      "label": "Prometheus",
+      "label": "prometheus",
       "description": "",
       "type": "datasource",
       "pluginId": "prometheus",
@@ -21,7 +21,7 @@
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "10.2.0"
+      "version": "11.0.0"
     },
     {
       "type": "panel",
@@ -159,7 +159,7 @@
         "content": "<h1 style=\"\">\r\n  <center>$site</center>\r\n</h1>",
         "mode": "html"
       },
-      "pluginVersion": "10.2.0",
+      "pluginVersion": "11.0.0",
       "type": "text"
     },
     {
@@ -207,10 +207,12 @@
           "fields": "",
           "values": false
         },
+        "showPercentChange": false,
         "text": {},
-        "textMode": "value"
+        "textMode": "value",
+        "wideLayout": true
       },
-      "pluginVersion": "10.2.0",
+      "pluginVersion": "11.0.0",
       "targets": [
         {
           "datasource": {
@@ -219,7 +221,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum(present_over_time(hardware_sentry_host_configured{site=~\"$site\"}[1h]))",
+          "expr": "sum(present_over_time(metricshub_host_configured{site=~\"$site\"}[1h]))",
           "instant": true,
           "interval": "",
           "legendFormat": "Hosts",
@@ -283,10 +285,12 @@
           "fields": "",
           "values": false
         },
+        "showPercentChange": false,
         "text": {},
-        "textMode": "auto"
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "pluginVersion": "10.2.0",
+      "pluginVersion": "11.0.0",
       "targets": [
         {
           "datasource": {
@@ -295,7 +299,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "count(max by (host_id, site) (hardware_sentry_connector_status{state=\"ok\", site=~\"$site\"} == 1)) / sum(present_over_time(hardware_sentry_host_configured{site=~\"$site\"}[1h]))",
+          "expr": "count(max by (host_id, site) (metricshub_connector_status{state=\"ok\", site=~\"$site\"} == 1)) / sum(present_over_time(metricshub_host_configured{site=~\"$site\"}[1h]))",
           "instant": true,
           "interval": "",
           "legendFormat": "Coverage",
@@ -353,10 +357,12 @@
           "fields": "",
           "values": false
         },
+        "showPercentChange": false,
         "text": {},
-        "textMode": "value"
+        "textMode": "value",
+        "wideLayout": true
       },
-      "pluginVersion": "10.2.0",
+      "pluginVersion": "11.0.0",
       "targets": [
         {
           "datasource": {
@@ -423,10 +429,12 @@
           "fields": "",
           "values": false
         },
+        "showPercentChange": false,
         "text": {},
-        "textMode": "value"
+        "textMode": "value",
+        "wideLayout": true
       },
-      "pluginVersion": "10.2.0",
+      "pluginVersion": "11.0.0",
       "targets": [
         {
           "datasource": {
@@ -495,6 +503,7 @@
           "values": true
         },
         "tooltip": {
+          "maxHeight": 600,
           "mode": "multi",
           "sort": "none"
         }
@@ -505,8 +514,9 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
+          "editorMode": "code",
           "exemplar": false,
-          "expr": "sum by (host_type) (hardware_sentry_host_up{site=~\"$site\"})",
+          "expr": "sum by (host_type) (metricshub_host_configured{site=~\"$site\"})",
           "instant": true,
           "interval": "",
           "legendFormat": "{{host_type}}",
@@ -565,6 +575,7 @@
           "values": true
         },
         "tooltip": {
+          "maxHeight": 600,
           "mode": "multi",
           "sort": "none"
         }
@@ -599,6 +610,7 @@
             "mode": "fixed"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisGridShow": false,
@@ -677,6 +689,7 @@
           "showLegend": false
         },
         "tooltip": {
+          "maxHeight": 600,
           "mode": "single",
           "sort": "none"
         }
@@ -690,7 +703,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "avg(avg_over_time(hw_site_pue_ratio{site=~\"$site\"}[2h]))",
+          "expr": "avg(avg_over_time(metricshub_site_pue_ratio{site=~\"$site\"}[2h]))",
           "hide": false,
           "instant": false,
           "interval": "",
@@ -749,9 +762,11 @@
           "fields": "",
           "values": false
         },
-        "textMode": "value"
+        "showPercentChange": false,
+        "textMode": "value",
+        "wideLayout": true
       },
-      "pluginVersion": "10.2.0",
+      "pluginVersion": "11.0.0",
       "targets": [
         {
           "datasource": {
@@ -760,7 +775,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "avg(avg_over_time(hw_site_pue_ratio{site=~\"$site\"}[1d]))",
+          "expr": "avg(avg_over_time(metricshub_site_pue_ratio{site=~\"$site\"}[1d]))",
           "hide": false,
           "instant": false,
           "interval": "",
@@ -818,12 +833,14 @@
           "fields": "",
           "values": false
         },
+        "showPercentChange": false,
         "text": {
           "valueSize": 32
         },
-        "textMode": "value"
+        "textMode": "value",
+        "wideLayout": true
       },
-      "pluginVersion": "10.2.0",
+      "pluginVersion": "11.0.0",
       "targets": [
         {
           "datasource": {
@@ -889,12 +906,14 @@
           "fields": "",
           "values": false
         },
+        "showPercentChange": false,
         "text": {
           "valueSize": 32
         },
-        "textMode": "value"
+        "textMode": "value",
+        "wideLayout": true
       },
-      "pluginVersion": "10.2.0",
+      "pluginVersion": "11.0.0",
       "targets": [
         {
           "datasource": {
@@ -960,12 +979,14 @@
           "fields": "",
           "values": false
         },
+        "showPercentChange": false,
         "text": {
           "valueSize": 32
         },
-        "textMode": "value"
+        "textMode": "value",
+        "wideLayout": true
       },
-      "pluginVersion": "10.2.0",
+      "pluginVersion": "11.0.0",
       "targets": [
         {
           "datasource": {
@@ -1031,12 +1052,14 @@
           "fields": "",
           "values": false
         },
+        "showPercentChange": false,
         "text": {
           "valueSize": 32
         },
-        "textMode": "value"
+        "textMode": "value",
+        "wideLayout": true
       },
-      "pluginVersion": "10.2.0",
+      "pluginVersion": "11.0.0",
       "targets": [
         {
           "datasource": {
@@ -1101,12 +1124,14 @@
           "fields": "",
           "values": false
         },
+        "showPercentChange": false,
         "text": {
           "valueSize": 32
         },
-        "textMode": "value"
+        "textMode": "value",
+        "wideLayout": true
       },
-      "pluginVersion": "10.2.0",
+      "pluginVersion": "11.0.0",
       "targets": [
         {
           "datasource": {
@@ -1115,7 +1140,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "avg(hw_site_carbon_intensity_grams{site=~\"$site\"})",
+          "expr": "avg(metricshub_site_carbon_intensity_grams{site=~\"$site\"})",
           "instant": false,
           "interval": "",
           "legendFormat": "CO₂ Intensity",
@@ -1172,12 +1197,14 @@
           "fields": "",
           "values": false
         },
+        "showPercentChange": false,
         "text": {
           "valueSize": 32
         },
-        "textMode": "value"
+        "textMode": "value",
+        "wideLayout": true
       },
-      "pluginVersion": "10.2.0",
+      "pluginVersion": "11.0.0",
       "targets": [
         {
           "datasource": {
@@ -1186,7 +1213,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "avg(hw_site_electricity_cost{site=~\"$site\"})",
+          "expr": "avg(metricshub_site_electricity_cost{site=~\"$site\"})",
           "instant": false,
           "interval": "",
           "legendFormat": "Electricity Cost",
@@ -1257,10 +1284,12 @@
           "fields": "",
           "values": false
         },
+        "showPercentChange": false,
         "text": {},
-        "textMode": "auto"
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "pluginVersion": "10.2.0",
+      "pluginVersion": "11.0.0",
       "targets": [
         {
           "datasource": {
@@ -1269,7 +1298,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum(hw_host_power_watts{site=~\"$site\"}) * scalar(avg(hw_site_pue_ratio{site=~\"$site\"}))",
+          "expr": "sum(hw_host_power_watts{site=~\"$site\"}) * scalar(avg(metricshub_site_pue_ratio{site=~\"$site\"}))",
           "instant": true,
           "interval": "",
           "legendFormat": "Total Power * PUE",
@@ -1292,6 +1321,7 @@
             "mode": "fixed"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisGridShow": false,
@@ -1362,6 +1392,7 @@
           "showLegend": false
         },
         "tooltip": {
+          "maxHeight": 600,
           "mode": "single",
           "sort": "none"
         }
@@ -1373,7 +1404,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "sum(hw_host_power_watts{site=~\"$site\"}) * scalar(avg(avg_over_time(hw_site_pue_ratio{site=~\"$site\"}[2h])))",
+          "expr": "sum(hw_host_power_watts{site=~\"$site\"}) * scalar(avg(avg_over_time(metricshub_site_pue_ratio{site=~\"$site\"}[2h])))",
           "hide": false,
           "legendFormat": "Total Power * PUE",
           "range": true,
@@ -1405,7 +1436,7 @@
         "content": "<h3 style=\"background-color:Grey\"><center>Live Data</center></h3>",
         "mode": "html"
       },
-      "pluginVersion": "10.2.0",
+      "pluginVersion": "11.0.0",
       "type": "text"
     },
     {
@@ -1430,7 +1461,7 @@
         "content": "<h3 style=\"background-color:Grey\"><center>Cumulative Data</center></h3>",
         "mode": "html"
       },
-      "pluginVersion": "10.2.0",
+      "pluginVersion": "11.0.0",
       "type": "text"
     },
     {
@@ -1479,10 +1510,12 @@
           "fields": "",
           "values": false
         },
+        "showPercentChange": false,
         "text": {},
-        "textMode": "value"
+        "textMode": "value",
+        "wideLayout": true
       },
-      "pluginVersion": "10.2.0",
+      "pluginVersion": "11.0.0",
       "targets": [
         {
           "datasource": {
@@ -1491,7 +1524,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum(increase(hw_host_energy_joules_total{site=~\"$site\"}[$__range])) * avg_over_time(avg(hw_site_pue_ratio{site=~\"$site\"})[$__range:5m]) / 3600 ",
+          "expr": "sum(increase(hw_host_energy_joules_total{site=~\"$site\"}[$__range])) * avg_over_time(avg(metricshub_site_pue_ratio{site=~\"$site\"})[$__range:5m]) / 3600 ",
           "hide": false,
           "instant": true,
           "legendFormat": "Today's Live Consumption",
@@ -1548,10 +1581,12 @@
           "fields": "",
           "values": false
         },
+        "showPercentChange": false,
         "text": {},
-        "textMode": "value"
+        "textMode": "value",
+        "wideLayout": true
       },
-      "pluginVersion": "10.2.0",
+      "pluginVersion": "11.0.0",
       "targets": [
         {
           "datasource": {
@@ -1560,7 +1595,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum(avg_over_time(sum(hw_host_power_watts{site=~\"$site\"})[1d:5m]) * avg_over_time(avg(hw_site_pue_ratio{site=~\"$site\"})[1d:5m])) * 24",
+          "expr": "sum(avg_over_time(sum(hw_host_power_watts{site=~\"$site\"})[1d:5m]) * avg_over_time(avg(metricshub_site_pue_ratio{site=~\"$site\"})[1d:5m])) * 24",
           "instant": true,
           "interval": "",
           "legendFormat": "Daily Consumption",
@@ -1615,10 +1650,12 @@
           "fields": "",
           "values": false
         },
+        "showPercentChange": false,
         "text": {},
-        "textMode": "value"
+        "textMode": "value",
+        "wideLayout": true
       },
-      "pluginVersion": "10.2.0",
+      "pluginVersion": "11.0.0",
       "targets": [
         {
           "datasource": {
@@ -1627,7 +1664,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum(avg_over_time(sum(hw_host_power_watts{site=~\"$site\"})[1d:5m]) * avg_over_time(avg(hw_site_pue_ratio{site=~\"$site\"})[1d:5m]) * avg_over_time(avg(hw_site_electricity_cost{site=~\"$site\"})[1d:5m])) * 24 / 1000",
+          "expr": "sum(avg_over_time(sum(hw_host_power_watts{site=~\"$site\"})[1d:5m]) * avg_over_time(avg(metricshub_site_pue_ratio{site=~\"$site\"})[1d:5m]) * avg_over_time(avg(metricshub_site_electricity_cost{site=~\"$site\"})[1d:5m])) * 24 / 1000",
           "hide": false,
           "instant": true,
           "legendFormat": "Daily Cost",
@@ -1682,10 +1719,12 @@
           "fields": "",
           "values": false
         },
+        "showPercentChange": false,
         "text": {},
-        "textMode": "value"
+        "textMode": "value",
+        "wideLayout": true
       },
-      "pluginVersion": "10.2.0",
+      "pluginVersion": "11.0.0",
       "targets": [
         {
           "datasource": {
@@ -1694,7 +1733,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum(avg_over_time(sum(hw_host_power_watts{site=~\"$site\"})[1d:5m]) * avg_over_time(avg(hw_site_pue_ratio{site=~\"$site\"})[1d:5m]) * avg_over_time(avg(hw_site_carbon_intensity_grams{site=~\"$site\"})[1d:5m])) * 24 / 1000 / 1000",
+          "expr": "sum(avg_over_time(sum(hw_host_power_watts{site=~\"$site\"})[1d:5m]) * avg_over_time(avg(metricshub_site_pue_ratio{site=~\"$site\"})[1d:5m]) * avg_over_time(avg(metricshub_site_carbon_intensity_grams{site=~\"$site\"})[1d:5m])) * 24 / 1000 / 1000",
           "hide": false,
           "instant": true,
           "legendFormat": "Daily CO₂ Emissions",
@@ -1752,10 +1791,12 @@
           "fields": "",
           "values": false
         },
+        "showPercentChange": false,
         "text": {},
-        "textMode": "auto"
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "pluginVersion": "10.2.0",
+      "pluginVersion": "11.0.0",
       "targets": [
         {
           "datasource": {
@@ -1772,7 +1813,6 @@
         }
       ],
       "title": "Total Power",
-      "transformations": [],
       "type": "stat"
     },
     {
@@ -1821,10 +1861,12 @@
           "fields": "",
           "values": false
         },
+        "showPercentChange": false,
         "text": {},
-        "textMode": "value"
+        "textMode": "value",
+        "wideLayout": true
       },
-      "pluginVersion": "10.2.0",
+      "pluginVersion": "11.0.0",
       "targets": [
         {
           "datasource": {
@@ -1833,7 +1875,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum(increase(hw_host_energy_joules_total{site=~\"$site\"}[$__range])) * avg_over_time(avg(hw_site_pue_ratio{site=~\"$site\"})[$__range:5m]) * avg_over_time(avg(hw_site_electricity_cost{site=~\"$site\"})[$__range:5m]) / 3600 / 1000",
+          "expr": "sum(increase(hw_host_energy_joules_total{site=~\"$site\"}[$__range])) * avg_over_time(avg(metricshub_site_pue_ratio{site=~\"$site\"})[$__range:5m]) * avg_over_time(avg(metricshub_site_electricity_cost{site=~\"$site\"})[$__range:5m]) / 3600 / 1000",
           "hide": false,
           "instant": true,
           "legendFormat": "Today's Live Cost",
@@ -1890,10 +1932,12 @@
           "fields": "",
           "values": false
         },
+        "showPercentChange": false,
         "text": {},
-        "textMode": "value"
+        "textMode": "value",
+        "wideLayout": true
       },
-      "pluginVersion": "10.2.0",
+      "pluginVersion": "11.0.0",
       "targets": [
         {
           "datasource": {
@@ -1902,7 +1946,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum(avg_over_time(sum(hw_host_power_watts{site=~\"$site\"})[30d:1h]) * avg_over_time(avg(hw_site_pue_ratio{site=~\"$site\"})[30d:1h])) * 30.437 * 24",
+          "expr": "sum(avg_over_time(sum(hw_host_power_watts{site=~\"$site\"})[30d:1h]) * avg_over_time(avg(metricshub_site_pue_ratio{site=~\"$site\"})[30d:1h])) * 30.437 * 24",
           "instant": true,
           "interval": "",
           "legendFormat": "Monthly Consumption",
@@ -1957,10 +2001,12 @@
           "fields": "",
           "values": false
         },
+        "showPercentChange": false,
         "text": {},
-        "textMode": "value"
+        "textMode": "value",
+        "wideLayout": true
       },
-      "pluginVersion": "10.2.0",
+      "pluginVersion": "11.0.0",
       "targets": [
         {
           "datasource": {
@@ -1969,7 +2015,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum(avg_over_time(sum(hw_host_power_watts{site=~\"$site\"})[30d:1h]) * avg_over_time(avg(hw_site_pue_ratio{site=~\"$site\"})[30d:1h]) * avg_over_time(avg(hw_site_electricity_cost{site=~\"$site\"})[30d:1h])) * 30.437 * 24 /1000",
+          "expr": "sum(avg_over_time(sum(hw_host_power_watts{site=~\"$site\"})[30d:1h]) * avg_over_time(avg(metricshub_site_pue_ratio{site=~\"$site\"})[30d:1h]) * avg_over_time(avg(metricshub_site_electricity_cost{site=~\"$site\"})[30d:1h])) * 30.437 * 24 /1000",
           "hide": false,
           "instant": true,
           "legendFormat": "Monthly Cost",
@@ -2025,10 +2071,12 @@
           "fields": "",
           "values": false
         },
+        "showPercentChange": false,
         "text": {},
-        "textMode": "value"
+        "textMode": "value",
+        "wideLayout": true
       },
-      "pluginVersion": "10.2.0",
+      "pluginVersion": "11.0.0",
       "targets": [
         {
           "datasource": {
@@ -2037,7 +2085,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum(avg_over_time(sum(hw_host_power_watts{site=~\"$site\"})[30d:1h]) * avg_over_time(avg(hw_site_pue_ratio{site=~\"$site\"})[30d:1h]) * avg_over_time(avg(hw_site_carbon_intensity_grams{site=~\"$site\"})[30d:1h])) * 30.437 * 24 / 1000 / 1000 / 1000",
+          "expr": "sum(avg_over_time(sum(hw_host_power_watts{site=~\"$site\"})[30d:1h]) * avg_over_time(avg(metricshub_site_pue_ratio{site=~\"$site\"})[30d:1h]) * avg_over_time(avg(metricshub_site_carbon_intensity_grams{site=~\"$site\"})[30d:1h])) * 30.437 * 24 / 1000 / 1000 / 1000",
           "hide": false,
           "instant": true,
           "legendFormat": "Monthly CO₂ Emissions",
@@ -2104,10 +2152,12 @@
           "fields": "",
           "values": false
         },
+        "showPercentChange": false,
         "text": {},
-        "textMode": "auto"
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "pluginVersion": "10.2.0",
+      "pluginVersion": "11.0.0",
       "targets": [
         {
           "datasource": {
@@ -2116,7 +2166,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "(sum(hw_host_power_watts{quality=\"estimated\", site=\"$site\"} * 15) + sum(hw_host_power_watts{quality=\"measured\", site=\"$site\"} * 5) + 10000 * (sum(present_over_time(hardware_sentry_host_configured{site=\"$site\"}[1h])) - (count(max by (host_id) (hardware_sentry_connector_status{state=\"ok\", site=\"$site\"} == 1))))) / (sum(hw_host_power_watts{site=\"$site\"}) + 100 * (sum(present_over_time(hardware_sentry_host_configured{site=\"$site\"}[1h])) - (count(max by (host_id) (hardware_sentry_connector_status{state=\"ok\", site=\"$site\"} == 1)))))",
+          "expr": "(sum(hw_host_power_watts{quality=\"estimated\", site=\"$site\"} * 15) + sum(hw_host_power_watts{quality=\"measured\", site=\"$site\"} * 5) + 10000 * (sum(present_over_time(metricshub_host_configured{site=\"$site\"}[1h])) - (count(max by (host_id) (metricshub_connector_status{state=\"ok\", site=\"$site\"} == 1))))) / (sum(hw_host_power_watts{site=\"$site\"}) + 100 * (sum(present_over_time(metricshub_host_configured{site=\"$site\"}[1h])) - (count(max by (host_id) (metricshub_connector_status{state=\"ok\", site=\"$site\"} == 1)))))",
           "hide": false,
           "instant": true,
           "legendFormat": "Margin of Error",
@@ -2181,10 +2231,12 @@
           "fields": "",
           "values": false
         },
+        "showPercentChange": false,
         "text": {},
-        "textMode": "value"
+        "textMode": "value",
+        "wideLayout": true
       },
-      "pluginVersion": "10.2.0",
+      "pluginVersion": "11.0.0",
       "targets": [
         {
           "datasource": {
@@ -2193,7 +2245,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum(increase(hw_host_energy_joules_total{site=~\"$site\"}[$__range])) * avg_over_time(avg(hw_site_pue_ratio{site=~\"$site\"})[$__range:5m]) * avg_over_time(avg(hw_site_carbon_intensity_grams{site=~\"$site\"})[$__range:5m]) / 3600 / 1000 / 1000",
+          "expr": "sum(increase(hw_host_energy_joules_total{site=~\"$site\"}[$__range])) * avg_over_time(avg(metricshub_site_pue_ratio{site=~\"$site\"})[$__range:5m]) * avg_over_time(avg(metricshub_site_carbon_intensity_grams{site=~\"$site\"})[$__range:5m]) / 3600 / 1000 / 1000",
           "hide": false,
           "instant": true,
           "legendFormat": "Today's Live CO₂ Emissions",
@@ -2250,10 +2302,12 @@
           "fields": "",
           "values": false
         },
+        "showPercentChange": false,
         "text": {},
-        "textMode": "value"
+        "textMode": "value",
+        "wideLayout": true
       },
-      "pluginVersion": "10.2.0",
+      "pluginVersion": "11.0.0",
       "targets": [
         {
           "datasource": {
@@ -2262,7 +2316,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum(avg_over_time(sum(hw_host_power_watts{site=~\"$site\"})[1y:1d]) * avg_over_time(avg(hw_site_pue_ratio{site=~\"$site\"})[1y:1d])) * 365 * 24",
+          "expr": "sum(avg_over_time(sum(hw_host_power_watts{site=~\"$site\"})[1y:1d]) * avg_over_time(avg(metricshub_site_pue_ratio{site=~\"$site\"})[1y:1d])) * 365 * 24",
           "hide": false,
           "instant": true,
           "legendFormat": "Yearly Consumption",
@@ -2318,10 +2372,12 @@
           "fields": "",
           "values": false
         },
+        "showPercentChange": false,
         "text": {},
-        "textMode": "value"
+        "textMode": "value",
+        "wideLayout": true
       },
-      "pluginVersion": "10.2.0",
+      "pluginVersion": "11.0.0",
       "targets": [
         {
           "datasource": {
@@ -2330,7 +2386,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum(avg_over_time(sum(hw_host_power_watts{site=~\"$site\"})[1y:1d]) * avg_over_time(avg(hw_site_pue_ratio{site=~\"$site\"})[1y:1d]) * avg_over_time(avg(hw_site_electricity_cost{site=~\"$site\"})[1y:1d])) * 365 * 24 / 1000",
+          "expr": "sum(avg_over_time(sum(hw_host_power_watts{site=~\"$site\"})[1y:1d]) * avg_over_time(avg(metricshub_site_pue_ratio{site=~\"$site\"})[1y:1d]) * avg_over_time(avg(metricshub_site_electricity_cost{site=~\"$site\"})[1y:1d])) * 365 * 24 / 1000",
           "hide": false,
           "instant": true,
           "legendFormat": "Yearly Cost",
@@ -2386,10 +2442,12 @@
           "fields": "",
           "values": false
         },
+        "showPercentChange": false,
         "text": {},
-        "textMode": "value"
+        "textMode": "value",
+        "wideLayout": true
       },
-      "pluginVersion": "10.2.0",
+      "pluginVersion": "11.0.0",
       "targets": [
         {
           "datasource": {
@@ -2398,7 +2456,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum(avg_over_time(sum(hw_host_power_watts{site=~\"$site\"})[1y:1d]) * avg_over_time(avg(hw_site_pue_ratio{site=~\"$site\"})[1y:1d]) * avg_over_time(avg(hw_site_carbon_intensity_grams{site=~\"$site\"})[1y:1d])) * 365 * 24 / 1000 / 1000 / 1000",
+          "expr": "sum(avg_over_time(sum(hw_host_power_watts{site=~\"$site\"})[1y:1d]) * avg_over_time(avg(metricshub_site_pue_ratio{site=~\"$site\"})[1y:1d]) * avg_over_time(avg(metricshub_site_carbon_intensity_grams{site=~\"$site\"})[1y:1d])) * 365 * 24 / 1000 / 1000 / 1000",
           "hide": false,
           "instant": true,
           "legendFormat": "Yearly CO₂ Emissions",
@@ -2487,9 +2545,11 @@
           "fields": "",
           "values": false
         },
-        "textMode": "auto"
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "pluginVersion": "10.2.0",
+      "pluginVersion": "11.0.0",
       "targets": [
         {
           "datasource": {
@@ -2571,10 +2631,12 @@
           "fields": "",
           "values": false
         },
+        "showPercentChange": false,
         "text": {},
-        "textMode": "auto"
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "pluginVersion": "10.2.0",
+      "pluginVersion": "11.0.0",
       "targets": [
         {
           "datasource": {
@@ -2583,7 +2645,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "count(hw_host_ambient_temperature_celsius{site=~\"$site\"}) / sum(present_over_time(hw_host_configured{site=~\"$site\"}[1h])) * 100",
+          "expr": "count(hw_host_ambient_temperature_celsius{site=~\"$site\"}) / sum(present_over_time(metricshub_host_configured{site=~\"$site\"}[1h])) * 100",
           "hide": false,
           "instant": true,
           "interval": "",
@@ -2614,6 +2676,7 @@
             "mode": "thresholds"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisGridShow": true,
@@ -2685,6 +2748,7 @@
           "showLegend": false
         },
         "tooltip": {
+          "maxHeight": 600,
           "mode": "multi",
           "sort": "none"
         }
@@ -2768,10 +2832,12 @@
           "fields": "",
           "values": false
         },
+        "showPercentChange": false,
         "text": {},
-        "textMode": "value"
+        "textMode": "value",
+        "wideLayout": true
       },
-      "pluginVersion": "10.2.0",
+      "pluginVersion": "11.0.0",
       "targets": [
         {
           "datasource": {
@@ -2851,10 +2917,12 @@
           "fields": "",
           "values": false
         },
+        "showPercentChange": false,
         "text": {},
-        "textMode": "auto"
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "pluginVersion": "10.2.0",
+      "pluginVersion": "11.0.0",
       "targets": [
         {
           "datasource": {
@@ -2862,7 +2930,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "sum(avg_over_time(hw_host_power_watts{site=~\"$site\"}[1d])) * (avg(avg_over_time(hw_site_pue_ratio{site=~\"$site\"}[1d])) - 1.15) * 24 * 365 * (clamp_max(avg(avg_over_time(hw_host_ambient_temperature_celsius{site=~\"$site\"}[1d])) + min(min_over_time(hw_host_heating_margin_celsius{site=~\"$site\"}[1d])) - 5 - ((avg(max_over_time(avg(hw_host_ambient_temperature_celsius{site=~\"$site\"})[1d:])) - avg(avg_over_time(hw_host_ambient_temperature_celsius{site=~\"$site\"}[1d])))), 29) - avg(avg_over_time(hw_host_ambient_temperature_celsius{site=~\"$site\"}[1d]))) * 0.05",
+          "expr": "sum(avg_over_time(hw_host_power_watts{site=~\"$site\"}[1d])) * (avg(avg_over_time(metricshub_site_pue_ratio{site=~\"$site\"}[1d])) - 1.15) * 24 * 365 * (clamp_max(avg(avg_over_time(hw_host_ambient_temperature_celsius{site=~\"$site\"}[1d])) + min(min_over_time(hw_host_heating_margin_celsius{site=~\"$site\"}[1d])) - 5 - ((avg(max_over_time(avg(hw_host_ambient_temperature_celsius{site=~\"$site\"})[1d:])) - avg(avg_over_time(hw_host_ambient_temperature_celsius{site=~\"$site\"}[1d])))), 29) - avg(avg_over_time(hw_host_ambient_temperature_celsius{site=~\"$site\"}[1d]))) * 0.05",
           "hide": false,
           "instant": false,
           "legendFormat": "__auto",
@@ -2901,7 +2969,11 @@
               "tooltip": false,
               "viz": false
             },
-            "lineWidth": 1
+            "lineWidth": 1,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            }
           },
           "decimals": 0,
           "mappings": [],
@@ -3008,10 +3080,12 @@
           "fields": "",
           "values": false
         },
+        "showPercentChange": false,
         "text": {},
-        "textMode": "auto"
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "pluginVersion": "10.2.0",
+      "pluginVersion": "11.0.0",
       "targets": [
         {
           "datasource": {
@@ -3019,7 +3093,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "sum(avg_over_time(hw_host_power_watts{site=~\"$site\"}[1d])) * (avg(avg_over_time(hw_site_pue_ratio{site=~\"$site\"}[1d])) - 1.15) * 24 * 365 * (clamp_max(avg(avg_over_time(hw_host_ambient_temperature_celsius{site=~\"$site\"}[1d])) + min(min_over_time(hw_host_heating_margin_celsius{site=~\"$site\"}[1d])) - 5 - ((max_over_time(avg(hw_host_ambient_temperature_celsius{site=~\"$site\"})[1d:]) - avg(avg_over_time(hw_host_ambient_temperature_celsius{site=~\"$site\"}[1d])))), 29) - avg(avg_over_time(hw_host_ambient_temperature_celsius{site=~\"$site\"}[1d]))) * 0.05 * avg(avg_over_time(hw_site_electricity_cost{site=~\"$site\"}[1d])) / 1000",
+          "expr": "sum(avg_over_time(hw_host_power_watts{site=~\"$site\"}[1d])) * (avg(avg_over_time(metricshub_site_pue_ratio{site=~\"$site\"}[1d])) - 1.15) * 24 * 365 * (clamp_max(avg(avg_over_time(hw_host_ambient_temperature_celsius{site=~\"$site\"}[1d])) + min(min_over_time(hw_host_heating_margin_celsius{site=~\"$site\"}[1d])) - 5 - ((max_over_time(avg(hw_host_ambient_temperature_celsius{site=~\"$site\"})[1d:]) - avg(avg_over_time(hw_host_ambient_temperature_celsius{site=~\"$site\"}[1d])))), 29) - avg(avg_over_time(hw_host_ambient_temperature_celsius{site=~\"$site\"}[1d]))) * 0.05 * avg(avg_over_time(metricshub_site_electricity_cost{site=~\"$site\"}[1d])) / 1000",
           "hide": false,
           "instant": false,
           "legendFormat": "__auto",
@@ -3086,10 +3160,12 @@
           "fields": "",
           "values": false
         },
+        "showPercentChange": false,
         "text": {},
-        "textMode": "auto"
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "pluginVersion": "10.2.0",
+      "pluginVersion": "11.0.0",
       "targets": [
         {
           "datasource": {
@@ -3106,7 +3182,6 @@
         }
       ],
       "title": "Recommended Max Site Temperature",
-      "transformations": [],
       "type": "stat"
     },
     {
@@ -3127,8 +3202,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "super-light-red",
-                "value": null
+                "color": "super-light-red"
               },
               {
                 "color": "green",
@@ -3160,10 +3234,12 @@
           "fields": "",
           "values": false
         },
+        "showPercentChange": false,
         "text": {},
-        "textMode": "auto"
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "pluginVersion": "10.2.0",
+      "pluginVersion": "11.0.0",
       "targets": [
         {
           "datasource": {
@@ -3171,7 +3247,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "sum(avg_over_time(hw_host_power_watts{site=~\"$site\"}[1d])) * (avg(avg_over_time(hw_site_pue_ratio{site=~\"$site\"}[1d])) - 1.15) * 24 * 365 * (clamp_max(avg(avg_over_time(hw_host_ambient_temperature_celsius{site=~\"$site\"}[1d])) + min(min_over_time(hw_host_heating_margin_celsius{site=~\"$site\"}[1d])) - 5 - ((max_over_time(avg(hw_host_ambient_temperature_celsius{site=~\"$site\"})[1d:]) - avg(avg_over_time(hw_host_ambient_temperature_celsius{site=~\"$site\"}[1d])))), 29) - avg(avg_over_time(hw_host_ambient_temperature_celsius{site=~\"$site\"}[1d]))) * 0.05 * avg(avg_over_time(hw_site_carbon_intensity_grams{site=~\"$site\"}[1d])) / 1000 / 1000000",
+          "expr": "sum(avg_over_time(hw_host_power_watts{site=~\"$site\"}[1d])) * (avg(avg_over_time(metricshub_site_pue_ratio{site=~\"$site\"}[1d])) - 1.15) * 24 * 365 * (clamp_max(avg(avg_over_time(hw_host_ambient_temperature_celsius{site=~\"$site\"}[1d])) + min(min_over_time(hw_host_heating_margin_celsius{site=~\"$site\"}[1d])) - 5 - ((max_over_time(avg(hw_host_ambient_temperature_celsius{site=~\"$site\"})[1d:]) - avg(avg_over_time(hw_host_ambient_temperature_celsius{site=~\"$site\"}[1d])))), 29) - avg(avg_over_time(hw_host_ambient_temperature_celsius{site=~\"$site\"}[1d]))) * 0.05 * avg(avg_over_time(metricshub_site_carbon_intensity_grams{site=~\"$site\"}[1d])) / 1000 / 1000000",
           "hide": false,
           "instant": false,
           "legendFormat": "__auto",
@@ -3563,7 +3639,7 @@
           }
         ]
       },
-      "pluginVersion": "10.2.0",
+      "pluginVersion": "11.0.0",
       "targets": [
         {
           "datasource": {
@@ -3600,8 +3676,9 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
+          "editorMode": "code",
           "exemplar": false,
-          "expr": "last_over_time(timestamp(hardware_sentry_host_up{site=~\"$site\"})[6h:])",
+          "expr": "last_over_time(timestamp(metricshub_host_up{site=~\"$site\"})[6h:])",
           "format": "table",
           "hide": false,
           "instant": true,
@@ -3630,7 +3707,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "hw_host_configured{site=~\"$site\"}",
+          "expr": "metricshub_host_configured{site=~\"$site\"}",
           "format": "table",
           "hide": false,
           "instant": true,
@@ -3645,7 +3722,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum by (host_name) (hardware_sentry_connector_status{site=~\"$site\"})",
+          "expr": "sum by (host_name) (metricshub_connector_status{site=~\"$site\"})",
           "format": "table",
           "hide": false,
           "instant": true,
@@ -3722,6 +3799,11 @@
               "instance 1": true,
               "instance 2": true,
               "instance 3": true,
+              "is_endpoint 1": true,
+              "is_endpoint 2": true,
+              "is_endpoint 3": true,
+              "is_endpoint 4": true,
+              "is_endpoint 5": true,
               "job 1": true,
               "job 2": true,
               "job 3": true,
@@ -3762,6 +3844,7 @@
               "zone 2": true,
               "zone 3": true
             },
+            "includeByName": {},
             "indexByName": {
               "Last Seen": 6,
               "Time 1": 10,
@@ -3873,6 +3956,7 @@
             "mode": "fixed"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
@@ -3947,6 +4031,7 @@
         "showValue": "always",
         "stacking": "none",
         "tooltip": {
+          "maxHeight": 600,
           "mode": "multi",
           "sort": "none"
         },
@@ -3962,7 +4047,7 @@
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "sum(avg_over_time(sum(hw_host_power_watts{site=~\"$site\"})[1d:5m]) * avg_over_time(avg(hw_site_pue_ratio{site=~\"$site\"})[1d:5m])) * 24 + ignoring(year, month, day) group_right\r\n  count_values without() (\"year\", year(timestamp(\r\n    count_values without() (\"month\", month(timestamp(\r\n\t\t\tcount_values without() (\"day\", day_of_month(timestamp(\r\n        sum(increase(hw_host_energy_joules_total{site=~\"$site\"} [1d])) / avg(increase(timestamp(hw_host_energy_joules_total{site=~\"$site\"})[1d:1d])) * 24 * avg(hw_site_pue_ratio{site=~\"$site\"})\r\n\t\t\t\t)))\r\n    )))\r\n  ))) * 0",
+          "expr": "sum(avg_over_time(sum(hw_host_power_watts{site=~\"$site\"})[1d:5m]) * avg_over_time(avg(metricshub_site_pue_ratio{site=~\"$site\"})[1d:5m])) * 24 + ignoring(year, month, day) group_right\r\n  count_values without() (\"year\", year(timestamp(\r\n    count_values without() (\"month\", month(timestamp(\r\n\t\t\tcount_values without() (\"day\", day_of_month(timestamp(\r\n        sum(increase(hw_host_energy_joules_total{site=~\"$site\"} [1d])) / avg(increase(timestamp(hw_host_energy_joules_total{site=~\"$site\"})[1d:1d])) * 24 * avg(metricshub_site_pue_ratio{site=~\"$site\"})\r\n\t\t\t\t)))\r\n    )))\r\n  ))) * 0",
           "format": "table",
           "instant": false,
           "interval": "",
@@ -4100,12 +4185,14 @@
           "fields": "",
           "values": false
         },
+        "showPercentChange": false,
         "text": {
           "valueSize": 32
         },
-        "textMode": "auto"
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "pluginVersion": "10.2.0",
+      "pluginVersion": "11.0.0",
       "targets": [
         {
           "datasource": {
@@ -4114,7 +4201,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "min_over_time(timestamp(hw_host_configured{site=~\"$site\"})[1y:1d])",
+          "expr": "min_over_time(timestamp(metricshub_host_configured{site=~\"$site\"})[1y:1d])",
           "format": "table",
           "instant": true,
           "interval": "",
@@ -4306,15 +4393,16 @@
           }
         ]
       },
-      "pluginVersion": "10.2.0",
+      "pluginVersion": "11.0.0",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
+          "editorMode": "code",
           "exemplar": false,
-          "expr": "last_over_time(timestamp(hardware_sentry_agent_info{site=~\"$site\"})[6h:])",
+          "expr": "last_over_time(timestamp(metricshub_agent_info{agent_host_name=\"$agent\"})[6h:])",
           "format": "table",
           "instant": true,
           "interval": "",
@@ -4350,8 +4438,10 @@
               "names": [
                 "agent_host_name",
                 "build_date",
-                "hc_version",
-                "Last Seen"
+                "build_number",
+                "version",
+                "Last Seen",
+                "cc_version"
               ]
             }
           }
@@ -4367,7 +4457,7 @@
               "Value #A": true,
               "__name__": true,
               "agent_host_name": false,
-              "build_number": true,
+              "build_number": false,
               "build_number 2": true,
               "hc_version 2": true,
               "host_id": true,
@@ -4399,23 +4489,13 @@
               "timestamp 1": true,
               "timestamp 2": true
             },
+            "includeByName": {},
             "indexByName": {
-              "Last Seen": 4,
-              "Time": 7,
-              "Value": 13,
+              "Last Seen": 5,
               "agent_host_name": 0,
-              "build_date": 2,
-              "build_number": 6,
-              "hc_version": 3,
-              "host_id": 8,
-              "host_name": 9,
-              "host_type": 10,
-              "job": 14,
-              "name": 15,
-              "os_type": 11,
-              "otel_version": 16,
-              "service_name": 12,
-              "site": 5,
+              "build_date": 3,
+              "build_number": 4,
+              "cc_version": 2,
               "version": 1
             },
             "renameByName": {
@@ -4423,8 +4503,9 @@
               "Value": "",
               "agent_host_name": "Hostname",
               "build_date": "Agent Build Date",
-              "build_number": "",
+              "build_number": "Build Number",
               "build_number 1": "Agent Build Number",
+              "cc_version": "Community Version",
               "hc_version": "Connectors Version",
               "hc_version 1": "Connectors Version",
               "name": "",
@@ -4452,7 +4533,7 @@
             "mode": "thresholds"
           },
           "mappings": [],
-          "noValue": "2024.1",
+          "noValue": "2024.2",
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -4483,16 +4564,17 @@
           "fields": "",
           "values": false
         },
-        "textMode": "auto"
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "pluginVersion": "10.2.0",
+      "pluginVersion": "11.0.0",
       "title": "Dashboard Version",
       "type": "stat"
     }
   ],
   "refresh": "30s",
-  "schemaVersion": 38,
-  "style": "dark",
+  "schemaVersion": 39,
   "tags": [
     "hw_site"
   ],
@@ -4504,7 +4586,7 @@
           "type": "prometheus",
           "uid": "${DS_PROMETHEUS}"
         },
-        "definition": "label_values(hw_host_configured, site)",
+        "definition": "label_values(metricshub_host_configured,site)",
         "hide": 0,
         "includeAll": false,
         "label": "Site",
@@ -4512,13 +4594,37 @@
         "name": "site",
         "options": [],
         "query": {
-          "query": "label_values(hw_host_configured, site)",
-          "refId": "StandardVariableQuery"
+          "qryType": 1,
+          "query": "label_values(metricshub_host_configured,site)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,
         "regex": "",
         "skipUrlSync": false,
         "sort": 5,
+        "type": "query"
+      },
+      {
+        "current": {},
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_PROMETHEUS}"
+        },
+        "definition": "label_values(metricshub_host_configured{site=\"$site\"},agent_host_name)",
+        "hide": 2,
+        "includeAll": false,
+        "multi": false,
+        "name": "agent",
+        "options": [],
+        "query": {
+          "qryType": 1,
+          "query": "label_values(metricshub_host_configured{site=\"$site\"},agent_host_name)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
+        },
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
         "type": "query"
       }
     ]
@@ -4527,10 +4633,11 @@
     "from": "now-7d",
     "to": "now"
   },
+  "timeRangeUpdatedDuringEditOrView": false,
   "timepicker": {},
   "timezone": "",
-  "title": "Hardware Sentry - Site",
+  "title": "Hardware Site (MetricsHub)",
   "uid": "SHFBpSH7z",
-  "version": 26,
+  "version": 19,
   "weekStart": ""
 }
