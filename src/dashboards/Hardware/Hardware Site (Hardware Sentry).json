@@ -4451,7 +4451,7 @@
             "mode": "thresholds"
           },
           "mappings": [],
-          "noValue": "2024.1",
+          "noValue": "2024.2",
           "thresholds": {
             "mode": "absolute",
             "steps": [
