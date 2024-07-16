@@ -2,7 +2,7 @@
   "__inputs": [
     {
       "name": "DS_METRICSHUB",
-      "label": "metricshub",
+      "label": "MetricsHub",
       "description": "",
       "type": "datasource",
       "pluginId": "prometheus",
@@ -27,7 +27,7 @@
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "10.4.2"
+      "version": "10.3.3"
     },
     {
       "type": "panel",
@@ -137,7 +137,7 @@
         "content": "\n<img src=\"https://metricshub.com/images/logo-darkgrey.svg\" alt=\"MetricsHub\" width=\"150\" height=\"150\">\n",
         "mode": "markdown"
       },
-      "pluginVersion": "10.4.2",
+      "pluginVersion": "10.3.3",
       "transparent": true,
       "type": "text"
     },
@@ -186,7 +186,8 @@
                 "value": 80
               }
             ]
-          }
+          },
+          "unitScale": true
         },
         "overrides": [
           {
@@ -236,7 +237,7 @@
         },
         "showHeader": true
       },
-      "pluginVersion": "10.4.2",
+      "pluginVersion": "10.3.3",
       "targets": [
         {
           "datasource": {
@@ -325,737 +326,6 @@
       },
       "fieldConfig": {
         "defaults": {
-          "color": {
-            "fixedColor": "super-light-blue",
-            "mode": "fixed"
-          },
-          "decimals": 0,
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 2,
-        "x": 2,
-        "y": 5
-      },
-      "id": 38,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showPercentChange": false,
-        "textMode": "auto",
-        "wideLayout": true
-      },
-      "pluginVersion": "10.4.2",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_METRICSHUB}"
-          },
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "count (system_cpu_utilization_ratio{site=\"$site\", host_id=\"$host_id\", system_cpu_state=\"system\"})",
-          "format": "time_series",
-          "instant": true,
-          "legendFormat": "CPU Core",
-          "range": false,
-          "refId": "A"
-        }
-      ],
-      "title": "CPU Core",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${DS_METRICSHUB}"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "fixedColor": "super-light-blue",
-            "mode": "fixed"
-          },
-          "decimals": 0,
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "bytes"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 2,
-        "x": 4,
-        "y": 5
-      },
-      "id": 39,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "area",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showPercentChange": false,
-        "textMode": "auto",
-        "wideLayout": true
-      },
-      "pluginVersion": "10.4.2",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_METRICSHUB}"
-          },
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "system_memory_limit_bytes{site=\"$site\", host_id=\"$host_id\"}",
-          "format": "time_series",
-          "instant": true,
-          "legendFormat": "Memory",
-          "range": false,
-          "refId": "A"
-        }
-      ],
-      "title": "Memory",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${DS_METRICSHUB}"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "custom": {
-            "align": "center",
-            "cellOptions": {
-              "type": "auto"
-            },
-            "inspect": false
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "bytes"
-        },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Used %"
-            },
-            "properties": [
-              {
-                "id": "unit",
-                "value": "percentunit"
-              },
-              {
-                "id": "min",
-                "value": 0
-              },
-              {
-                "id": "max",
-                "value": 1
-              },
-              {
-                "id": "custom.cellOptions",
-                "value": {
-                  "mode": "lcd",
-                  "type": "gauge",
-                  "valueDisplayMode": "text"
-                }
-              },
-              {
-                "id": "color",
-                "value": {
-                  "mode": "continuous-GrYlRd"
-                }
-              },
-              {
-                "id": "decimals",
-                "value": 0
-              }
-            ]
-          }
-        ]
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 8,
-        "x": 6,
-        "y": 5
-      },
-      "id": 73,
-      "options": {
-        "cellHeight": "sm",
-        "footer": {
-          "countRows": false,
-          "fields": "",
-          "reducer": [
-            "sum"
-          ],
-          "show": false
-        },
-        "showHeader": true,
-        "sortBy": [
-          {
-            "desc": true,
-            "displayName": "Used %"
-          }
-        ]
-      },
-      "pluginVersion": "10.4.2",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_METRICSHUB}"
-          },
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "system_volume_size_bytes{site=\"$site\", host_id=\"$host_id\"}",
-          "format": "table",
-          "instant": true,
-          "legendFormat": "__auto",
-          "range": false,
-          "refId": "A"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_METRICSHUB}"
-          },
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "system_volume_used_bytes{site=\"$site\", host_id=\"$host_id\"}",
-          "format": "table",
-          "hide": false,
-          "instant": true,
-          "legendFormat": "__auto",
-          "range": false,
-          "refId": "B"
-        }
-      ],
-      "title": "Volume",
-      "transformations": [
-        {
-          "id": "joinByField",
-          "options": {
-            "byField": "id",
-            "mode": "outer"
-          }
-        },
-        {
-          "id": "calculateField",
-          "options": {
-            "alias": "Used %",
-            "binary": {
-              "left": "Value #B",
-              "operator": "/",
-              "right": "Value #A"
-            },
-            "mode": "binary",
-            "reduce": {
-              "reducer": "sum"
-            }
-          }
-        },
-        {
-          "id": "organize",
-          "options": {
-            "excludeByName": {
-              "Time 1": true,
-              "Time 2": true,
-              "Value #B": true,
-              "__name__ 1": true,
-              "__name__ 2": true,
-              "agent_host_name 1": true,
-              "agent_host_name 2": true,
-              "connector_id 1": true,
-              "connector_id 2": true,
-              "host_id 1": true,
-              "host_id 2": true,
-              "host_name 1": true,
-              "host_name 2": true,
-              "host_type 1": true,
-              "host_type 2": true,
-              "label 2": true,
-              "name 2": true,
-              "os_type 1": true,
-              "os_type 2": true,
-              "site 1": true,
-              "site 2": true
-            },
-            "includeByName": {},
-            "indexByName": {
-              "Time 1": 1,
-              "Time 2": 13,
-              "Used %": 25,
-              "Value #A": 12,
-              "Value #B": 24,
-              "__name__ 1": 2,
-              "__name__ 2": 14,
-              "agent_host_name 1": 3,
-              "agent_host_name 2": 15,
-              "connector_id 1": 4,
-              "connector_id 2": 16,
-              "host_id 1": 5,
-              "host_id 2": 17,
-              "host_name 1": 6,
-              "host_name 2": 18,
-              "host_type 1": 7,
-              "host_type 2": 19,
-              "id": 0,
-              "label 1": 9,
-              "label 2": 20,
-              "name 1": 8,
-              "name 2": 21,
-              "os_type 1": 10,
-              "os_type 2": 22,
-              "site 1": 11,
-              "site 2": 23
-            },
-            "renameByName": {
-              "Value #A": "Size",
-              "Value #B": "Used",
-              "__name__ 1": "",
-              "id": "Volume",
-              "label 1": "Label",
-              "name 1": "Letter",
-              "os_type 1": ""
-            }
-          }
-        }
-      ],
-      "type": "table"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${DS_METRICSHUB}"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "fixedColor": "super-light-blue",
-            "mode": "fixed"
-          },
-          "custom": {
-            "align": "auto",
-            "cellOptions": {
-              "type": "auto"
-            },
-            "filterable": true,
-            "inspect": false
-          },
-          "decimals": 1,
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "decbytes"
-        },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "% Used"
-            },
-            "properties": [
-              {
-                "id": "unit",
-                "value": "percentunit"
-              },
-              {
-                "id": "decimals",
-                "value": 0
-              },
-              {
-                "id": "custom.cellOptions",
-                "value": {
-                  "mode": "lcd",
-                  "type": "gauge",
-                  "valueDisplayMode": "text"
-                }
-              },
-              {
-                "id": "color",
-                "value": {
-                  "mode": "continuous-GrYlRd"
-                }
-              },
-              {
-                "id": "min",
-                "value": 0
-              },
-              {
-                "id": "max",
-                "value": 1
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Used"
-            },
-            "properties": [
-              {
-                "id": "custom.cellOptions",
-                "value": {
-                  "type": "color-text"
-                }
-              },
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "red",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Free"
-            },
-            "properties": [
-              {
-                "id": "custom.cellOptions",
-                "value": {
-                  "type": "color-text"
-                }
-              },
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "green",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Type"
-            },
-            "properties": [
-              {
-                "id": "custom.hidden",
-                "value": true
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Free"
-            },
-            "properties": [
-              {
-                "id": "custom.hidden",
-                "value": true
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Used"
-            },
-            "properties": [
-              {
-                "id": "custom.hidden",
-                "value": true
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Total"
-            },
-            "properties": [
-              {
-                "id": "custom.hidden",
-                "value": true
-              }
-            ]
-          }
-        ]
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 6,
-        "x": 14,
-        "y": 5
-      },
-      "id": 56,
-      "options": {
-        "cellHeight": "sm",
-        "footer": {
-          "countRows": false,
-          "fields": "",
-          "reducer": [
-            "sum"
-          ],
-          "show": false
-        },
-        "showHeader": false,
-        "sortBy": []
-      },
-      "pluginVersion": "10.4.2",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_METRICSHUB}"
-          },
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "system_filesystem_usage_bytes{site=\"$site\", host_id=\"$host_id\", system_filesystem_state=\"free\"}",
-          "format": "table",
-          "hide": false,
-          "instant": true,
-          "legendFormat": "__auto",
-          "range": false,
-          "refId": "A"
-        }
-      ],
-      "title": "Filesystem",
-      "transformations": [
-        {
-          "id": "organize",
-          "options": {
-            "excludeByName": {
-              "Time": true,
-              "Time 1": true,
-              "Time 2": true,
-              "Value": true,
-              "Value #A": true,
-              "__name__": true,
-              "__name__ 1": true,
-              "__name__ 2": true,
-              "agent_host_name": true,
-              "agent_host_name 1": true,
-              "agent_host_name 2": true,
-              "connector_id": true,
-              "connector_id 1": true,
-              "connector_id 2": true,
-              "host_id": true,
-              "host_id 1": true,
-              "host_id 2": true,
-              "host_name": true,
-              "host_name 1": true,
-              "host_name 2": true,
-              "host_type": true,
-              "host_type 1": true,
-              "host_type 2": true,
-              "os_type": true,
-              "os_type 1": true,
-              "os_type 2": true,
-              "site": true,
-              "site 1": true,
-              "site 2": true,
-              "system_filesystem_device": true,
-              "system_filesystem_device 1": true,
-              "system_filesystem_device 2": true,
-              "system_filesystem_mountpoint": false,
-              "system_filesystem_mountpoint 1": true,
-              "system_filesystem_mountpoint 2": true,
-              "system_filesystem_state": true,
-              "system_filesystem_state 1": true,
-              "system_filesystem_state 2": true,
-              "system_filesystem_type": true,
-              "system_filesystem_type 2": true
-            },
-            "includeByName": {},
-            "indexByName": {},
-            "renameByName": {
-              "Value #A": "Free",
-              "Value #B": "Used",
-              "system_filesystem_type 1": "Type",
-              "system_filesystem_type 2": ""
-            }
-          }
-        }
-      ],
-      "type": "table"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${DS_METRICSHUB}"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "custom": {
-            "align": "auto",
-            "cellOptions": {
-              "type": "auto"
-            },
-            "inspect": false
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 4,
-        "x": 20,
-        "y": 5
-      },
-      "id": 63,
-      "options": {
-        "cellHeight": "sm",
-        "footer": {
-          "countRows": false,
-          "enablePagination": false,
-          "fields": "",
-          "reducer": [
-            "sum"
-          ],
-          "show": false
-        },
-        "showHeader": false
-      },
-      "pluginVersion": "10.4.2",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_METRICSHUB}"
-          },
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "system_network_io_bytes_total{site=\"$site\", host_id=\"$host_id\", network_io_direction=\"receive\"}",
-          "format": "table",
-          "instant": true,
-          "legendFormat": "{{id}}",
-          "range": false,
-          "refId": "A"
-        }
-      ],
-      "title": "Network",
-      "transformations": [
-        {
-          "id": "organize",
-          "options": {
-            "excludeByName": {
-              "Time": true,
-              "Value": true,
-              "__name__": true,
-              "agent_host_name": true,
-              "connector_id": true,
-              "host_id": true,
-              "host_name": true,
-              "host_type": true,
-              "network_io_direction": true,
-              "os_type": true,
-              "site": true
-            },
-            "includeByName": {},
-            "indexByName": {},
-            "renameByName": {}
-          }
-        }
-      ],
-      "type": "table"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${DS_METRICSHUB}"
-      },
-      "fieldConfig": {
-        "defaults": {
           "custom": {
             "align": "center",
             "cellOptions": {
@@ -1115,7 +385,8 @@
                 "value": 80
               }
             ]
-          }
+          },
+          "unitScale": true
         },
         "overrides": [
           {
@@ -1138,7 +409,7 @@
         "h": 4,
         "w": 22,
         "x": 2,
-        "y": 9
+        "y": 5
       },
       "id": 67,
       "options": {
@@ -1153,7 +424,7 @@
         },
         "showHeader": true
       },
-      "pluginVersion": "10.4.2",
+      "pluginVersion": "10.3.3",
       "targets": [
         {
           "datasource": {
@@ -1320,6 +591,471 @@
       "type": "table"
     },
     {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_METRICSHUB}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "super-light-blue",
+            "mode": "fixed"
+          },
+          "decimals": 0,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unitScale": true
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 2,
+        "x": 2,
+        "y": 9
+      },
+      "id": 38,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "10.3.3",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_METRICSHUB}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "count (system_cpu_utilization_ratio{site=\"$site\", host_id=\"$host_id\", system_cpu_state=\"system\"})",
+          "format": "time_series",
+          "instant": true,
+          "legendFormat": "CPU Core",
+          "range": false,
+          "refId": "A"
+        }
+      ],
+      "title": "CPU Core",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_METRICSHUB}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "super-light-blue",
+            "mode": "fixed"
+          },
+          "decimals": 0,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "bytes",
+          "unitScale": true
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 2,
+        "x": 4,
+        "y": 9
+      },
+      "id": 39,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "10.3.3",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_METRICSHUB}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "system_memory_limit_bytes{site=\"$site\", host_id=\"$host_id\"}",
+          "format": "time_series",
+          "instant": true,
+          "legendFormat": "Memory",
+          "range": false,
+          "refId": "A"
+        }
+      ],
+      "title": "Memory",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_METRICSHUB}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "center",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "bytes",
+          "unitScale": true
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Size"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "bytes"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Usage"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "percentunit"
+              },
+              {
+                "id": "custom.minWidth",
+                "value": 0
+              },
+              {
+                "id": "max",
+                "value": 1
+              },
+              {
+                "id": "decimals",
+                "value": 0
+              },
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "lcd",
+                  "type": "gauge",
+                  "valueDisplayMode": "color"
+                }
+              },
+              {
+                "id": "color",
+                "value": {
+                  "mode": "continuous-GrYlRd"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 13,
+        "x": 6,
+        "y": 9
+      },
+      "id": 73,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": true,
+            "displayName": "Usage"
+          }
+        ]
+      },
+      "pluginVersion": "10.3.3",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_METRICSHUB}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "system_filesystem_size_bytes{site=\"$site\", host_id=\"$host_id\"}",
+          "format": "table",
+          "instant": true,
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_METRICSHUB}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "system_filesystem_used_ratio{site=\"$site\", host_id=\"$host_id\"}",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "B"
+        }
+      ],
+      "title": "Filesystem",
+      "transformations": [
+        {
+          "id": "joinByField",
+          "options": {
+            "byField": "id",
+            "mode": "outer"
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Time 1": true,
+              "Time 2": true,
+              "__name__ 1": true,
+              "__name__ 2": true,
+              "agent_host_name 1": true,
+              "agent_host_name 2": true,
+              "connector_id 1": true,
+              "connector_id 2": true,
+              "host_id 1": true,
+              "host_id 2": true,
+              "host_name 1": true,
+              "host_name 2": true,
+              "host_type 1": true,
+              "host_type 2": true,
+              "label 2": true,
+              "name 2": true,
+              "os_type 1": true,
+              "os_type 2": true,
+              "site 1": true,
+              "site 2": true
+            },
+            "includeByName": {},
+            "indexByName": {
+              "Time 1": 1,
+              "Time 2": 13,
+              "Value #A": 12,
+              "Value #B": 24,
+              "__name__ 1": 2,
+              "__name__ 2": 14,
+              "agent_host_name 1": 3,
+              "agent_host_name 2": 15,
+              "connector_id 1": 4,
+              "connector_id 2": 16,
+              "host_id 1": 5,
+              "host_id 2": 17,
+              "host_name 1": 6,
+              "host_name 2": 18,
+              "host_type 1": 7,
+              "host_type 2": 19,
+              "id": 0,
+              "label 1": 9,
+              "label 2": 20,
+              "name 1": 8,
+              "name 2": 21,
+              "os_type 1": 10,
+              "os_type 2": 22,
+              "site 1": 11,
+              "site 2": 23
+            },
+            "renameByName": {
+              "Time 1": "",
+              "Time 2": "",
+              "Value #A": "Size",
+              "Value #B": "Usage",
+              "id": "Filesystem",
+              "label 1": "Label",
+              "name 1": "Letter"
+            }
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_METRICSHUB}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unitScale": true
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 5,
+        "x": 19,
+        "y": 9
+      },
+      "id": 63,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "enablePagination": false,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": false
+      },
+      "pluginVersion": "10.3.3",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_METRICSHUB}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "system_network_io_bytes_total{site=\"$site\", host_id=\"$host_id\", network_io_direction=\"receive\"}",
+          "format": "table",
+          "instant": true,
+          "legendFormat": "{{id}}",
+          "range": false,
+          "refId": "A"
+        }
+      ],
+      "title": "Network",
+      "transformations": [
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Time": true,
+              "Value": true,
+              "__name__": true,
+              "agent_host_name": true,
+              "connector_id": true,
+              "host_id": true,
+              "host_name": true,
+              "host_type": true,
+              "network_io_direction": true,
+              "os_type": true,
+              "site": true
+            },
+            "includeByName": {},
+            "indexByName": {},
+            "renameByName": {}
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
       "collapsed": false,
       "gridPos": {
         "h": 1,
@@ -1350,7 +1086,8 @@
             }
           },
           "mappings": [],
-          "unit": "seconde"
+          "unit": "seconde",
+          "unitScale": true
         },
         "overrides": [
           {
@@ -1479,7 +1216,8 @@
               }
             ]
           },
-          "unit": "percentunit"
+          "unit": "percentunit",
+          "unitScale": true
         },
         "overrides": []
       },
@@ -1505,7 +1243,7 @@
         "showThresholdMarkers": true,
         "sizing": "auto"
       },
-      "pluginVersion": "10.4.2",
+      "pluginVersion": "10.3.3",
       "targets": [
         {
           "datasource": {
@@ -1580,7 +1318,8 @@
               }
             ]
           },
-          "unit": "percentunit"
+          "unit": "percentunit",
+          "unitScale": true
         },
         "overrides": []
       },
@@ -1651,7 +1390,8 @@
             }
           },
           "mappings": [],
-          "unit": "bytes"
+          "unit": "bytes",
+          "unitScale": true
         },
         "overrides": [
           {
@@ -1831,7 +1571,8 @@
               }
             ]
           },
-          "unit": "percentunit"
+          "unit": "percentunit",
+          "unitScale": true
         },
         "overrides": []
       },
@@ -1907,7 +1648,8 @@
               }
             ]
           },
-          "unit": "bytes"
+          "unit": "bytes",
+          "unitScale": true
         },
         "overrides": [
           {
@@ -1967,7 +1709,7 @@
         "sizing": "auto",
         "valueMode": "text"
       },
-      "pluginVersion": "10.4.2",
+      "pluginVersion": "10.3.3",
       "targets": [
         {
           "datasource": {
@@ -2028,7 +1770,8 @@
                 "value": 80
               }
             ]
-          }
+          },
+          "unitScale": true
         },
         "overrides": []
       },
@@ -2052,7 +1795,7 @@
         },
         "showHeader": false
       },
-      "pluginVersion": "10.4.2",
+      "pluginVersion": "10.3.3",
       "targets": [
         {
           "datasource": {
@@ -2152,7 +1895,8 @@
               }
             ]
           },
-          "unit": "binBps"
+          "unit": "binBps",
+          "unitScale": true
         },
         "overrides": [
           {
@@ -2279,7 +2023,8 @@
                 "value": 100
               }
             ]
-          }
+          },
+          "unitScale": true
         },
         "overrides": []
       },
@@ -2307,7 +2052,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "10.4.2",
+      "pluginVersion": "10.3.3",
       "targets": [
         {
           "datasource": {
@@ -2346,18 +2091,15 @@
       "fieldConfig": {
         "defaults": {
           "color": {
-            "fixedColor": "super-light-blue",
-            "mode": "fixed"
+            "mode": "thresholds"
           },
           "custom": {
-            "align": "auto",
+            "align": "center",
             "cellOptions": {
               "type": "auto"
             },
-            "filterable": true,
             "inspect": false
           },
-          "decimals": 1,
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -2372,18 +2114,39 @@
               }
             ]
           },
-          "unit": "decbytes"
+          "unit": "bytes",
+          "unitScale": true
         },
         "overrides": [
           {
             "matcher": {
               "id": "byName",
-              "options": "% Used"
+              "options": "Size"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "bytes"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Usage"
             },
             "properties": [
               {
                 "id": "unit",
                 "value": "percentunit"
+              },
+              {
+                "id": "custom.minWidth",
+                "value": 0
+              },
+              {
+                "id": "max",
+                "value": 1
               },
               {
                 "id": "decimals",
@@ -2394,7 +2157,7 @@
                 "value": {
                   "mode": "lcd",
                   "type": "gauge",
-                  "valueDisplayMode": "text"
+                  "valueDisplayMode": "color"
                 }
               },
               {
@@ -2402,68 +2165,18 @@
                 "value": {
                   "mode": "continuous-GrYlRd"
                 }
-              },
-              {
-                "id": "min",
-                "value": 0
-              },
-              {
-                "id": "max",
-                "value": 1
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Used"
-            },
-            "properties": [
-              {
-                "id": "custom.cellOptions",
-                "value": {
-                  "type": "color-text"
-                }
-              },
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "red",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Free"
-            },
-            "properties": [
-              {
-                "id": "custom.cellOptions",
-                "value": {
-                  "type": "color-text"
-                }
-              },
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "green",
-                  "mode": "fixed"
-                }
               }
             ]
           }
         ]
       },
       "gridPos": {
-        "h": 9,
+        "h": 10,
         "w": 24,
         "x": 0,
         "y": 51
       },
-      "id": 48,
+      "id": 76,
       "options": {
         "cellHeight": "sm",
         "footer": {
@@ -2477,12 +2190,12 @@
         "showHeader": true,
         "sortBy": [
           {
-            "desc": false,
-            "displayName": "ID"
+            "desc": true,
+            "displayName": "Usage"
           }
         ]
       },
-      "pluginVersion": "10.4.2",
+      "pluginVersion": "10.3.3",
       "targets": [
         {
           "datasource": {
@@ -2491,9 +2204,8 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "system_filesystem_usage_bytes{site=\"$site\", host_id=\"$host_id\", system_filesystem_state=\"free\"}",
+          "expr": "system_filesystem_size_bytes{site=\"$site\", host_id=\"$host_id\"}",
           "format": "table",
-          "hide": false,
           "instant": true,
           "legendFormat": "__auto",
           "range": false,
@@ -2506,7 +2218,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "system_filesystem_usage_bytes{site=\"$site\", host_id=\"$host_id\", system_filesystem_state=\"used\"}",
+          "expr": "system_filesystem_used_ratio{site=\"$site\", host_id=\"$host_id\"}",
           "format": "table",
           "hide": false,
           "instant": true,
@@ -2521,7 +2233,7 @@
           "id": "joinByField",
           "options": {
             "byField": "id",
-            "mode": "outerTabular"
+            "mode": "outer"
           }
         },
         {
@@ -2530,8 +2242,6 @@
             "excludeByName": {
               "Time 1": true,
               "Time 2": true,
-              "Value #A": true,
-              "Value #B": true,
               "__name__ 1": true,
               "__name__ 2": true,
               "agent_host_name 1": true,
@@ -2544,142 +2254,54 @@
               "host_name 2": true,
               "host_type 1": true,
               "host_type 2": true,
+              "label 2": true,
+              "name 2": true,
               "os_type 1": true,
               "os_type 2": true,
               "site 1": true,
-              "site 2": true,
-              "system_filesystem_device 1": true,
-              "system_filesystem_device 2": true,
-              "system_filesystem_mountpoint 1": false,
-              "system_filesystem_mountpoint 2": true,
-              "system_filesystem_state 1": true,
-              "system_filesystem_state 2": true,
-              "system_filesystem_type 2": true
+              "site 2": true
             },
             "includeByName": {},
-            "indexByName": {},
+            "indexByName": {
+              "Time 1": 1,
+              "Time 2": 13,
+              "Value #A": 12,
+              "Value #B": 24,
+              "__name__ 1": 2,
+              "__name__ 2": 14,
+              "agent_host_name 1": 3,
+              "agent_host_name 2": 15,
+              "connector_id 1": 4,
+              "connector_id 2": 16,
+              "host_id 1": 5,
+              "host_id 2": 17,
+              "host_name 1": 6,
+              "host_name 2": 18,
+              "host_type 1": 7,
+              "host_type 2": 19,
+              "id": 0,
+              "label 1": 9,
+              "label 2": 20,
+              "name 1": 8,
+              "name 2": 21,
+              "os_type 1": 10,
+              "os_type 2": 22,
+              "site 1": 11,
+              "site 2": 23
+            },
             "renameByName": {
-              "Value #A": "",
-              "Value #B": "",
-              "id": "ID",
-              "system_filesystem_device 1": "",
-              "system_filesystem_mountpoint 1": "Mount Point",
-              "system_filesystem_type 1": "Type",
-              "system_filesystem_type 2": ""
+              "Time 1": "",
+              "Time 2": "",
+              "Value #A": "Size",
+              "Value #B": "Usage",
+              "id": "Filesystem",
+              "label 1": "Label",
+              "name 1": "Letter"
             }
           }
         }
       ],
       "type": "table"
-    },
-    {
-      "collapsed": false,
-      "gridPos": {
-        "h": 1,
-        "w": 24,
-        "x": 0,
-        "y": 60
-      },
-      "id": 32,
-      "panels": [],
-      "title": "Disk",
-      "type": "row"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${DS_METRICSHUB}"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisBorderShow": false,
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 16,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "insertNulls": false,
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "bytes"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 9,
-        "w": 8,
-        "x": 0,
-        "y": 61
-      },
-      "id": 68,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": true
-        },
-        "tooltip": {
-          "mode": "single",
-          "sort": "none"
-        }
-      },
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_METRICSHUB}"
-          },
-          "editorMode": "code",
-          "expr": "irate (system_disk_operations_bytes{site=\"$site\", host_id=\"$host_id\"}[3m])",
-          "instant": false,
-          "legendFormat": "{{id}} {{direction}}",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "Disk Activity",
-      "type": "timeseries"
     },
     {
       "datasource": {
@@ -2743,17 +2365,132 @@
               }
             ]
           },
-          "unit": "percentunit"
+          "unit": "percentunit",
+          "unitScale": true
         },
         "overrides": []
       },
       "gridPos": {
         "h": 9,
-        "w": 8,
-        "x": 8,
+        "w": 24,
+        "x": 0,
         "y": 61
       },
       "id": 75,
+      "options": {
+        "legend": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true,
+          "sortBy": "Last *",
+          "sortDesc": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_METRICSHUB}"
+          },
+          "editorMode": "code",
+          "expr": "system_filesystem_used_ratio{site=\"$site\", host_id=\"$host_id\"}",
+          "instant": false,
+          "legendFormat": "{{name}} {{id}} ",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Usage",
+      "type": "timeseries"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 70
+      },
+      "id": 32,
+      "panels": [],
+      "title": "Disk",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_METRICSHUB}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 16,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "bytes",
+          "unitScale": true
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 24,
+        "x": 0,
+        "y": 71
+      },
+      "id": 68,
       "options": {
         "legend": {
           "calcs": [],
@@ -2773,238 +2510,15 @@
             "uid": "${DS_METRICSHUB}"
           },
           "editorMode": "code",
-          "expr": "system_volume_used_ratio{site=\"$site\", host_id=\"$host_id\"}",
+          "expr": "irate (system_disk_operations_bytes{site=\"$site\", host_id=\"$host_id\"}[3m])",
           "instant": false,
-          "legendFormat": "{{id}}",
+          "legendFormat": "{{id}} {{direction}}",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "Usage",
+      "title": "Disk Activity",
       "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${DS_METRICSHUB}"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "custom": {
-            "align": "center",
-            "cellOptions": {
-              "type": "auto"
-            },
-            "inspect": false
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "bytes"
-        },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Used %"
-            },
-            "properties": [
-              {
-                "id": "unit",
-                "value": "percentunit"
-              },
-              {
-                "id": "min",
-                "value": 0
-              },
-              {
-                "id": "max",
-                "value": 1
-              },
-              {
-                "id": "custom.cellOptions",
-                "value": {
-                  "mode": "lcd",
-                  "type": "gauge",
-                  "valueDisplayMode": "text"
-                }
-              },
-              {
-                "id": "color",
-                "value": {
-                  "mode": "continuous-GrYlRd"
-                }
-              },
-              {
-                "id": "decimals",
-                "value": 0
-              }
-            ]
-          }
-        ]
-      },
-      "gridPos": {
-        "h": 9,
-        "w": 8,
-        "x": 16,
-        "y": 61
-      },
-      "id": 74,
-      "options": {
-        "cellHeight": "sm",
-        "footer": {
-          "countRows": false,
-          "fields": "",
-          "reducer": [
-            "sum"
-          ],
-          "show": false
-        },
-        "showHeader": true,
-        "sortBy": [
-          {
-            "desc": true,
-            "displayName": "Used %"
-          }
-        ]
-      },
-      "pluginVersion": "10.4.2",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_METRICSHUB}"
-          },
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "system_volume_size_bytes{site=\"$site\", host_id=\"$host_id\"}",
-          "format": "table",
-          "instant": true,
-          "legendFormat": "__auto",
-          "range": false,
-          "refId": "A"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_METRICSHUB}"
-          },
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "system_volume_used_bytes{site=\"$site\", host_id=\"$host_id\"}",
-          "format": "table",
-          "hide": false,
-          "instant": true,
-          "legendFormat": "__auto",
-          "range": false,
-          "refId": "B"
-        }
-      ],
-      "title": "Volum",
-      "transformations": [
-        {
-          "id": "joinByField",
-          "options": {
-            "byField": "id",
-            "mode": "outer"
-          }
-        },
-        {
-          "id": "calculateField",
-          "options": {
-            "alias": "Used %",
-            "binary": {
-              "left": "Value #B",
-              "operator": "/",
-              "right": "Value #A"
-            },
-            "mode": "binary",
-            "reduce": {
-              "reducer": "sum"
-            }
-          }
-        },
-        {
-          "id": "organize",
-          "options": {
-            "excludeByName": {
-              "Time 1": true,
-              "Time 2": true,
-              "Value #B": true,
-              "__name__ 1": true,
-              "__name__ 2": true,
-              "agent_host_name 1": true,
-              "agent_host_name 2": true,
-              "connector_id 1": true,
-              "connector_id 2": true,
-              "host_id 1": true,
-              "host_id 2": true,
-              "host_name 1": true,
-              "host_name 2": true,
-              "host_type 1": true,
-              "host_type 2": true,
-              "label 2": true,
-              "name 2": true,
-              "os_type 1": true,
-              "os_type 2": true,
-              "site 1": true,
-              "site 2": true
-            },
-            "includeByName": {},
-            "indexByName": {
-              "Time 1": 1,
-              "Time 2": 13,
-              "Used %": 25,
-              "Value #A": 12,
-              "Value #B": 24,
-              "__name__ 1": 2,
-              "__name__ 2": 14,
-              "agent_host_name 1": 3,
-              "agent_host_name 2": 15,
-              "connector_id 1": 4,
-              "connector_id 2": 16,
-              "host_id 1": 5,
-              "host_id 2": 17,
-              "host_name 1": 6,
-              "host_name 2": 18,
-              "host_type 1": 7,
-              "host_type 2": 19,
-              "id": 0,
-              "label 1": 9,
-              "label 2": 20,
-              "name 1": 8,
-              "name 2": 21,
-              "os_type 1": 10,
-              "os_type 2": 22,
-              "site 1": 11,
-              "site 2": 23
-            },
-            "renameByName": {
-              "Value #A": "Size",
-              "Value #B": "Used",
-              "id": "Volum",
-              "label 1": "Label",
-              "name 1": "Letter",
-              "os_type 1": ""
-            }
-          }
-        }
-      ],
-      "type": "table"
     },
     {
       "collapsed": false,
@@ -3012,7 +2526,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 70
+        "y": 80
       },
       "id": 29,
       "panels": [],
@@ -3056,15 +2570,15 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
                 "value": 80
               }
             ]
-          }
+          },
+          "unitScale": true
         },
         "overrides": [
           {
@@ -3123,7 +2637,7 @@
         "h": 5,
         "w": 24,
         "x": 0,
-        "y": 71
+        "y": 81
       },
       "id": 35,
       "options": {
@@ -3138,7 +2652,7 @@
         },
         "showHeader": true
       },
-      "pluginVersion": "10.4.2",
+      "pluginVersion": "10.3.3",
       "targets": [
         {
           "datasource": {
@@ -3250,8 +2764,8 @@
       {
         "current": {
           "selected": false,
-          "text": "metricshub",
-          "value": "ddj4405lysoaof"
+          "text": "MetricsHub",
+          "value": "fe476281-532d-4b4e-b3a7-8618d8e133be"
         },
         "hide": 2,
         "includeAll": false,
@@ -3323,6 +2837,6 @@
   "timezone": "",
   "title": "MetricsHub System",
   "uid": "eWQoMUTIk",
-  "version": 68,
+  "version": 6,
   "weekStart": ""
 }
