@@ -1660,7 +1660,7 @@
             "uid": "${DS_METRICSHUB}"
           },
           "editorMode": "code",
-          "expr": "sum (system_memory_utilization_ratio{host_id=\"$host_id\", system_memory_usage=\"used\", site=\"$site\"})",
+          "expr": "sum (system_memory_utilization_ratio{host_id=\"$host_id\", system_memory_state=\"used\", site=\"$site\"})",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -1774,7 +1774,7 @@
             "uid": "${DS_METRICSHUB}"
           },
           "editorMode": "code",
-          "expr": "system_memory_usage_bytes{host_id=~\"$host_id\", site=\"$site\", system_memory_usage=~\"cached|buffers\"}",
+          "expr": "system_memory_usage_bytes{host_id=~\"$host_id\", site=\"$site\", system_memory_state=~\"cached|buffers\"}",
           "instant": false,
           "legendFormat": "{{system_memory_usage}}",
           "range": true,
@@ -2466,7 +2466,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "orange",
@@ -2578,7 +2579,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -2942,6 +2944,6 @@
   "timezone": "",
   "title": "MetricsHub System",
   "uid": "eWQoMUTIk",
-  "version": 4,
+  "version": 6,
   "weekStart": ""
 }
