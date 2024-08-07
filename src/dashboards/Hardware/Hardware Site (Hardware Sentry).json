@@ -2,7 +2,7 @@
   "__inputs": [
     {
       "name": "DS_PROMETHEUS",
-      "label": "Prometheus",
+      "label": "prometheus",
       "description": "",
       "type": "datasource",
       "pluginId": "prometheus",
@@ -21,7 +21,7 @@
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "10.2.0"
+      "version": "10.1.5"
     },
     {
       "type": "panel",
@@ -159,7 +159,7 @@
         "content": "<h1 style=\"\">\r\n  <center>$site</center>\r\n</h1>",
         "mode": "html"
       },
-      "pluginVersion": "10.2.0",
+      "pluginVersion": "10.1.5",
       "type": "text"
     },
     {
@@ -210,7 +210,7 @@
         "text": {},
         "textMode": "value"
       },
-      "pluginVersion": "10.2.0",
+      "pluginVersion": "10.1.5",
       "targets": [
         {
           "datasource": {
@@ -286,7 +286,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "10.2.0",
+      "pluginVersion": "10.1.5",
       "targets": [
         {
           "datasource": {
@@ -356,7 +356,7 @@
         "text": {},
         "textMode": "value"
       },
-      "pluginVersion": "10.2.0",
+      "pluginVersion": "10.1.5",
       "targets": [
         {
           "datasource": {
@@ -426,7 +426,7 @@
         "text": {},
         "textMode": "value"
       },
-      "pluginVersion": "10.2.0",
+      "pluginVersion": "10.1.5",
       "targets": [
         {
           "datasource": {
@@ -751,7 +751,7 @@
         },
         "textMode": "value"
       },
-      "pluginVersion": "10.2.0",
+      "pluginVersion": "10.1.5",
       "targets": [
         {
           "datasource": {
@@ -823,7 +823,7 @@
         },
         "textMode": "value"
       },
-      "pluginVersion": "10.2.0",
+      "pluginVersion": "10.1.5",
       "targets": [
         {
           "datasource": {
@@ -894,7 +894,7 @@
         },
         "textMode": "value"
       },
-      "pluginVersion": "10.2.0",
+      "pluginVersion": "10.1.5",
       "targets": [
         {
           "datasource": {
@@ -965,7 +965,7 @@
         },
         "textMode": "value"
       },
-      "pluginVersion": "10.2.0",
+      "pluginVersion": "10.1.5",
       "targets": [
         {
           "datasource": {
@@ -1036,7 +1036,7 @@
         },
         "textMode": "value"
       },
-      "pluginVersion": "10.2.0",
+      "pluginVersion": "10.1.5",
       "targets": [
         {
           "datasource": {
@@ -1106,7 +1106,7 @@
         },
         "textMode": "value"
       },
-      "pluginVersion": "10.2.0",
+      "pluginVersion": "10.1.5",
       "targets": [
         {
           "datasource": {
@@ -1177,7 +1177,7 @@
         },
         "textMode": "value"
       },
-      "pluginVersion": "10.2.0",
+      "pluginVersion": "10.1.5",
       "targets": [
         {
           "datasource": {
@@ -1260,7 +1260,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "10.2.0",
+      "pluginVersion": "10.1.5",
       "targets": [
         {
           "datasource": {
@@ -1405,7 +1405,7 @@
         "content": "<h3 style=\"background-color:Grey\"><center>Live Data</center></h3>",
         "mode": "html"
       },
-      "pluginVersion": "10.2.0",
+      "pluginVersion": "10.1.5",
       "type": "text"
     },
     {
@@ -1430,7 +1430,7 @@
         "content": "<h3 style=\"background-color:Grey\"><center>Cumulative Data</center></h3>",
         "mode": "html"
       },
-      "pluginVersion": "10.2.0",
+      "pluginVersion": "10.1.5",
       "type": "text"
     },
     {
@@ -1482,7 +1482,7 @@
         "text": {},
         "textMode": "value"
       },
-      "pluginVersion": "10.2.0",
+      "pluginVersion": "10.1.5",
       "targets": [
         {
           "datasource": {
@@ -1551,7 +1551,7 @@
         "text": {},
         "textMode": "value"
       },
-      "pluginVersion": "10.2.0",
+      "pluginVersion": "10.1.5",
       "targets": [
         {
           "datasource": {
@@ -1618,7 +1618,7 @@
         "text": {},
         "textMode": "value"
       },
-      "pluginVersion": "10.2.0",
+      "pluginVersion": "10.1.5",
       "targets": [
         {
           "datasource": {
@@ -1685,7 +1685,7 @@
         "text": {},
         "textMode": "value"
       },
-      "pluginVersion": "10.2.0",
+      "pluginVersion": "10.1.5",
       "targets": [
         {
           "datasource": {
@@ -1755,7 +1755,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "10.2.0",
+      "pluginVersion": "10.1.5",
       "targets": [
         {
           "datasource": {
@@ -1824,7 +1824,7 @@
         "text": {},
         "textMode": "value"
       },
-      "pluginVersion": "10.2.0",
+      "pluginVersion": "10.1.5",
       "targets": [
         {
           "datasource": {
@@ -1893,7 +1893,7 @@
         "text": {},
         "textMode": "value"
       },
-      "pluginVersion": "10.2.0",
+      "pluginVersion": "10.1.5",
       "targets": [
         {
           "datasource": {
@@ -1960,7 +1960,7 @@
         "text": {},
         "textMode": "value"
       },
-      "pluginVersion": "10.2.0",
+      "pluginVersion": "10.1.5",
       "targets": [
         {
           "datasource": {
@@ -2028,7 +2028,7 @@
         "text": {},
         "textMode": "value"
       },
-      "pluginVersion": "10.2.0",
+      "pluginVersion": "10.1.5",
       "targets": [
         {
           "datasource": {
@@ -2107,7 +2107,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "10.2.0",
+      "pluginVersion": "10.1.5",
       "targets": [
         {
           "datasource": {
@@ -2184,7 +2184,7 @@
         "text": {},
         "textMode": "value"
       },
-      "pluginVersion": "10.2.0",
+      "pluginVersion": "10.1.5",
       "targets": [
         {
           "datasource": {
@@ -2253,7 +2253,7 @@
         "text": {},
         "textMode": "value"
       },
-      "pluginVersion": "10.2.0",
+      "pluginVersion": "10.1.5",
       "targets": [
         {
           "datasource": {
@@ -2321,7 +2321,7 @@
         "text": {},
         "textMode": "value"
       },
-      "pluginVersion": "10.2.0",
+      "pluginVersion": "10.1.5",
       "targets": [
         {
           "datasource": {
@@ -2389,7 +2389,7 @@
         "text": {},
         "textMode": "value"
       },
-      "pluginVersion": "10.2.0",
+      "pluginVersion": "10.1.5",
       "targets": [
         {
           "datasource": {
@@ -2489,7 +2489,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "10.2.0",
+      "pluginVersion": "10.1.5",
       "targets": [
         {
           "datasource": {
@@ -2574,7 +2574,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "10.2.0",
+      "pluginVersion": "10.1.5",
       "targets": [
         {
           "datasource": {
@@ -2771,7 +2771,7 @@
         "text": {},
         "textMode": "value"
       },
-      "pluginVersion": "10.2.0",
+      "pluginVersion": "10.1.5",
       "targets": [
         {
           "datasource": {
@@ -2854,7 +2854,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "10.2.0",
+      "pluginVersion": "10.1.5",
       "targets": [
         {
           "datasource": {
@@ -3011,7 +3011,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "10.2.0",
+      "pluginVersion": "10.1.5",
       "targets": [
         {
           "datasource": {
@@ -3089,7 +3089,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "10.2.0",
+      "pluginVersion": "10.1.5",
       "targets": [
         {
           "datasource": {
@@ -3127,8 +3127,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "super-light-red",
-                "value": null
+                "color": "super-light-red"
               },
               {
                 "color": "green",
@@ -3163,7 +3162,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "10.2.0",
+      "pluginVersion": "10.1.5",
       "targets": [
         {
           "datasource": {
@@ -3563,7 +3562,7 @@
           }
         ]
       },
-      "pluginVersion": "10.2.0",
+      "pluginVersion": "10.1.5",
       "targets": [
         {
           "datasource": {
@@ -4105,7 +4104,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "10.2.0",
+      "pluginVersion": "10.1.5",
       "targets": [
         {
           "datasource": {
@@ -4306,7 +4305,7 @@
           }
         ]
       },
-      "pluginVersion": "10.2.0",
+      "pluginVersion": "10.1.5",
       "targets": [
         {
           "datasource": {
@@ -4452,7 +4451,7 @@
             "mode": "thresholds"
           },
           "mappings": [],
-          "noValue": "2024.1",
+          "noValue": "2024.2",
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -4485,7 +4484,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "10.2.0",
+      "pluginVersion": "10.1.5",
       "title": "Dashboard Version",
       "type": "stat"
     }
@@ -4529,8 +4528,8 @@
   },
   "timepicker": {},
   "timezone": "",
-  "title": "Hardware Sentry - Site",
+  "title": "Hardware Site (Hardware Sentry)",
   "uid": "SHFBpSH7z",
-  "version": 26,
+  "version": 28,
   "weekStart": ""
 }

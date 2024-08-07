@@ -2,7 +2,7 @@
   "__inputs": [
     {
       "name": "DS_PROMETHEUS",
-      "label": "Prometheus",
+      "label": "prometheus",
       "description": "",
       "type": "datasource",
       "pluginId": "prometheus",
@@ -27,7 +27,7 @@
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "10.2.0"
+      "version": "11.0.0"
     },
     {
       "type": "panel",
@@ -166,10 +166,12 @@
           "fields": "",
           "values": false
         },
+        "showPercentChange": false,
         "text": {},
-        "textMode": "auto"
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "pluginVersion": "10.2.0",
+      "pluginVersion": "11.0.0",
       "targets": [
         {
           "datasource": {
@@ -178,7 +180,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum(present_over_time(hardware_sentry_host_configured[1h]))",
+          "expr": "sum(present_over_time(metricshub_host_configured[1h]))",
           "instant": true,
           "interval": "",
           "legendFormat": "Hosts",
@@ -243,10 +245,12 @@
           "fields": "",
           "values": false
         },
+        "showPercentChange": false,
         "text": {},
-        "textMode": "auto"
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "pluginVersion": "10.2.0",
+      "pluginVersion": "11.0.0",
       "targets": [
         {
           "datasource": {
@@ -255,7 +259,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "count(max by (host_id, site) (hardware_sentry_connector_status{state=\"ok\"} == 1)) / sum(present_over_time(hardware_sentry_host_configured[1h]))",
+          "expr": "count(max by (host_id, site) (metricshub_connector_status{state=\"ok\"} == 1)) / sum(present_over_time(metricshub_host_configured[1h]))",
           "instant": true,
           "interval": "",
           "legendFormat": "Coverage",
@@ -313,10 +317,12 @@
           "fields": "",
           "values": false
         },
+        "showPercentChange": false,
         "text": {},
-        "textMode": "value"
+        "textMode": "value",
+        "wideLayout": true
       },
-      "pluginVersion": "10.2.0",
+      "pluginVersion": "11.0.0",
       "targets": [
         {
           "datasource": {
@@ -383,10 +389,12 @@
           "fields": "",
           "values": false
         },
+        "showPercentChange": false,
         "text": {},
-        "textMode": "value"
+        "textMode": "value",
+        "wideLayout": true
       },
-      "pluginVersion": "10.2.0",
+      "pluginVersion": "11.0.0",
       "targets": [
         {
           "datasource": {
@@ -545,7 +553,7 @@
           }
         ]
       },
-      "pluginVersion": "10.2.0",
+      "pluginVersion": "11.0.0",
       "targets": [
         {
           "datasource": {
@@ -730,10 +738,10 @@
           "showLineNumbers": false,
           "showMiniMap": false
         },
-        "content": "<a href=\"https://www.sentrysoftware.com/products/hardware-sentry-opentelemetry-collector.html\" target=\"_blank\">\n<div style=\"background: #76a600 url(https://dl.sentrysoftware.com/public/otel-dl-link.png) no-repeat center; background-size: contain; margin: 0; padding: 0px; border-radius: 3px; height: 100%; width: 100%;\">\n</div>\n</a>",
+        "content": "<a href=\"https://www.sentrysoftware.com/products/hardware-sentry-opentelemetry-collector.html\" target=\"_blank\">\n<div style=\"background:transparent url(https://metricshub.com/images/logo-darkgrey.svg) no-repeat center; background-size: contain; margin: 0; padding: 0px; border-radius: 3px; height: 100%; width: 100%;\">\n</div>\n</a>",
         "mode": "html"
       },
-      "pluginVersion": "10.2.0",
+      "pluginVersion": "11.0.0",
       "type": "text"
     },
     {
@@ -794,10 +802,12 @@
           "fields": "",
           "values": false
         },
+        "showPercentChange": false,
         "text": {},
-        "textMode": "auto"
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "pluginVersion": "10.2.0",
+      "pluginVersion": "11.0.0",
       "targets": [
         {
           "datasource": {
@@ -829,6 +839,7 @@
             "mode": "fixed"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisGridShow": false,
@@ -899,6 +910,7 @@
           "showLegend": false
         },
         "tooltip": {
+          "maxHeight": 600,
           "mode": "single",
           "sort": "none"
         }
@@ -943,7 +955,7 @@
         "content": "<h3 style=\"background-color:DimGray\"><center>Live Data</center></h3>",
         "mode": "html"
       },
-      "pluginVersion": "10.2.0",
+      "pluginVersion": "11.0.0",
       "type": "text"
     },
     {
@@ -968,7 +980,7 @@
         "content": "<h3 style=\"background-color:DimGray\"><center>Cumulative Data</center></h3>",
         "mode": "html"
       },
-      "pluginVersion": "10.2.0",
+      "pluginVersion": "11.0.0",
       "type": "text"
     },
     {
@@ -1018,10 +1030,12 @@
           "fields": "",
           "values": false
         },
+        "showPercentChange": false,
         "text": {},
-        "textMode": "auto"
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "pluginVersion": "10.2.0",
+      "pluginVersion": "11.0.0",
       "targets": [
         {
           "datasource": {
@@ -1089,10 +1103,12 @@
           "fields": "",
           "values": false
         },
+        "showPercentChange": false,
         "text": {},
-        "textMode": "auto"
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "pluginVersion": "10.2.0",
+      "pluginVersion": "11.0.0",
       "targets": [
         {
           "datasource": {
@@ -1158,10 +1174,12 @@
           "fields": "",
           "values": false
         },
+        "showPercentChange": false,
         "text": {},
-        "textMode": "auto"
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "pluginVersion": "10.2.0",
+      "pluginVersion": "11.0.0",
       "targets": [
         {
           "datasource": {
@@ -1226,10 +1244,12 @@
           "fields": "",
           "values": false
         },
+        "showPercentChange": false,
         "text": {},
-        "textMode": "auto"
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "pluginVersion": "10.2.0",
+      "pluginVersion": "11.0.0",
       "targets": [
         {
           "datasource": {
@@ -1295,10 +1315,12 @@
           "fields": "",
           "values": false
         },
+        "showPercentChange": false,
         "text": {},
-        "textMode": "auto"
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "pluginVersion": "10.2.0",
+      "pluginVersion": "11.0.0",
       "targets": [
         {
           "datasource": {
@@ -1364,10 +1386,12 @@
           "fields": "",
           "values": false
         },
+        "showPercentChange": false,
         "text": {},
-        "textMode": "auto"
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "pluginVersion": "10.2.0",
+      "pluginVersion": "11.0.0",
       "targets": [
         {
           "datasource": {
@@ -1436,10 +1460,12 @@
           "fields": "",
           "values": false
         },
+        "showPercentChange": false,
         "text": {},
-        "textMode": "auto"
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "pluginVersion": "10.2.0",
+      "pluginVersion": "11.0.0",
       "targets": [
         {
           "datasource": {
@@ -1505,10 +1531,12 @@
           "fields": "",
           "values": false
         },
+        "showPercentChange": false,
         "text": {},
-        "textMode": "auto"
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "pluginVersion": "10.2.0",
+      "pluginVersion": "11.0.0",
       "targets": [
         {
           "datasource": {
@@ -1573,10 +1601,12 @@
           "fields": "",
           "values": false
         },
+        "showPercentChange": false,
         "text": {},
-        "textMode": "auto"
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "pluginVersion": "10.2.0",
+      "pluginVersion": "11.0.0",
       "targets": [
         {
           "datasource": {
@@ -1651,10 +1681,12 @@
           "fields": "",
           "values": false
         },
+        "showPercentChange": false,
         "text": {},
-        "textMode": "auto"
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "pluginVersion": "10.2.0",
+      "pluginVersion": "11.0.0",
       "targets": [
         {
           "datasource": {
@@ -1663,7 +1695,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "(sum(hw_host_power_watts{quality=\"estimated\"} * 15) + sum(hw_host_power_watts{quality=\"measured\"} * 5) + 10000 * (sum(present_over_time(hardware_sentry_host_configured[1h])) - (count(max by (host_id) (hardware_sentry_connector_status{state=\"ok\"} == 1))))) / (sum(hw_host_power_watts) + 100 * (sum(present_over_time(hardware_sentry_host_configured[1h])) - (count(max by (host_id) (hardware_sentry_connector_status{state=\"ok\"} == 1)))))",
+          "expr": "(sum(hw_host_power_watts{quality=\"estimated\"} * 15) + sum(hw_host_power_watts{quality=\"measured\"} * 5) + 10000 * (sum(present_over_time(metricshub_host_configured[1h])) - (count(max by (host_id) (metricshub_connector_status{state=\"ok\"} == 1))))) / (sum(hw_host_power_watts) + 100 * (sum(present_over_time(metricshub_host_configured[1h])) - (count(max by (host_id) (metricshub_connector_status{state=\"ok\"} == 1)))))",
           "hide": false,
           "instant": true,
           "legendFormat": "Margin of Error",
@@ -1729,10 +1761,12 @@
           "fields": "",
           "values": false
         },
+        "showPercentChange": false,
         "text": {},
-        "textMode": "auto"
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "pluginVersion": "10.2.0",
+      "pluginVersion": "11.0.0",
       "targets": [
         {
           "datasource": {
@@ -1803,10 +1837,12 @@
           "fields": "",
           "values": false
         },
+        "showPercentChange": false,
         "text": {},
-        "textMode": "auto"
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "pluginVersion": "10.2.0",
+      "pluginVersion": "11.0.0",
       "targets": [
         {
           "datasource": {
@@ -1872,10 +1908,12 @@
           "fields": "",
           "values": false
         },
+        "showPercentChange": false,
         "text": {},
-        "textMode": "auto"
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "pluginVersion": "10.2.0",
+      "pluginVersion": "11.0.0",
       "targets": [
         {
           "datasource": {
@@ -1940,10 +1978,12 @@
           "fields": "",
           "values": false
         },
+        "showPercentChange": false,
         "text": {},
-        "textMode": "auto"
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "pluginVersion": "10.2.0",
+      "pluginVersion": "11.0.0",
       "targets": [
         {
           "datasource": {
@@ -2367,7 +2407,7 @@
           }
         ]
       },
-      "pluginVersion": "10.2.0",
+      "pluginVersion": "11.0.0",
       "targets": [
         {
           "datasource": {
@@ -2435,7 +2475,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum by (site) (avg_over_time(hardware_sentry_host_up[1d]))",
+          "expr": "sum by (site) (avg_over_time(metricshub_host_configured[1d]))",
           "format": "table",
           "hide": false,
           "instant": true,
@@ -2450,7 +2490,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "(sum by (site) (avg_over_time(hardware_sentry_host_up[1d]))) / scalar(sum(avg_over_time(hardware_sentry_host_up[1d])))",
+          "expr": "(sum by (site) (avg_over_time(metricshub_host_configured[1d]))) / scalar(sum(avg_over_time(metricshub_host_configured[1d])))",
           "format": "table",
           "hide": false,
           "instant": true,
@@ -2553,6 +2593,7 @@
             "mode": "fixed"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisGridShow": false,
@@ -2585,8 +2626,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               }
             ]
           },
@@ -2618,6 +2658,7 @@
         "stacking": "none",
         "text": {},
         "tooltip": {
+          "maxHeight": 600,
           "mode": "single",
           "sort": "none"
         },
@@ -2671,6 +2712,7 @@
             "mode": "fixed"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisGridShow": false,
@@ -2703,8 +2745,7 @@
             "mode": "percentage",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               }
             ]
           },
@@ -2736,6 +2777,7 @@
         "stacking": "none",
         "text": {},
         "tooltip": {
+          "maxHeight": 600,
           "mode": "single",
           "sort": "none"
         },
@@ -2788,6 +2830,7 @@
             "mode": "fixed"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisGridShow": false,
@@ -2821,8 +2864,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "#ccccdc",
-                "value": null
+                "color": "#ccccdc"
               }
             ]
           },
@@ -2856,6 +2898,7 @@
         "stacking": "none",
         "text": {},
         "tooltip": {
+          "maxHeight": 600,
           "mode": "single",
           "sort": "none"
         },
@@ -2966,6 +3009,7 @@
       "id": 179,
       "options": {
         "displayMode": "gradient",
+        "maxVizHeight": 300,
         "minVizHeight": 10,
         "minVizWidth": 0,
         "namePlacement": "auto",
@@ -2978,9 +3022,10 @@
           "values": false
         },
         "showUnfilled": true,
+        "sizing": "auto",
         "valueMode": "color"
       },
-      "pluginVersion": "10.2.0",
+      "pluginVersion": "11.0.0",
       "targets": [
         {
           "datasource": {
@@ -3049,6 +3094,7 @@
           "values": true
         },
         "tooltip": {
+          "maxHeight": 600,
           "mode": "multi",
           "sort": "none"
         }
@@ -3135,6 +3181,7 @@
           "values": true
         },
         "tooltip": {
+          "maxHeight": 600,
           "mode": "multi",
           "sort": "none"
         }
@@ -3206,6 +3253,7 @@
           "values": true
         },
         "tooltip": {
+          "maxHeight": 600,
           "mode": "multi",
           "sort": "none"
         }
@@ -3216,8 +3264,9 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
+          "editorMode": "code",
           "exemplar": false,
-          "expr": "sum by (host_type) (hw_host_configured)",
+          "expr": "sum by (host_type) (metricshub_host_configured)",
           "instant": true,
           "interval": "",
           "legendFormat": "{{host_type}}",
@@ -3276,6 +3325,7 @@
           "values": true
         },
         "tooltip": {
+          "maxHeight": 600,
           "mode": "multi",
           "sort": "none"
         }
@@ -3366,10 +3416,12 @@
           "fields": "",
           "values": true
         },
+        "showPercentChange": false,
         "text": {},
-        "textMode": "auto"
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "pluginVersion": "10.2.0",
+      "pluginVersion": "11.0.0",
       "targets": [
         {
           "datasource": {
@@ -3502,10 +3554,12 @@
           "fields": "",
           "values": true
         },
+        "showPercentChange": false,
         "text": {},
-        "textMode": "auto"
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "pluginVersion": "10.2.0",
+      "pluginVersion": "11.0.0",
       "targets": [
         {
           "datasource": {
@@ -3598,6 +3652,7 @@
             "mode": "fixed"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
@@ -3672,6 +3727,7 @@
         "showValue": "always",
         "stacking": "none",
         "tooltip": {
+          "maxHeight": 600,
           "mode": "single",
           "sort": "none"
         },
@@ -3836,12 +3892,14 @@
           "fields": "",
           "values": false
         },
+        "showPercentChange": false,
         "text": {
           "valueSize": 32
         },
-        "textMode": "auto"
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "pluginVersion": "10.2.0",
+      "pluginVersion": "11.0.0",
       "targets": [
         {
           "datasource": {
@@ -3850,7 +3908,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "min_over_time(timestamp(hw_host_configured)[1y:1w])",
+          "expr": "min_over_time(timestamp(metricshub_host_configured)[1y:1w])",
           "format": "table",
           "hide": false,
           "instant": true,
@@ -3976,12 +4034,7 @@
             "filterable": true,
             "inspect": false
           },
-          "links": [
-            {
-              "title": "",
-              "url": "/d/SHFBpSH7z/site-information?orgId=1&var-site=${__data.fields.site}﻿"
-            }
-          ],
+          "links": [],
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -4065,15 +4118,16 @@
           }
         ]
       },
-      "pluginVersion": "10.2.0",
+      "pluginVersion": "11.0.0",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
+          "editorMode": "code",
           "exemplar": false,
-          "expr": "last_over_time(timestamp(hardware_sentry_agent_info)[6h:])",
+          "expr": "last_over_time(timestamp(metricshub_agent_info)[6h:])",
           "format": "table",
           "instant": true,
           "interval": "",
@@ -4089,10 +4143,10 @@
               "names": [
                 "agent_host_name",
                 "build_date",
-                "hc_version",
                 "site",
                 "version",
-                "Value"
+                "Value",
+                "build_number"
               ]
             }
           }
@@ -4128,7 +4182,7 @@
               "Value #A": true,
               "__name__": true,
               "agent_host_name": false,
-              "build_number": true,
+              "build_number": false,
               "build_number 2": true,
               "hc_version 2": true,
               "host_id": true,
@@ -4159,26 +4213,15 @@
               "timestamp 1": true,
               "timestamp 2": true
             },
+            "includeByName": {},
             "indexByName": {
               "Last Seen": 5,
-              "Time": 7,
-              "Value": 16,
-              "agent_host_name": 1,
-              "build_date": 3,
-              "build_number": 6,
-              "hc_version": 4,
-              "host_id": 8,
-              "host_name": 9,
-              "host_type": 11,
-              "job": 17,
-              "name": 15,
-              "os_type": 12,
-              "otel_version": 18,
-              "project_name": 13,
-              "project_version": 10,
-              "service_name": 14,
-              "site": 0,
-              "version": 2
+              "Value": 6,
+              "agent_host_name": 0,
+              "build_date": 2,
+              "build_number": 3,
+              "site": 4,
+              "version": 1
             },
             "renameByName": {
               "Last Seen": "",
@@ -4186,7 +4229,7 @@
               "Value": "",
               "agent_host_name": "Hostname",
               "build_date": "Build Date",
-              "build_number": "",
+              "build_number": "Build Number",
               "build_number 1": "Agent Build Number",
               "hc_version": "Connectors Version",
               "hc_version 1": "Connectors Version",
@@ -4214,7 +4257,7 @@
             "mode": "thresholds"
           },
           "mappings": [],
-          "noValue": "2024.1",
+          "noValue": "2024.2",
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -4245,16 +4288,17 @@
           "fields": "",
           "values": false
         },
-        "textMode": "auto"
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "pluginVersion": "10.1.5",
+      "pluginVersion": "11.0.0",
       "title": "Dashboard Version",
       "type": "stat"
     }
   ],
   "refresh": "30s",
-  "schemaVersion": 38,
-  "style": "dark",
+  "schemaVersion": 39,
   "tags": [
     "hw_main"
   ],
@@ -4289,10 +4333,11 @@
     "from": "now-7d",
     "to": "now"
   },
+  "timeRangeUpdatedDuringEditOrView": false,
   "timepicker": {},
   "timezone": "",
-  "title": "Hardware Sentry - Main",
+  "title": "Hardware Main (MetricsHub)",
   "uid": "-GV2ChOnz",
-  "version": 6,
+  "version": 18,
   "weekStart": ""
 }
