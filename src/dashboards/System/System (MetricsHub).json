@@ -1,4 +1,71 @@
 {
+  "__inputs": [
+    {
+      "name": "DS_PROMETHEUS",
+      "label": "prometheus",
+      "description": "",
+      "type": "datasource",
+      "pluginId": "prometheus",
+      "pluginName": "Prometheus"
+    }
+  ],
+  "__elements": {},
+  "__requires": [
+    {
+      "type": "panel",
+      "id": "bargauge",
+      "name": "Bar gauge",
+      "version": ""
+    },
+    {
+      "type": "panel",
+      "id": "gauge",
+      "name": "Gauge",
+      "version": ""
+    },
+    {
+      "type": "grafana",
+      "id": "grafana",
+      "name": "Grafana",
+      "version": "11.0.0"
+    },
+    {
+      "type": "panel",
+      "id": "piechart",
+      "name": "Pie chart",
+      "version": ""
+    },
+    {
+      "type": "datasource",
+      "id": "prometheus",
+      "name": "Prometheus",
+      "version": "1.0.0"
+    },
+    {
+      "type": "panel",
+      "id": "stat",
+      "name": "Stat",
+      "version": ""
+    },
+    {
+      "type": "panel",
+      "id": "table",
+      "name": "Table",
+      "version": ""
+    },
+    {
+      "type": "panel",
+      "id": "text",
+      "name": "Text",
+      "version": ""
+    },
+    {
+      "type": "panel",
+      "id": "timeseries",
+      "name": "Time series",
+      "version": ""
+    }
+  ],
   "annotations": {
     "list": [
       {
@@ -24,7 +91,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 4,
+  "id": null,
   "links": [],
   "liveNow": true,
   "panels": [
@@ -44,7 +111,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "edor7qzpnaarke"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -78,7 +145,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -140,7 +208,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "edor7qzpnaarke"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "exemplar": false,
@@ -220,7 +288,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "edor7qzpnaarke"
+        "uid": "${DS_PROMETHEUS}"
       },
       "description": "",
       "gridPos": {
@@ -253,7 +321,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "edor7qzpnaarke"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -308,7 +376,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -358,7 +427,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "edor7qzpnaarke"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "exemplar": false,
@@ -372,7 +441,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "edor7qzpnaarke"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "exemplar": false,
@@ -387,7 +456,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "edor7qzpnaarke"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "exemplar": false,
@@ -522,7 +591,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "edor7qzpnaarke"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -536,7 +605,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -575,7 +645,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "edor7qzpnaarke"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "exemplar": false,
@@ -593,7 +663,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "edor7qzpnaarke"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -607,7 +677,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -647,7 +718,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "edor7qzpnaarke"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "exemplar": false,
@@ -665,7 +736,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "edor7qzpnaarke"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -685,7 +756,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -766,7 +838,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "edor7qzpnaarke"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "exemplar": false,
@@ -781,7 +853,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "edor7qzpnaarke"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "exemplar": false,
@@ -796,7 +868,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "edor7qzpnaarke"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "exemplar": false,
@@ -950,7 +1022,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "edor7qzpnaarke"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -969,7 +1041,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -1005,7 +1078,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "edor7qzpnaarke"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "exemplar": false,
@@ -1061,7 +1134,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "edor7qzpnaarke"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -1160,7 +1233,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "edor7qzpnaarke"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "exemplar": false,
@@ -1180,7 +1253,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "edor7qzpnaarke"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -1195,7 +1268,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "#EAB839",
@@ -1238,7 +1312,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "edor7qzpnaarke"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "exemplar": false,
@@ -1255,7 +1329,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "edor7qzpnaarke"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -1301,7 +1375,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -1338,7 +1413,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "edor7qzpnaarke"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "exemplar": false,
@@ -1370,7 +1445,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "edor7qzpnaarke"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -1488,7 +1563,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "edor7qzpnaarke"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "exemplar": false,
@@ -1505,7 +1580,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "edor7qzpnaarke"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -1593,7 +1668,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "edor7qzpnaarke"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "system_memory_utilization_ratio{host_name=\"$host_name\", system_memory_state=\"used\"}",
@@ -1621,7 +1696,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "edor7qzpnaarke"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -1674,7 +1749,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "edor7qzpnaarke"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "exemplar": false,
@@ -1705,7 +1780,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "edor7qzpnaarke"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -1760,7 +1835,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "edor7qzpnaarke"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "exemplar": false,
@@ -1801,7 +1876,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "edor7qzpnaarke"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -1924,7 +1999,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "edor7qzpnaarke"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "-(rate(system_network_io_bytes_total{host_name=\"$host_name\", network_io_direction=\"receive\"}[$__rate_interval]))",
@@ -1937,7 +2012,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "edor7qzpnaarke"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "rate(system_network_io_bytes_total{host_name=\"$host_name\", network_io_direction=\"transmit\"}[$__rate_interval])",
@@ -1954,7 +2029,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "edor7qzpnaarke"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -2012,7 +2087,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "edor7qzpnaarke"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "sum by (network_io_direction) (delta(system_network_errors_total{host_name=\"$host_name\"}[$__range]))\r\n/\r\nsum by (network_io_direction) (delta(system_network_packets_total{host_name=\"$host_name\"}[$__range]))",
@@ -2041,7 +2116,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "edor7qzpnaarke"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -2142,7 +2217,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "edor7qzpnaarke"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "exemplar": false,
@@ -2157,7 +2232,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "edor7qzpnaarke"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "exemplar": false,
@@ -2172,7 +2247,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "edor7qzpnaarke"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "exemplar": false,
@@ -2320,7 +2395,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "edor7qzpnaarke"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -2406,7 +2481,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "edor7qzpnaarke"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "system_filesystem_utilization_ratio{host_name=\"$host_name\", system_filesystem_state=\"used\"}",
@@ -2435,7 +2510,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "edor7qzpnaarke"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -2516,7 +2591,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "edor7qzpnaarke"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "irate (system_disk_io_bytes_total{host_name=\"$host_name\"}[$__rate_interval])",
@@ -2545,7 +2620,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "edor7qzpnaarke"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -2665,7 +2740,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "edor7qzpnaarke"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "exemplar": false,
@@ -2792,14 +2867,10 @@
         "type": "datasource"
       },
       {
-        "current": {
-          "selected": false,
-          "text": "All",
-          "value": "$__all"
-        },
+        "current": {},
         "datasource": {
           "type": "prometheus",
-          "uid": "edor7qzpnaarke"
+          "uid": "${DS_PROMETHEUS}"
         },
         "definition": "label_values(metricshub_host_configured,site)",
         "description": "Location of the monitored host (optional)",
@@ -2821,14 +2892,10 @@
         "type": "query"
       },
       {
-        "current": {
-          "selected": false,
-          "text": "TALLINN.internal.sentrysoftware.net",
-          "value": "TALLINN.internal.sentrysoftware.net"
-        },
+        "current": {},
         "datasource": {
           "type": "prometheus",
-          "uid": "edor7qzpnaarke"
+          "uid": "${DS_PROMETHEUS}"
         },
         "definition": "label_values({site=~\"$site\", connector_id=~\"Linux|Windows\"},host_name)",
         "description": "Name of the monitored host",
