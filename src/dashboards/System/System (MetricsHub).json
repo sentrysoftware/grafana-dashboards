@@ -1,8 +1,8 @@
 {
   "__inputs": [
     {
-      "name": "DS_METRICSHUB",
-      "label": "metricshub",
+      "name": "DS_PROMETHEUS",
+      "label": "prometheus",
       "description": "",
       "type": "datasource",
       "pluginId": "prometheus",
@@ -27,7 +27,7 @@
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "10.4.2"
+      "version": "11.0.0"
     },
     {
       "type": "panel",
@@ -93,7 +93,7 @@
   "graphTooltip": 0,
   "id": null,
   "links": [],
-  "liveNow": false,
+  "liveNow": true,
   "panels": [
     {
       "collapsed": false,
@@ -111,40 +111,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${DS_METRICSHUB}"
-      },
-      "description": "",
-      "gridPos": {
-        "h": 4,
-        "w": 2,
-        "x": 0,
-        "y": 1
-      },
-      "id": 57,
-      "links": [
-        {
-          "targetBlank": true,
-          "title": "",
-          "url": "https://metricshub.com/"
-        }
-      ],
-      "options": {
-        "code": {
-          "language": "plaintext",
-          "showLineNumbers": false,
-          "showMiniMap": false
-        },
-        "content": "\n<img src=\"https://metricshub.com/images/logo-darkgrey.svg\" alt=\"MetricsHub\" width=\"150\" height=\"150\">\n",
-        "mode": "markdown"
-      },
-      "pluginVersion": "10.4.2",
-      "transparent": true,
-      "type": "text"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${DS_METRICSHUB}"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -220,7 +187,7 @@
       "gridPos": {
         "h": 4,
         "w": 22,
-        "x": 2,
+        "x": 0,
         "y": 1
       },
       "id": 64,
@@ -236,16 +203,16 @@
         },
         "showHeader": true
       },
-      "pluginVersion": "10.4.2",
+      "pluginVersion": "11.0.0",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_METRICSHUB}"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "system_uptime{site=\"$site\", host_id=\"$host_id\"}",
+          "expr": "system_uptime_seconds{host_name=\"$host_name\"}",
           "format": "table",
           "instant": true,
           "legendFormat": "__auto",
@@ -321,7 +288,40 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${DS_METRICSHUB}"
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "description": "",
+      "gridPos": {
+        "h": 4,
+        "w": 2,
+        "x": 22,
+        "y": 1
+      },
+      "id": 57,
+      "links": [
+        {
+          "targetBlank": true,
+          "title": "",
+          "url": "https://metricshub.com/"
+        }
+      ],
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "\n<img src=\"https://metricshub.com/images/logo-darkgrey.svg\" alt=\"MetricsHub\" width=\"150\" height=\"150\">\n",
+        "mode": "markdown"
+      },
+      "pluginVersion": "11.0.0",
+      "transparent": true,
+      "type": "text"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -422,16 +422,16 @@
         },
         "showHeader": true
       },
-      "pluginVersion": "10.4.2",
+      "pluginVersion": "11.0.0",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_METRICSHUB}"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "metricshub_host_up{site=\"$site\", id=\"$host_id\", protocol!=\"ping\"}",
+          "expr": "metricshub_host_up{host_name=\"$host_name\", protocol!=\"ping\"}",
           "format": "table",
           "instant": true,
           "legendFormat": "__auto",
@@ -441,11 +441,11 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_METRICSHUB}"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "metricshub_host_up{site=\"$site\", id=\"$host_id\", protocol=\"ping\"}",
+          "expr": "metricshub_host_up{host_name=\"$host_name\", protocol=\"ping\"}",
           "format": "table",
           "hide": false,
           "instant": true,
@@ -456,11 +456,11 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_METRICSHUB}"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "metricshub_connector_status{site=\"$site\", host_id=\"$host_id\", connector_id=~\"Linux|Windows\"} == 1",
+          "expr": "metricshub_connector_status{host_name=\"$host_name\", connector_id=~\"Linux|Windows\"} == 1",
           "format": "table",
           "hide": false,
           "instant": true,
@@ -591,7 +591,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${DS_METRICSHUB}"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -640,16 +640,16 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "10.4.2",
+      "pluginVersion": "11.0.0",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_METRICSHUB}"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "count (system_cpu_utilization_ratio{site=\"$site\", host_id=\"$host_id\", system_cpu_state=\"system\"})",
+          "expr": "count(system_cpu_utilization_ratio{host_name=\"$host_name\", system_cpu_state=\"idle\"})",
           "format": "time_series",
           "instant": true,
           "legendFormat": "CPU Core",
@@ -663,7 +663,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${DS_METRICSHUB}"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -713,16 +713,16 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "10.4.2",
+      "pluginVersion": "11.0.0",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_METRICSHUB}"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "system_memory_limit_bytes{site=\"$site\", host_id=\"$host_id\"}",
+          "expr": "system_memory_limit_bytes{host_name=\"$host_name\"}",
           "format": "time_series",
           "instant": true,
           "legendFormat": "Memory",
@@ -736,7 +736,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${DS_METRICSHUB}"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -833,16 +833,16 @@
           }
         ]
       },
-      "pluginVersion": "10.4.2",
+      "pluginVersion": "11.0.0",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_METRICSHUB}"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "system_filesystem_utilization_ratio{site=\"$site\", host_id=\"$host_id\", system_filesystem_state=\"used\"}",
+          "expr": "system_filesystem_utilization_ratio{host_name=\"$host_name\",system_filesystem_state=\"used\"}",
           "format": "table",
           "hide": false,
           "instant": true,
@@ -853,11 +853,11 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_METRICSHUB}"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "system_filesystem_usage_bytes{site=\"$site\", host_id=\"$host_id\", system_filesystem_state=\"free\"}",
+          "expr": "system_filesystem_usage_bytes{host_name=\"$host_name\", system_filesystem_state=\"free\"}",
           "format": "table",
           "hide": false,
           "instant": true,
@@ -868,11 +868,11 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_METRICSHUB}"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "system_filesystem_usage_bytes{site=\"$site\", host_id=\"$host_id\", system_filesystem_state=\"used\"}",
+          "expr": "system_filesystem_usage_bytes{host_name=\"$host_name\", system_filesystem_state=\"used\"}",
           "format": "table",
           "hide": false,
           "instant": true,
@@ -1022,7 +1022,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${DS_METRICSHUB}"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -1073,16 +1073,16 @@
         },
         "showHeader": false
       },
-      "pluginVersion": "10.4.2",
+      "pluginVersion": "11.0.0",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_METRICSHUB}"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "system_network_io_bytes_total{site=\"$site\", host_id=\"$host_id\", network_io_direction=\"receive\"}",
+          "expr": "system_network_io_bytes_total{host_name=\"$host_name\", network_io_direction=\"receive\"}",
           "format": "table",
           "instant": true,
           "legendFormat": "{{id}}",
@@ -1134,7 +1134,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${DS_METRICSHUB}"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -1224,6 +1224,7 @@
           "values": false
         },
         "tooltip": {
+          "maxHeight": 600,
           "mode": "single",
           "sort": "none"
         }
@@ -1232,13 +1233,15 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_METRICSHUB}"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum by (system_cpu_state) (rate(system_cpu_time_seconds_total{site=\"$site\", host_id=~\"$host_id\"}[2m]))",
+          "expr": "sum by (system_cpu_state) (delta(system_cpu_time_seconds_total{host_name=\"$host_name\"}[$__range]))",
+          "format": "time_series",
           "hide": false,
           "instant": true,
+          "interval": "",
           "legendFormat": "__auto",
           "range": false,
           "refId": "A"
@@ -1250,7 +1253,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${DS_METRICSHUB}"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -1304,17 +1307,19 @@
         "showThresholdMarkers": true,
         "sizing": "auto"
       },
-      "pluginVersion": "10.4.2",
+      "pluginVersion": "11.0.0",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_METRICSHUB}"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "sum(rate(system_cpu_time_seconds_total{site=\"$site\", host_id=~\"$host_id\", system_cpu_state!=\"idle\"}[2m])) by (name)",
+          "exemplar": false,
+          "expr": "sum by (name)(rate(system_cpu_time_seconds_total{host_name=\"$host_name\", system_cpu_state!=\"idle\"}[$__range]))",
+          "instant": true,
           "legendFormat": "{{name}}",
-          "range": true,
+          "range": false,
           "refId": "A"
         }
       ],
@@ -1324,7 +1329,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${DS_METRICSHUB}"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -1395,23 +1400,28 @@
           "calcs": [],
           "displayMode": "list",
           "placement": "bottom",
-          "showLegend": true
+          "showLegend": false
         },
         "tooltip": {
+          "maxHeight": 600,
           "mode": "single",
           "sort": "none"
         }
       },
+      "pluginVersion": "11.0.0",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_METRICSHUB}"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "avg(sum(rate(system_cpu_time_seconds_total{site=\"$site\", host_id=~\"$host_id\", system_cpu_state!=\"idle\"}[3m])) by (name))",
+          "exemplar": false,
+          "expr": "avg by (host_name) (sum by (name) (system_cpu_utilization_ratio{host_name=\"$host_name\", system_cpu_state!=\"idle\"}))",
+          "format": "time_series",
           "instant": false,
-          "legendFormat": "CPU Usage",
+          "interval": "",
+          "legendFormat": "__auto",
           "range": true,
           "refId": "A"
         }
@@ -1435,7 +1445,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${DS_METRICSHUB}"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -1544,6 +1554,7 @@
           "values": false
         },
         "tooltip": {
+          "maxHeight": 600,
           "mode": "single",
           "sort": "none"
         }
@@ -1552,11 +1563,11 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_METRICSHUB}"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "system_memory_usage_bytes{host_id=~\"$host_id\", site=\"$site\" }",
+          "expr": "system_memory_usage_bytes{host_name=\"$host_name\"}",
           "instant": true,
           "legendFormat": "{{system_memory_state}}",
           "range": false,
@@ -1569,7 +1580,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${DS_METRICSHUB}"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -1617,8 +1628,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "#EAB839",
@@ -1649,6 +1659,7 @@
           "showLegend": false
         },
         "tooltip": {
+          "maxHeight": 600,
           "mode": "single",
           "sort": "desc"
         }
@@ -1657,10 +1668,10 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_METRICSHUB}"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "sum (system_memory_utilization_ratio{host_id=\"$host_id\", system_memory_state=\"used\", site=\"$site\"})",
+          "expr": "system_memory_utilization_ratio{host_name=\"$host_name\", system_memory_state=\"used\"}",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -1685,61 +1696,28 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${DS_METRICSHUB}"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
           "color": {
+            "fixedColor": "#808080",
             "mode": "fixed"
           },
           "mappings": [],
+          "min": 0,
+          "noValue": "N/A",
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
+                "color": "green"
               }
             ]
           },
           "unit": "bytes"
         },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "free"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "green",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "used"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "red",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          }
-        ]
+        "overrides": []
       },
       "gridPos": {
         "h": 11,
@@ -1749,7 +1727,7 @@
       },
       "id": 44,
       "options": {
-        "displayMode": "gradient",
+        "displayMode": "lcd",
         "maxVizHeight": 300,
         "minVizHeight": 16,
         "minVizWidth": 8,
@@ -1766,18 +1744,20 @@
         "sizing": "auto",
         "valueMode": "text"
       },
-      "pluginVersion": "10.4.2",
+      "pluginVersion": "11.0.0",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_METRICSHUB}"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "system_memory_usage_bytes{host_id=~\"$host_id\", site=\"$site\", system_memory_state=~\"cached|buffers\"}",
-          "instant": false,
-          "legendFormat": "{{system_memory_usage}}",
-          "range": true,
+          "exemplar": false,
+          "expr": "system_memory_usage_bytes{host_name=\"$host_name\", system_memory_state=~\"cached|buffers\"}",
+          "format": "time_series",
+          "instant": true,
+          "legendFormat": "{{system_memory_state}}",
+          "range": false,
           "refId": "A"
         }
       ],
@@ -1800,7 +1780,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${DS_METRICSHUB}"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -1819,8 +1799,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -1851,16 +1830,16 @@
         },
         "showHeader": false
       },
-      "pluginVersion": "10.4.2",
+      "pluginVersion": "11.0.0",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_METRICSHUB}"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "system_network_io_bytes_total{site=\"$site\", host_id=\"$host_id\", network_io_direction=\"receive\"}",
+          "expr": "system_network_io_bytes_total{host_name=\"$host_name\", network_io_direction=\"receive\"}",
           "format": "table",
           "instant": true,
           "legendFormat": "{{id}}",
@@ -1870,24 +1849,24 @@
       ],
       "transformations": [
         {
-          "id": "organize",
+          "id": "filterFieldsByName",
           "options": {
-            "excludeByName": {
-              "Time": true,
-              "Value": true,
-              "__name__": true,
-              "agent_host_name": true,
-              "connector_id": true,
-              "host_id": true,
-              "host_name": true,
-              "host_type": true,
-              "network_io_direction": true,
-              "os_type": true,
-              "site": true
-            },
-            "includeByName": {},
-            "indexByName": {},
-            "renameByName": {}
+            "include": {
+              "names": [
+                "id"
+              ]
+            }
+          }
+        },
+        {
+          "id": "sortBy",
+          "options": {
+            "fields": {},
+            "sort": [
+              {
+                "field": "id"
+              }
+            ]
           }
         }
       ],
@@ -1897,7 +1876,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${DS_METRICSHUB}"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -1942,8 +1921,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -2003,6 +1981,7 @@
         "y": 37
       },
       "id": 36,
+      "interval": "10m",
       "options": {
         "legend": {
           "calcs": [],
@@ -2011,6 +1990,7 @@
           "showLegend": true
         },
         "tooltip": {
+          "maxHeight": 600,
           "mode": "single",
           "sort": "none"
         }
@@ -2019,10 +1999,10 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_METRICSHUB}"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "-(irate(system_network_io_bytes_total{site=\"$site\", host_id=\"$host_id\", network_io_direction=\"receive\"}[5m]))",
+          "expr": "-(rate(system_network_io_bytes_total{host_name=\"$host_name\", network_io_direction=\"receive\"}[$__rate_interval]))",
           "hide": false,
           "instant": false,
           "legendFormat": "Receive from {{id}}",
@@ -2032,10 +2012,10 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_METRICSHUB}"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "irate(system_network_io_bytes_total{site=\"$site\", host_id=\"$host_id\", network_io_direction=\"transmit\"}[5m])",
+          "expr": "rate(system_network_io_bytes_total{host_name=\"$host_name\", network_io_direction=\"transmit\"}[$__rate_interval])",
           "hide": false,
           "instant": false,
           "legendFormat": "Transmit from {{id}}",
@@ -2049,7 +2029,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${DS_METRICSHUB}"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -2062,23 +2042,19 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "#EAB839",
-                "value": 10
+                "color": "green"
               },
               {
                 "color": "orange",
-                "value": 50
+                "value": 0.01
               },
               {
                 "color": "red",
-                "value": 100
+                "value": 1
               }
             ]
-          }
+          },
+          "unit": "percentunit"
         },
         "overrides": []
       },
@@ -2106,15 +2082,15 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "10.4.2",
+      "pluginVersion": "11.0.0",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_METRICSHUB}"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "sum by (network_io_direction) (system_network_errors_total{site=\"$site\", host_id=\"$host_id\"})\r\n/\r\nsum by (network_io_direction) (system_network_io_bytes_total{site=\"$site\", host_id=\"$host_id\"})",
+          "expr": "sum by (network_io_direction) (delta(system_network_errors_total{host_name=\"$host_name\"}[$__range]))\r\n/\r\nsum by (network_io_direction) (delta(system_network_packets_total{host_name=\"$host_name\"}[$__range]))",
           "instant": false,
           "legendFormat": "__auto",
           "range": true,
@@ -2140,7 +2116,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${DS_METRICSHUB}"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -2160,8 +2136,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -2237,16 +2212,16 @@
           }
         ]
       },
-      "pluginVersion": "10.4.2",
+      "pluginVersion": "11.0.0",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_METRICSHUB}"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "system_filesystem_utilization_ratio{site=\"$site\", host_id=\"$host_id\", system_filesystem_state=\"used\"}",
+          "expr": "system_filesystem_utilization_ratio{host_name=\"$host_name\", system_filesystem_state=\"used\"}",
           "format": "table",
           "hide": false,
           "instant": true,
@@ -2257,11 +2232,11 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_METRICSHUB}"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "system_filesystem_usage_bytes{site=\"$site\", host_id=\"$host_id\", system_filesystem_state=\"free\"}",
+          "expr": "system_filesystem_usage_bytes{host_name=\"$host_name\", system_filesystem_state=\"free\"}",
           "format": "table",
           "hide": false,
           "instant": true,
@@ -2272,7 +2247,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_METRICSHUB}"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "exemplar": false,
@@ -2420,7 +2395,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${DS_METRICSHUB}"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -2466,8 +2441,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "orange",
@@ -2498,6 +2472,7 @@
           "showLegend": true
         },
         "tooltip": {
+          "maxHeight": 600,
           "mode": "single",
           "sort": "none"
         }
@@ -2506,10 +2481,10 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_METRICSHUB}"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "system_filesystem_utilization_ratio{site=\"$site\", host_id=\"$host_id\", system_filesystem_state=\"used\"}",
+          "expr": "system_filesystem_utilization_ratio{host_name=\"$host_name\", system_filesystem_state=\"used\"}",
           "instant": false,
           "legendFormat": "{{id}}",
           "range": true,
@@ -2535,7 +2510,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${DS_METRICSHUB}"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -2579,8 +2554,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -2599,6 +2573,7 @@
         "y": 68
       },
       "id": 68,
+      "interval": "10m",
       "options": {
         "legend": {
           "calcs": [],
@@ -2607,6 +2582,7 @@
           "showLegend": true
         },
         "tooltip": {
+          "maxHeight": 600,
           "mode": "single",
           "sort": "none"
         }
@@ -2615,10 +2591,10 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_METRICSHUB}"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "irate (system_disk_io_bytes_total{site=\"$site\", host_id=\"$host_id\"}[3m])",
+          "expr": "irate (system_disk_io_bytes_total{host_name=\"$host_name\"}[$__rate_interval])",
           "instant": false,
           "legendFormat": "{{id}} {{disk_io_direction}}",
           "range": true,
@@ -2644,7 +2620,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${DS_METRICSHUB}"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -2759,12 +2735,12 @@
         },
         "showHeader": true
       },
-      "pluginVersion": "10.4.2",
+      "pluginVersion": "11.0.0",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_METRICSHUB}"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "exemplar": false,
@@ -2863,16 +2839,19 @@
       "type": "table"
     }
   ],
-  "refresh": "5s",
+  "refresh": "1m",
   "schemaVersion": 39,
-  "tags": [],
+  "tags": [
+    "System",
+    "Otel"
+  ],
   "templating": {
     "list": [
       {
         "current": {
           "selected": false,
-          "text": "metricshub",
-          "value": "ddj4405lysoaof"
+          "text": "prometheus",
+          "value": "edor7qzpnaarke"
         },
         "hide": 2,
         "includeAll": false,
@@ -2891,18 +2870,20 @@
         "current": {},
         "datasource": {
           "type": "prometheus",
-          "uid": "${DS_METRICSHUB}"
+          "uid": "${DS_PROMETHEUS}"
         },
-        "definition": "label_values(site)",
+        "definition": "label_values(metricshub_host_configured,site)",
+        "description": "Location of the monitored host (optional)",
         "hide": 0,
-        "includeAll": false,
+        "includeAll": true,
         "label": "Site",
         "multi": false,
         "name": "site",
         "options": [],
         "query": {
-          "query": "label_values(site)",
-          "refId": "StandardVariableQuery"
+          "qryType": 1,
+          "query": "label_values(metricshub_host_configured,site)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 2,
         "regex": "",
@@ -2914,18 +2895,19 @@
         "current": {},
         "datasource": {
           "type": "prometheus",
-          "uid": "${DS_METRICSHUB}"
+          "uid": "${DS_PROMETHEUS}"
         },
-        "definition": "label_values({site=~\"$site\", connector_id=~\"Linux|Windows\"},host_id)",
+        "definition": "label_values({site=~\"$site\", connector_id=~\"Linux|Windows\"},host_name)",
+        "description": "Name of the monitored host",
         "hide": 0,
         "includeAll": false,
-        "label": "Host",
+        "label": "Hostname",
         "multi": false,
-        "name": "host_id",
+        "name": "host_name",
         "options": [],
         "query": {
           "qryType": 1,
-          "query": "label_values({site=~\"$site\", connector_id=~\"Linux|Windows\"},host_id)",
+          "query": "label_values({site=~\"$site\", connector_id=~\"Linux|Windows\"},host_name)",
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 2,
@@ -2940,10 +2922,11 @@
     "from": "now-3h",
     "to": "now"
   },
+  "timeRangeUpdatedDuringEditOrView": false,
   "timepicker": {},
   "timezone": "",
   "title": "MetricsHub System",
   "uid": "eWQoMUTIk",
-  "version": 6,
+  "version": 20,
   "weekStart": ""
 }
