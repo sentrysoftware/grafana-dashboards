@@ -1,15 +1,20 @@
 # grafana-dashboards
 
-![License](https://img.shields.io/github/license/sentrysoftware/metricshub)
+This is a set of Grafana dashboards that allow users of MetricsHub products to visualize the collected data.
 
-This is a set of Grafana dashboards that allow users of Sentry Software products to visualize the collected data.
+Watch the [MetricsHub labs](https://m8b-demo.metricshub.com/) running Grafana with live data.
 
-## Hardware Sentry
+# Prerequisites
 
-The Hardware Sentry dashboards give you immediate visibility into your environment. The organized panels expose hardware health metrics for all monitored systems and bring real-time metrics and projected trends on electricity consumption and costs, as well as CO₂ emissions for your entire infrastructure.
+## Grafana version
 
-Watch the [Sentry Software labs](https://hws-demo.sentrysoftware.com/d/-GV2ChOnz/hardware-sentry-main?orgId=1) running on Grafana with live data.
+**Minimum: Grafana 13.0.1**
+These dashboard uses the v2 dashboard schema (Dynamic Dashboards), which is enabled by default in Grafana 13. No configuration required.
 
-## License
+## Data source
+
+These dashboard expects a **Prometheus** data source scraping metrics exposed by [MetricsHub](https://metricshub.com/). The data source is selectable at import time.
+
+# License
 
 The license is GNU Affero General Public License v3.0.
