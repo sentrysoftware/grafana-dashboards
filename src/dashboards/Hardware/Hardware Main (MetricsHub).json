@@ -1,9 +1,9 @@
 {
-  "apiVersion": "dashboard.grafana.app/v2beta1",
+  "apiVersion": "dashboard.grafana.app/v2",
   "kind": "Dashboard",
   "metadata": {
     "name": "adbdmkq",
-    "generation": 4,
+    "generation": 6,
     "creationTimestamp": "2026-04-29T13:43:02Z",
     "labels": {},
     "annotations": {}
@@ -13,22 +13,25 @@
       {
         "kind": "AnnotationQuery",
         "spec": {
-          "builtIn": true,
-          "enable": true,
-          "hide": true,
-          "iconColor": "rgba(0, 211, 255, 1)",
-          "name": "Annotations & Alerts",
           "query": {
-            "group": "grafana",
             "kind": "DataQuery",
+            "group": "grafana",
+            "version": "v0",
             "spec": {
               "limit": 100,
               "matchAny": false,
               "tags": [],
               "type": "dashboard"
             },
-            "version": "v0"
-          }
+            "labels": {
+              "grafana.app/export-label": "grafana-1"
+            }
+          },
+          "enable": true,
+          "hide": true,
+          "iconColor": "rgba(0, 211, 255, 1)",
+          "name": "Annotations & Alerts",
+          "builtIn": true
         }
       }
     ],
@@ -39,6 +42,10 @@
       "panel-114": {
         "kind": "Panel",
         "spec": {
+          "id": 114,
+          "title": "Yearly Cost",
+          "description": "The sites' yearly cost.\n\nThese values are estimated according to the past data if less than a year of data has been collected.",
+          "links": [],
           "data": {
             "kind": "QueryGroup",
             "spec": {
@@ -46,10 +53,10 @@
                 {
                   "kind": "PanelQuery",
                   "spec": {
-                    "hidden": false,
                     "query": {
-                      "group": "prometheus",
                       "kind": "DataQuery",
+                      "group": "prometheus",
+                      "version": "v0",
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
@@ -59,20 +66,20 @@
                         "interval": "",
                         "legendFormat": "{{site}}"
                       },
-                      "version": "v0"
+                      "labels": {
+                        "grafana.app/export-label": "prometheus-1"
+                      }
                     },
-                    "refId": "A"
+                    "refId": "A",
+                    "hidden": false
                   }
                 }
               ],
-              "queryOptions": {
-                "interval": "5m"
-              },
               "transformations": [
                 {
-                  "kind": "sortBy",
+                  "kind": "Transformation",
+                  "group": "sortBy",
                   "spec": {
-                    "id": "sortBy",
                     "options": {
                       "fields": {},
                       "sort": [
@@ -83,65 +90,17 @@
                     }
                   }
                 }
-              ]
+              ],
+              "queryOptions": {
+                "interval": "5m"
+              }
             }
           },
-          "description": "The sites' yearly cost.\n\nThese values are estimated according to the past data if less than a year of data has been collected.",
-          "id": 114,
-          "links": [],
-          "title": "Yearly Cost",
           "vizConfig": {
-            "group": "barchart",
             "kind": "VizConfig",
+            "group": "barchart",
+            "version": "13.0.1",
             "spec": {
-              "fieldConfig": {
-                "defaults": {
-                  "color": {
-                    "fixedColor": "dark-green",
-                    "mode": "fixed"
-                  },
-                  "custom": {
-                    "axisBorderShow": false,
-                    "axisCenteredZero": false,
-                    "axisColorMode": "text",
-                    "axisGridShow": false,
-                    "axisLabel": "",
-                    "axisPlacement": "auto",
-                    "axisSoftMin": 0,
-                    "fillOpacity": 80,
-                    "gradientMode": "hue",
-                    "hideFrom": {
-                      "legend": false,
-                      "tooltip": false,
-                      "viz": false
-                    },
-                    "lineWidth": 1,
-                    "scaleDistribution": {
-                      "type": "linear"
-                    },
-                    "thresholdsStyle": {
-                      "mode": "off"
-                    }
-                  },
-                  "links": [
-                    {
-                      "title": "Site Information",
-                      "url": "/d/SHFBpSH7z/site-information?orgId=1&var-site=${__data.fields.site}"
-                    }
-                  ],
-                  "thresholds": {
-                    "mode": "percentage",
-                    "steps": [
-                      {
-                        "color": "green",
-                        "value": 0
-                      }
-                    ]
-                  },
-                  "unit": "currencyUSD"
-                },
-                "overrides": []
-              },
               "options": {
                 "barRadius": 0,
                 "barWidth": 0.95,
@@ -165,76 +124,29 @@
                 },
                 "xTickLabelRotation": -45,
                 "xTickLabelSpacing": 0
-              }
-            },
-            "version": "12.3.2"
-          }
-        }
-      },
-      "panel-115": {
-        "kind": "Panel",
-        "spec": {
-          "data": {
-            "kind": "QueryGroup",
-            "spec": {
-              "queries": [
-                {
-                  "kind": "PanelQuery",
-                  "spec": {
-                    "hidden": false,
-                    "query": {
-                      "group": "prometheus",
-                      "kind": "DataQuery",
-                      "spec": {
-                        "editorMode": "code",
-                        "exemplar": false,
-                        "expr": "avg_over_time(sum by (site) (hw_host_power_watts)[1y:1d]) * avg_over_time(avg by (site) (hw_site_pue_ratio)[1y:1d]) * avg_over_time(avg by (site) (hw_site_carbon_intensity_grams)[1y:1d]) * 365 * 24 / 1000 / 1000 / 1000",
-                        "format": "table",
-                        "instant": true,
-                        "interval": "",
-                        "legendFormat": "{{site}}"
-                      },
-                      "version": "v0"
-                    },
-                    "refId": "A"
-                  }
-                }
-              ],
-              "queryOptions": {
-                "interval": "5m"
               },
-              "transformations": [
-                {
-                  "kind": "sortBy",
-                  "spec": {
-                    "id": "sortBy",
-                    "options": {
-                      "fields": {},
-                      "sort": [
-                        {
-                          "field": "site"
-                        }
-                      ]
-                    }
-                  }
-                }
-              ]
-            }
-          },
-          "description": "The sites' yearly CO₂ emissions. \n\nThese values are estimated according to the past data if less than a year of data has been collected.",
-          "id": 115,
-          "links": [],
-          "title": "Yearly CO₂",
-          "vizConfig": {
-            "group": "barchart",
-            "kind": "VizConfig",
-            "spec": {
               "fieldConfig": {
                 "defaults": {
-                  "color": {
-                    "fixedColor": "#414141",
-                    "mode": "fixed"
+                  "unit": "currencyUSD",
+                  "thresholds": {
+                    "mode": "percentage",
+                    "steps": [
+                      {
+                        "value": 0,
+                        "color": "green"
+                      }
+                    ]
                   },
+                  "color": {
+                    "mode": "fixed",
+                    "fixedColor": "dark-green"
+                  },
+                  "links": [
+                    {
+                      "title": "Site Information",
+                      "url": "/d/SHFBpSH7z/site-information?orgId=1&var-site=${__data.fields.site}"
+                    }
+                  ],
                   "custom": {
                     "axisBorderShow": false,
                     "axisCenteredZero": false,
@@ -257,27 +169,76 @@
                     "thresholdsStyle": {
                       "mode": "off"
                     }
-                  },
-                  "links": [
-                    {
-                      "title": "Site Information",
-                      "url": "/d/SHFBpSH7z/site-information?orgId=1&var-site=${__data.fields.site}"
-                    }
-                  ],
-                  "min": 0,
-                  "thresholds": {
-                    "mode": "absolute",
-                    "steps": [
-                      {
-                        "color": "#ccccdc",
-                        "value": 0
-                      }
-                    ]
-                  },
-                  "unit": "masst"
+                  }
                 },
                 "overrides": []
-              },
+              }
+            }
+          }
+        }
+      },
+      "panel-115": {
+        "kind": "Panel",
+        "spec": {
+          "id": 115,
+          "title": "Yearly CO₂",
+          "description": "The sites' yearly CO₂ emissions. \n\nThese values are estimated according to the past data if less than a year of data has been collected.",
+          "links": [],
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "query": {
+                      "kind": "DataQuery",
+                      "group": "prometheus",
+                      "version": "v0",
+                      "spec": {
+                        "editorMode": "code",
+                        "exemplar": false,
+                        "expr": "avg_over_time(sum by (site) (hw_host_power_watts)[1y:1d]) * avg_over_time(avg by (site) (hw_site_pue_ratio)[1y:1d]) * avg_over_time(avg by (site) (hw_site_carbon_intensity_grams)[1y:1d]) * 365 * 24 / 1000 / 1000 / 1000",
+                        "format": "table",
+                        "instant": true,
+                        "interval": "",
+                        "legendFormat": "{{site}}"
+                      },
+                      "labels": {
+                        "grafana.app/export-label": "prometheus-1"
+                      }
+                    },
+                    "refId": "A",
+                    "hidden": false
+                  }
+                }
+              ],
+              "transformations": [
+                {
+                  "kind": "Transformation",
+                  "group": "sortBy",
+                  "spec": {
+                    "options": {
+                      "fields": {},
+                      "sort": [
+                        {
+                          "field": "site"
+                        }
+                      ]
+                    }
+                  }
+                }
+              ],
+              "queryOptions": {
+                "interval": "5m"
+              }
+            }
+          },
+          "vizConfig": {
+            "kind": "VizConfig",
+            "group": "barchart",
+            "version": "13.0.1",
+            "spec": {
               "options": {
                 "barRadius": 0,
                 "barWidth": 0.95,
@@ -303,76 +264,30 @@
                 },
                 "xTickLabelRotation": -45,
                 "xTickLabelSpacing": 0
-              }
-            },
-            "version": "12.3.2"
-          }
-        }
-      },
-      "panel-119": {
-        "kind": "Panel",
-        "spec": {
-          "data": {
-            "kind": "QueryGroup",
-            "spec": {
-              "queries": [
-                {
-                  "kind": "PanelQuery",
-                  "spec": {
-                    "hidden": false,
-                    "query": {
-                      "group": "prometheus",
-                      "kind": "DataQuery",
-                      "spec": {
-                        "editorMode": "code",
-                        "exemplar": false,
-                        "expr": "avg_over_time(sum by (site) (hw_host_power_watts)[1y:1d]) * avg_over_time(avg by (site) (hw_site_pue_ratio)[1y:1d]) * 365 * 24",
-                        "format": "table",
-                        "instant": true,
-                        "interval": "",
-                        "legendFormat": "{{site}}"
-                      },
-                      "version": "v0"
-                    },
-                    "refId": "B"
-                  }
-                }
-              ],
-              "queryOptions": {
-                "interval": "5m"
               },
-              "transformations": [
-                {
-                  "kind": "sortBy",
-                  "spec": {
-                    "id": "sortBy",
-                    "options": {
-                      "fields": {},
-                      "sort": [
-                        {
-                          "field": "site"
-                        }
-                      ]
-                    }
-                  }
-                }
-              ]
-            }
-          },
-          "description": "The sites' yearly power consumption.\n\nThese values are estimated according to the past data if less than a year of data has been collected.",
-          "id": 119,
-          "links": [],
-          "title": "Yearly Consumption",
-          "vizConfig": {
-            "group": "barchart",
-            "kind": "VizConfig",
-            "spec": {
               "fieldConfig": {
                 "defaults": {
-                  "color": {
-                    "fixedColor": "dark-blue",
-                    "mode": "fixed"
+                  "unit": "masst",
+                  "min": 0,
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "value": 0,
+                        "color": "#ccccdc"
+                      }
+                    ]
                   },
+                  "color": {
+                    "mode": "fixed",
+                    "fixedColor": "#414141"
+                  },
+                  "links": [
+                    {
+                      "title": "Site Information",
+                      "url": "/d/SHFBpSH7z/site-information?orgId=1&var-site=${__data.fields.site}"
+                    }
+                  ],
                   "custom": {
                     "axisBorderShow": false,
                     "axisCenteredZero": false,
@@ -395,26 +310,76 @@
                     "thresholdsStyle": {
                       "mode": "off"
                     }
-                  },
-                  "links": [
-                    {
-                      "title": "Site Information",
-                      "url": "/d/SHFBpSH7z/site-information?orgId=1&var-site=${__data.fields.site}"
-                    }
-                  ],
-                  "thresholds": {
-                    "mode": "absolute",
-                    "steps": [
-                      {
-                        "color": "green",
-                        "value": 0
-                      }
-                    ]
-                  },
-                  "unit": "watth"
+                  }
                 },
                 "overrides": []
-              },
+              }
+            }
+          }
+        }
+      },
+      "panel-119": {
+        "kind": "Panel",
+        "spec": {
+          "id": 119,
+          "title": "Yearly Consumption",
+          "description": "The sites' yearly power consumption.\n\nThese values are estimated according to the past data if less than a year of data has been collected.",
+          "links": [],
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "query": {
+                      "kind": "DataQuery",
+                      "group": "prometheus",
+                      "version": "v0",
+                      "spec": {
+                        "editorMode": "code",
+                        "exemplar": false,
+                        "expr": "avg_over_time(sum by (site) (hw_host_power_watts)[1y:1d]) * avg_over_time(avg by (site) (hw_site_pue_ratio)[1y:1d]) * 365 * 24",
+                        "format": "table",
+                        "instant": true,
+                        "interval": "",
+                        "legendFormat": "{{site}}"
+                      },
+                      "labels": {
+                        "grafana.app/export-label": "prometheus-1"
+                      }
+                    },
+                    "refId": "B",
+                    "hidden": false
+                  }
+                }
+              ],
+              "transformations": [
+                {
+                  "kind": "Transformation",
+                  "group": "sortBy",
+                  "spec": {
+                    "options": {
+                      "fields": {},
+                      "sort": [
+                        {
+                          "field": "site"
+                        }
+                      ]
+                    }
+                  }
+                }
+              ],
+              "queryOptions": {
+                "interval": "5m"
+              }
+            }
+          },
+          "vizConfig": {
+            "kind": "VizConfig",
+            "group": "barchart",
+            "version": "13.0.1",
+            "spec": {
               "options": {
                 "barRadius": 0,
                 "barWidth": 0.95,
@@ -438,15 +403,66 @@
                 },
                 "xTickLabelRotation": -45,
                 "xTickLabelSpacing": 0
+              },
+              "fieldConfig": {
+                "defaults": {
+                  "unit": "watth",
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "value": 0,
+                        "color": "green"
+                      }
+                    ]
+                  },
+                  "color": {
+                    "mode": "fixed",
+                    "fixedColor": "dark-blue"
+                  },
+                  "links": [
+                    {
+                      "title": "Site Information",
+                      "url": "/d/SHFBpSH7z/site-information?orgId=1&var-site=${__data.fields.site}"
+                    }
+                  ],
+                  "custom": {
+                    "axisBorderShow": false,
+                    "axisCenteredZero": false,
+                    "axisColorMode": "text",
+                    "axisGridShow": false,
+                    "axisLabel": "",
+                    "axisPlacement": "auto",
+                    "axisSoftMin": 0,
+                    "fillOpacity": 80,
+                    "gradientMode": "hue",
+                    "hideFrom": {
+                      "legend": false,
+                      "tooltip": false,
+                      "viz": false
+                    },
+                    "lineWidth": 1,
+                    "scaleDistribution": {
+                      "type": "linear"
+                    },
+                    "thresholdsStyle": {
+                      "mode": "off"
+                    }
+                  }
+                },
+                "overrides": []
               }
-            },
-            "version": "12.3.2"
+            }
           }
         }
       },
       "panel-155": {
         "kind": "Panel",
         "spec": {
+          "id": 155,
+          "title": "Total Power",
+          "description": "Total current power usage of all hosts across all sites.",
+          "links": [],
           "data": {
             "kind": "QueryGroup",
             "spec": {
@@ -454,10 +470,10 @@
                 {
                   "kind": "PanelQuery",
                   "spec": {
-                    "hidden": false,
                     "query": {
-                      "group": "prometheus",
                       "kind": "DataQuery",
+                      "group": "prometheus",
+                      "version": "v0",
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
@@ -466,46 +482,26 @@
                         "interval": "",
                         "legendFormat": "Total Power"
                       },
-                      "version": "v0"
+                      "labels": {
+                        "grafana.app/export-label": "prometheus-1"
+                      }
                     },
-                    "refId": "A"
+                    "refId": "A",
+                    "hidden": false
                   }
                 }
               ],
+              "transformations": [],
               "queryOptions": {
                 "interval": "1h"
-              },
-              "transformations": []
+              }
             }
           },
-          "description": "Total current power usage of all hosts across all sites.",
-          "id": 155,
-          "links": [],
-          "title": "Total Power",
           "vizConfig": {
-            "group": "stat",
             "kind": "VizConfig",
+            "group": "stat",
+            "version": "13.0.1",
             "spec": {
-              "fieldConfig": {
-                "defaults": {
-                  "color": {
-                    "fixedColor": "blue",
-                    "mode": "fixed"
-                  },
-                  "min": 0,
-                  "thresholds": {
-                    "mode": "absolute",
-                    "steps": [
-                      {
-                        "color": "green",
-                        "value": 0
-                      }
-                    ]
-                  },
-                  "unit": "watt"
-                },
-                "overrides": []
-              },
               "options": {
                 "colorMode": "background",
                 "graphMode": "none",
@@ -523,40 +519,56 @@
                 "text": {},
                 "textMode": "auto",
                 "wideLayout": true
+              },
+              "fieldConfig": {
+                "defaults": {
+                  "unit": "watt",
+                  "min": 0,
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "value": 0,
+                        "color": "green"
+                      }
+                    ]
+                  },
+                  "color": {
+                    "mode": "fixed",
+                    "fixedColor": "blue"
+                  }
+                },
+                "overrides": []
               }
-            },
-            "version": "12.3.2"
+            }
           }
         }
       },
       "panel-162": {
         "kind": "Panel",
         "spec": {
-          "data": {
-            "kind": "QueryGroup",
-            "spec": {
-              "queries": [],
-              "queryOptions": {},
-              "transformations": []
-            }
-          },
-          "description": "",
           "id": 162,
+          "title": "",
+          "description": "",
           "links": [
             {
               "title": "Hardware Sentry OpenTelemetry Collector",
               "url": "https://www.sentrysoftware.com/products/hardware-sentry-opentelemetry-collector.html"
             }
           ],
-          "title": "",
-          "vizConfig": {
-            "group": "text",
-            "kind": "VizConfig",
+          "data": {
+            "kind": "QueryGroup",
             "spec": {
-              "fieldConfig": {
-                "defaults": {},
-                "overrides": []
-              },
+              "queries": [],
+              "transformations": [],
+              "queryOptions": {}
+            }
+          },
+          "vizConfig": {
+            "kind": "VizConfig",
+            "group": "text",
+            "version": "13.0.1",
+            "spec": {
               "options": {
                 "code": {
                   "language": "plaintext",
@@ -565,15 +577,22 @@
                 },
                 "content": "<a href=\"https://metricshub.com/\" target=\"_blank\">\n  <div style=\"\n    display: block;\n    margin: 0 auto; \n    \n    background: transparent url(https://metricshub.com/images/logo-darkgrey.svg) no-repeat center center;\n    background-size: contain;\n    \n    width: 150px;   \n    height: 125px;\n    border-radius: 3px;\n  \">\n  </div>\n</a>",
                 "mode": "html"
+              },
+              "fieldConfig": {
+                "defaults": {},
+                "overrides": []
               }
-            },
-            "version": "12.3.2"
+            }
           }
         }
       },
       "panel-168": {
         "kind": "Panel",
         "spec": {
+          "id": 168,
+          "title": "Hosts Type",
+          "description": "The total number of hosts per type: compute (server), storage and network.",
+          "links": [],
           "data": {
             "kind": "QueryGroup",
             "spec": {
@@ -581,10 +600,10 @@
                 {
                   "kind": "PanelQuery",
                   "spec": {
-                    "hidden": false,
                     "query": {
-                      "group": "prometheus",
                       "kind": "DataQuery",
+                      "group": "prometheus",
+                      "version": "v0",
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
@@ -593,39 +612,24 @@
                         "interval": "",
                         "legendFormat": "{{host_type}}"
                       },
-                      "version": "v0"
+                      "labels": {
+                        "grafana.app/export-label": "prometheus-1"
+                      }
                     },
-                    "refId": "A"
+                    "refId": "A",
+                    "hidden": false
                   }
                 }
               ],
-              "queryOptions": {},
-              "transformations": []
+              "transformations": [],
+              "queryOptions": {}
             }
           },
-          "description": "The total number of hosts per type: compute (server), storage and network.",
-          "id": 168,
-          "links": [],
-          "title": "Hosts Type",
           "vizConfig": {
-            "group": "piechart",
             "kind": "VizConfig",
+            "group": "piechart",
+            "version": "13.0.1",
             "spec": {
-              "fieldConfig": {
-                "defaults": {
-                  "color": {
-                    "mode": "palette-classic"
-                  },
-                  "custom": {
-                    "hideFrom": {
-                      "legend": false,
-                      "tooltip": false,
-                      "viz": false
-                    }
-                  }
-                },
-                "overrides": []
-              },
               "options": {
                 "displayLabels": [
                   "name",
@@ -653,15 +657,33 @@
                   "mode": "multi",
                   "sort": "none"
                 }
+              },
+              "fieldConfig": {
+                "defaults": {
+                  "color": {
+                    "mode": "palette-classic"
+                  },
+                  "custom": {
+                    "hideFrom": {
+                      "legend": false,
+                      "tooltip": false,
+                      "viz": false
+                    }
+                  }
+                },
+                "overrides": []
               }
-            },
-            "version": "12.3.2"
+            }
           }
         }
       },
       "panel-172": {
         "kind": "Panel",
         "spec": {
+          "id": 172,
+          "title": "Power per Platform Type",
+          "description": "The power consumption distribution across platform types: \nHP-UX, IBM AIX, Management (i.e management card), Microsoft Windows, Linux, \nOracle Solaris and Storage.",
+          "links": [],
           "data": {
             "kind": "QueryGroup",
             "spec": {
@@ -669,10 +691,10 @@
                 {
                   "kind": "PanelQuery",
                   "spec": {
-                    "hidden": false,
                     "query": {
-                      "group": "prometheus",
                       "kind": "DataQuery",
+                      "group": "prometheus",
+                      "version": "v0",
                       "spec": {
                         "exemplar": false,
                         "expr": "sum by (os_type) (hw_host_power_watts)",
@@ -680,55 +702,24 @@
                         "interval": "",
                         "legendFormat": "{{site}}"
                       },
-                      "version": "v0"
+                      "labels": {
+                        "grafana.app/export-label": "prometheus-1"
+                      }
                     },
-                    "refId": "A"
+                    "refId": "A",
+                    "hidden": false
                   }
                 }
               ],
-              "queryOptions": {},
-              "transformations": []
+              "transformations": [],
+              "queryOptions": {}
             }
           },
-          "description": "The power consumption distribution across platform types: \nHP-UX, IBM AIX, Management (i.e management card), Microsoft Windows, Linux, \nOracle Solaris and Storage.",
-          "id": 172,
-          "links": [],
-          "title": "Power per Platform Type",
           "vizConfig": {
-            "group": "piechart",
             "kind": "VizConfig",
+            "group": "piechart",
+            "version": "13.0.1",
             "spec": {
-              "fieldConfig": {
-                "defaults": {
-                  "color": {
-                    "mode": "palette-classic"
-                  },
-                  "custom": {
-                    "hideFrom": {
-                      "legend": false,
-                      "tooltip": false,
-                      "viz": false
-                    }
-                  },
-                  "mappings": [
-                    {
-                      "options": {
-                        "linux": {
-                          "index": 0,
-                          "text": "Linux"
-                        },
-                        "management": {
-                          "index": 1,
-                          "text": "Out-of-band"
-                        }
-                      },
-                      "type": "value"
-                    }
-                  ],
-                  "unit": "watt"
-                },
-                "overrides": []
-              },
               "options": {
                 "displayLabels": [
                   "name",
@@ -755,53 +746,25 @@
                   "mode": "multi",
                   "sort": "none"
                 }
-              }
-            },
-            "version": "12.3.2"
-          }
-        }
-      },
-      "panel-177": {
-        "kind": "Panel",
-        "spec": {
-          "data": {
-            "kind": "QueryGroup",
-            "spec": {
-              "queries": [
-                {
-                  "kind": "PanelQuery",
-                  "spec": {
-                    "hidden": false,
-                    "query": {
-                      "group": "prometheus",
-                      "kind": "DataQuery",
-                      "spec": {
-                        "exemplar": false,
-                        "expr": "sum by (host_type) (hw_host_power_watts)",
-                        "instant": true,
-                        "interval": "",
-                        "legendFormat": "{{host_type}}"
-                      },
-                      "version": "v0"
-                    },
-                    "refId": "A"
-                  }
-                }
-              ],
-              "queryOptions": {},
-              "transformations": []
-            }
-          },
-          "description": "The power consumption distribution by host types: compute (server), storage and network.",
-          "id": 177,
-          "links": [],
-          "title": "Power per Host Type",
-          "vizConfig": {
-            "group": "piechart",
-            "kind": "VizConfig",
-            "spec": {
+              },
               "fieldConfig": {
                 "defaults": {
+                  "unit": "watt",
+                  "mappings": [
+                    {
+                      "type": "value",
+                      "options": {
+                        "linux": {
+                          "text": "Linux",
+                          "index": 0
+                        },
+                        "management": {
+                          "text": "Out-of-band",
+                          "index": 1
+                        }
+                      }
+                    }
+                  ],
                   "color": {
                     "mode": "palette-classic"
                   },
@@ -811,11 +774,57 @@
                       "tooltip": false,
                       "viz": false
                     }
-                  },
-                  "unit": "watt"
+                  }
                 },
                 "overrides": []
-              },
+              }
+            }
+          }
+        }
+      },
+      "panel-177": {
+        "kind": "Panel",
+        "spec": {
+          "id": 177,
+          "title": "Power per Host Type",
+          "description": "The power consumption distribution by host types: compute (server), storage and network.",
+          "links": [],
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "query": {
+                      "kind": "DataQuery",
+                      "group": "prometheus",
+                      "version": "v0",
+                      "spec": {
+                        "exemplar": false,
+                        "expr": "sum by (host_type) (hw_host_power_watts)",
+                        "instant": true,
+                        "interval": "",
+                        "legendFormat": "{{host_type}}"
+                      },
+                      "labels": {
+                        "grafana.app/export-label": "prometheus-1"
+                      }
+                    },
+                    "refId": "A",
+                    "hidden": false
+                  }
+                }
+              ],
+              "transformations": [],
+              "queryOptions": {}
+            }
+          },
+          "vizConfig": {
+            "kind": "VizConfig",
+            "group": "piechart",
+            "version": "13.0.1",
+            "spec": {
               "options": {
                 "displayLabels": [
                   "name",
@@ -843,15 +852,34 @@
                   "mode": "multi",
                   "sort": "none"
                 }
+              },
+              "fieldConfig": {
+                "defaults": {
+                  "unit": "watt",
+                  "color": {
+                    "mode": "palette-classic"
+                  },
+                  "custom": {
+                    "hideFrom": {
+                      "legend": false,
+                      "tooltip": false,
+                      "viz": false
+                    }
+                  }
+                },
+                "overrides": []
               }
-            },
-            "version": "12.3.2"
+            }
           }
         }
       },
       "panel-179": {
         "kind": "Panel",
         "spec": {
+          "id": 179,
+          "title": "Top Consumers",
+          "description": "The 10 hosts that currently consume the most energy across all sites.",
+          "links": [],
           "data": {
             "kind": "QueryGroup",
             "spec": {
@@ -859,10 +887,10 @@
                 {
                   "kind": "PanelQuery",
                   "spec": {
-                    "hidden": false,
                     "query": {
-                      "group": "prometheus",
                       "kind": "DataQuery",
+                      "group": "prometheus",
+                      "version": "v0",
                       "spec": {
                         "exemplar": false,
                         "expr": "topk(10, hw_host_power_watts)",
@@ -870,63 +898,24 @@
                         "interval": "",
                         "legendFormat": "{{site}}: {{host_name}} "
                       },
-                      "version": "v0"
+                      "labels": {
+                        "grafana.app/export-label": "prometheus-1"
+                      }
                     },
-                    "refId": "A"
+                    "refId": "A",
+                    "hidden": false
                   }
                 }
               ],
-              "queryOptions": {},
-              "transformations": []
+              "transformations": [],
+              "queryOptions": {}
             }
           },
-          "description": "The 10 hosts that currently consume the most energy across all sites.",
-          "id": 179,
-          "links": [],
-          "title": "Top Consumers",
           "vizConfig": {
-            "group": "bargauge",
             "kind": "VizConfig",
+            "group": "bargauge",
+            "version": "13.0.1",
             "spec": {
-              "fieldConfig": {
-                "defaults": {
-                  "color": {
-                    "fixedColor": "blue",
-                    "mode": "thresholds"
-                  },
-                  "links": [
-                    {
-                      "title": "",
-                      "url": "d/c2K8skm4k/host?orgId=1&var-site=${__field.labels.site}&var-host_name=${__field.labels.host_name}"
-                    }
-                  ],
-                  "max": 2000,
-                  "min": 500,
-                  "thresholds": {
-                    "mode": "absolute",
-                    "steps": [
-                      {
-                        "color": "super-light-blue",
-                        "value": 0
-                      },
-                      {
-                        "color": "light-blue",
-                        "value": 500
-                      },
-                      {
-                        "color": "semi-dark-blue",
-                        "value": 1000
-                      },
-                      {
-                        "color": "dark-blue",
-                        "value": 2000
-                      }
-                    ]
-                  },
-                  "unit": "watt"
-                },
-                "overrides": []
-              },
               "options": {
                 "displayMode": "gradient",
                 "legend": {
@@ -950,15 +939,57 @@
                 "showUnfilled": true,
                 "sizing": "auto",
                 "valueMode": "color"
+              },
+              "fieldConfig": {
+                "defaults": {
+                  "unit": "watt",
+                  "min": 500,
+                  "max": 2000,
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "value": 0,
+                        "color": "super-light-blue"
+                      },
+                      {
+                        "value": 500,
+                        "color": "light-blue"
+                      },
+                      {
+                        "value": 1000,
+                        "color": "semi-dark-blue"
+                      },
+                      {
+                        "value": 2000,
+                        "color": "dark-blue"
+                      }
+                    ]
+                  },
+                  "color": {
+                    "mode": "thresholds",
+                    "fixedColor": "blue"
+                  },
+                  "links": [
+                    {
+                      "title": "",
+                      "url": "d/c2K8skm4k/host?orgId=1&var-site=${__field.labels.site}&var-host_name=${__field.labels.host_name}"
+                    }
+                  ]
+                },
+                "overrides": []
               }
-            },
-            "version": "12.3.2"
+            }
           }
         }
       },
       "panel-181": {
         "kind": "Panel",
         "spec": {
+          "id": 181,
+          "title": "Total Power * PUE",
+          "description": "Total current power usage across all sites, multiplied by the site's PUE.\n\nThis number represents the actual power usage of all sites. It takes into account the cooling and other overhead that supports the equipment.",
+          "links": [],
           "data": {
             "kind": "QueryGroup",
             "spec": {
@@ -966,10 +997,10 @@
                 {
                   "kind": "PanelQuery",
                   "spec": {
-                    "hidden": false,
                     "query": {
-                      "group": "prometheus",
                       "kind": "DataQuery",
+                      "group": "prometheus",
+                      "version": "v0",
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
@@ -978,46 +1009,26 @@
                         "interval": "",
                         "legendFormat": "Total Power * PUE"
                       },
-                      "version": "v0"
+                      "labels": {
+                        "grafana.app/export-label": "prometheus-1"
+                      }
                     },
-                    "refId": "A"
+                    "refId": "A",
+                    "hidden": false
                   }
                 }
               ],
+              "transformations": [],
               "queryOptions": {
                 "interval": "1h"
-              },
-              "transformations": []
+              }
             }
           },
-          "description": "Total current power usage across all sites, multiplied by the site's PUE.\n\nThis number represents the actual power usage of all sites. It takes into account the cooling and other overhead that supports the equipment.",
-          "id": 181,
-          "links": [],
-          "title": "Total Power * PUE",
           "vizConfig": {
-            "group": "stat",
             "kind": "VizConfig",
+            "group": "stat",
+            "version": "13.0.1",
             "spec": {
-              "fieldConfig": {
-                "defaults": {
-                  "color": {
-                    "fixedColor": "blue",
-                    "mode": "fixed"
-                  },
-                  "min": 0,
-                  "thresholds": {
-                    "mode": "absolute",
-                    "steps": [
-                      {
-                        "color": "green",
-                        "value": 0
-                      }
-                    ]
-                  },
-                  "unit": "watt"
-                },
-                "overrides": []
-              },
               "options": {
                 "colorMode": "background",
                 "graphMode": "none",
@@ -1035,15 +1046,38 @@
                 "text": {},
                 "textMode": "auto",
                 "wideLayout": true
+              },
+              "fieldConfig": {
+                "defaults": {
+                  "unit": "watt",
+                  "min": 0,
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "value": 0,
+                        "color": "green"
+                      }
+                    ]
+                  },
+                  "color": {
+                    "mode": "fixed",
+                    "fixedColor": "blue"
+                  }
+                },
+                "overrides": []
               }
-            },
-            "version": "12.3.2"
+            }
           }
         }
       },
       "panel-188": {
         "kind": "Panel",
         "spec": {
+          "id": 188,
+          "title": "Hosts",
+          "description": "The number of hosts currently configured to be monitored.",
+          "links": [],
           "data": {
             "kind": "QueryGroup",
             "spec": {
@@ -1051,10 +1085,10 @@
                 {
                   "kind": "PanelQuery",
                   "spec": {
-                    "hidden": false,
                     "query": {
-                      "group": "prometheus",
                       "kind": "DataQuery",
+                      "group": "prometheus",
+                      "version": "v0",
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
@@ -1063,44 +1097,26 @@
                         "interval": "",
                         "legendFormat": "Hosts"
                       },
-                      "version": "v0"
+                      "labels": {
+                        "grafana.app/export-label": "prometheus-1"
+                      }
                     },
-                    "refId": "A"
+                    "refId": "A",
+                    "hidden": false
                   }
                 }
               ],
+              "transformations": [],
               "queryOptions": {
                 "interval": "2m"
-              },
-              "transformations": []
+              }
             }
           },
-          "description": "The number of hosts currently configured to be monitored.",
-          "id": 188,
-          "links": [],
-          "title": "Hosts",
           "vizConfig": {
-            "group": "stat",
             "kind": "VizConfig",
+            "group": "stat",
+            "version": "13.0.1",
             "spec": {
-              "fieldConfig": {
-                "defaults": {
-                  "color": {
-                    "mode": "fixed"
-                  },
-                  "thresholds": {
-                    "mode": "absolute",
-                    "steps": [
-                      {
-                        "color": "dark-green",
-                        "value": 0
-                      }
-                    ]
-                  },
-                  "unit": "none"
-                },
-                "overrides": []
-              },
               "options": {
                 "colorMode": "background",
                 "graphMode": "none",
@@ -1118,15 +1134,36 @@
                 "text": {},
                 "textMode": "auto",
                 "wideLayout": true
+              },
+              "fieldConfig": {
+                "defaults": {
+                  "unit": "none",
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "value": 0,
+                        "color": "dark-green"
+                      }
+                    ]
+                  },
+                  "color": {
+                    "mode": "fixed"
+                  }
+                },
+                "overrides": []
               }
-            },
-            "version": "12.3.2"
+            }
           }
         }
       },
       "panel-206": {
         "kind": "Panel",
         "spec": {
+          "id": 206,
+          "title": "",
+          "description": "",
+          "links": [],
           "data": {
             "kind": "QueryGroup",
             "spec": {
@@ -1134,10 +1171,10 @@
                 {
                   "kind": "PanelQuery",
                   "spec": {
-                    "hidden": false,
                     "query": {
-                      "group": "prometheus",
                       "kind": "DataQuery",
+                      "group": "prometheus",
+                      "version": "v0",
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
@@ -1147,20 +1184,20 @@
                         "interval": "",
                         "legendFormat": ""
                       },
-                      "version": "v0"
+                      "labels": {
+                        "grafana.app/export-label": "prometheus-1"
+                      }
                     },
-                    "refId": "A"
+                    "refId": "A",
+                    "hidden": false
                   }
                 }
               ],
-              "queryOptions": {
-                "interval": "1h"
-              },
               "transformations": [
                 {
-                  "kind": "filterFieldsByName",
+                  "kind": "Transformation",
+                  "group": "filterFieldsByName",
                   "spec": {
-                    "id": "filterFieldsByName",
                     "options": {
                       "include": {
                         "names": [
@@ -1176,9 +1213,9 @@
                   }
                 },
                 {
-                  "kind": "calculateField",
+                  "kind": "Transformation",
+                  "group": "calculateField",
                   "spec": {
-                    "id": "calculateField",
                     "options": {
                       "alias": "Last Seen",
                       "binary": {
@@ -1205,9 +1242,9 @@
                   }
                 },
                 {
-                  "kind": "organize",
+                  "kind": "Transformation",
+                  "group": "organize",
                   "spec": {
-                    "id": "organize",
                     "options": {
                       "excludeByName": {
                         "Time": true,
@@ -1279,19 +1316,38 @@
                     }
                   }
                 }
-              ]
+              ],
+              "queryOptions": {
+                "interval": "1h"
+              }
             }
           },
-          "description": "",
-          "id": 206,
-          "links": [],
-          "title": "",
           "vizConfig": {
-            "group": "table",
             "kind": "VizConfig",
+            "group": "table",
+            "version": "13.0.1",
             "spec": {
+              "options": {
+                "cellHeight": "sm",
+                "showHeader": true,
+                "sortBy": [
+                  {
+                    "desc": false,
+                    "displayName": "Site"
+                  }
+                ]
+              },
               "fieldConfig": {
                 "defaults": {
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "value": 0,
+                        "color": "green"
+                      }
+                    ]
+                  },
                   "color": {
                     "mode": "thresholds"
                   },
@@ -1305,15 +1361,6 @@
                       "reducers": []
                     },
                     "inspect": false
-                  },
-                  "thresholds": {
-                    "mode": "absolute",
-                    "steps": [
-                      {
-                        "color": "green",
-                        "value": 0
-                      }
-                    ]
                   }
                 },
                 "overrides": [
@@ -1362,25 +1409,18 @@
                     ]
                   }
                 ]
-              },
-              "options": {
-                "cellHeight": "sm",
-                "showHeader": true,
-                "sortBy": [
-                  {
-                    "desc": false,
-                    "displayName": "Site"
-                  }
-                ]
               }
-            },
-            "version": "12.3.2"
+            }
           }
         }
       },
       "panel-277": {
         "kind": "Panel",
         "spec": {
+          "id": 277,
+          "title": "Hosts Ambient Temperature",
+          "description": "The 25 hosts reporting the hottest ambient temperature.\n\nClick on a host for details.",
+          "links": [],
           "data": {
             "kind": "QueryGroup",
             "spec": {
@@ -1388,10 +1428,10 @@
                 {
                   "kind": "PanelQuery",
                   "spec": {
-                    "hidden": false,
                     "query": {
-                      "group": "prometheus",
                       "kind": "DataQuery",
+                      "group": "prometheus",
+                      "version": "v0",
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
@@ -1402,21 +1442,20 @@
                         "legendFormat": "",
                         "range": false
                       },
-                      "version": "v0"
+                      "labels": {
+                        "grafana.app/export-label": "prometheus-1"
+                      }
                     },
-                    "refId": "A"
+                    "refId": "A",
+                    "hidden": false
                   }
                 }
               ],
-              "queryOptions": {
-                "interval": "2m",
-                "maxDataPoints": 1
-              },
               "transformations": [
                 {
-                  "kind": "filterFieldsByName",
+                  "kind": "Transformation",
+                  "group": "filterFieldsByName",
                   "spec": {
-                    "id": "filterFieldsByName",
                     "options": {
                       "include": {
                         "names": [
@@ -1430,9 +1469,9 @@
                   }
                 },
                 {
-                  "kind": "sortBy",
+                  "kind": "Transformation",
+                  "group": "sortBy",
                   "spec": {
-                    "id": "sortBy",
                     "options": {
                       "fields": {},
                       "sort": [
@@ -1444,9 +1483,9 @@
                   }
                 },
                 {
-                  "kind": "organize",
+                  "kind": "Transformation",
+                  "group": "organize",
                   "spec": {
-                    "id": "organize",
                     "options": {
                       "excludeByName": {
                         "Time": true,
@@ -1480,44 +1519,18 @@
                     }
                   }
                 }
-              ]
+              ],
+              "queryOptions": {
+                "maxDataPoints": 1,
+                "interval": "2m"
+              }
             }
           },
-          "description": "The 25 hosts reporting the hottest ambient temperature.\n\nClick on a host for details.",
-          "id": 277,
-          "links": [],
-          "title": "Hosts Ambient Temperature",
           "vizConfig": {
-            "group": "stat",
             "kind": "VizConfig",
+            "group": "stat",
+            "version": "13.0.1",
             "spec": {
-              "fieldConfig": {
-                "defaults": {
-                  "color": {
-                    "mode": "continuous-BlYlRd"
-                  },
-                  "decimals": 1,
-                  "links": [
-                    {
-                      "title": "",
-                      "url": "d/c2K8skm4k/host?orgId=1&var-site=${__data.fields.site}&var-host_name=${__data.fields.host_name}"
-                    }
-                  ],
-                  "max": 30,
-                  "min": 18,
-                  "thresholds": {
-                    "mode": "absolute",
-                    "steps": [
-                      {
-                        "color": "green",
-                        "value": 0
-                      }
-                    ]
-                  },
-                  "unit": "celsius"
-                },
-                "overrides": []
-              },
               "options": {
                 "colorMode": "background",
                 "graphMode": "none",
@@ -1533,15 +1546,45 @@
                 "text": {},
                 "textMode": "auto",
                 "wideLayout": true
+              },
+              "fieldConfig": {
+                "defaults": {
+                  "unit": "celsius",
+                  "decimals": 1,
+                  "min": 18,
+                  "max": 30,
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "value": 0,
+                        "color": "green"
+                      }
+                    ]
+                  },
+                  "color": {
+                    "mode": "continuous-BlYlRd"
+                  },
+                  "links": [
+                    {
+                      "title": "",
+                      "url": "d/c2K8skm4k/host?orgId=1&var-site=${__data.fields.site}&var-host_name=${__data.fields.host_name}"
+                    }
+                  ]
+                },
+                "overrides": []
               }
-            },
-            "version": "12.3.2"
+            }
           }
         }
       },
       "panel-299": {
         "kind": "Panel",
         "spec": {
+          "id": 299,
+          "title": "Hosts Highest Temperature Sensor ",
+          "description": "The temperature sensors reporting the highest temperatures at the moment.\n\nClick on a temperature for details.",
+          "links": [],
           "data": {
             "kind": "QueryGroup",
             "spec": {
@@ -1549,10 +1592,10 @@
                 {
                   "kind": "PanelQuery",
                   "spec": {
-                    "hidden": false,
                     "query": {
-                      "group": "prometheus",
                       "kind": "DataQuery",
+                      "group": "prometheus",
+                      "version": "v0",
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
@@ -1563,21 +1606,20 @@
                         "legendFormat": "",
                         "range": false
                       },
-                      "version": "v0"
+                      "labels": {
+                        "grafana.app/export-label": "prometheus-1"
+                      }
                     },
-                    "refId": "A"
+                    "refId": "A",
+                    "hidden": false
                   }
                 }
               ],
-              "queryOptions": {
-                "interval": "2m",
-                "maxDataPoints": 1
-              },
               "transformations": [
                 {
-                  "kind": "filterFieldsByName",
+                  "kind": "Transformation",
+                  "group": "filterFieldsByName",
                   "spec": {
-                    "id": "filterFieldsByName",
                     "options": {
                       "include": {
                         "names": [
@@ -1590,9 +1632,9 @@
                   }
                 },
                 {
-                  "kind": "organize",
+                  "kind": "Transformation",
+                  "group": "organize",
                   "spec": {
-                    "id": "organize",
                     "options": {
                       "excludeByName": {
                         "Time": true,
@@ -1610,9 +1652,9 @@
                   }
                 },
                 {
-                  "kind": "sortBy",
+                  "kind": "Transformation",
+                  "group": "sortBy",
                   "spec": {
-                    "id": "sortBy",
                     "options": {
                       "fields": {},
                       "sort": [
@@ -1623,44 +1665,18 @@
                     }
                   }
                 }
-              ]
+              ],
+              "queryOptions": {
+                "maxDataPoints": 1,
+                "interval": "2m"
+              }
             }
           },
-          "description": "The temperature sensors reporting the highest temperatures at the moment.\n\nClick on a temperature for details.",
-          "id": 299,
-          "links": [],
-          "title": "Hosts Highest Temperature Sensor ",
           "vizConfig": {
-            "group": "stat",
             "kind": "VizConfig",
+            "group": "stat",
+            "version": "13.0.1",
             "spec": {
-              "fieldConfig": {
-                "defaults": {
-                  "color": {
-                    "mode": "continuous-BlYlRd"
-                  },
-                  "decimals": 1,
-                  "links": [
-                    {
-                      "title": "",
-                      "url": "d/c2K8skm4k/host?orgId=1&var-site=${__data.fields.site}&var-host_name=${__data.fields.host_name}"
-                    }
-                  ],
-                  "max": 60,
-                  "min": 18,
-                  "thresholds": {
-                    "mode": "absolute",
-                    "steps": [
-                      {
-                        "color": "green",
-                        "value": 0
-                      }
-                    ]
-                  },
-                  "unit": "celsius"
-                },
-                "overrides": []
-              },
               "options": {
                 "colorMode": "background",
                 "graphMode": "none",
@@ -1676,15 +1692,45 @@
                 "text": {},
                 "textMode": "auto",
                 "wideLayout": true
+              },
+              "fieldConfig": {
+                "defaults": {
+                  "unit": "celsius",
+                  "decimals": 1,
+                  "min": 18,
+                  "max": 60,
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "value": 0,
+                        "color": "green"
+                      }
+                    ]
+                  },
+                  "color": {
+                    "mode": "continuous-BlYlRd"
+                  },
+                  "links": [
+                    {
+                      "title": "",
+                      "url": "d/c2K8skm4k/host?orgId=1&var-site=${__data.fields.site}&var-host_name=${__data.fields.host_name}"
+                    }
+                  ]
+                },
+                "overrides": []
               }
-            },
-            "version": "12.3.2"
+            }
           }
         }
       },
       "panel-301": {
         "kind": "Panel",
         "spec": {
+          "id": 301,
+          "title": "Critical Alerts",
+          "description": "",
+          "links": [],
           "data": {
             "kind": "QueryGroup",
             "spec": {
@@ -1692,10 +1738,10 @@
                 {
                   "kind": "PanelQuery",
                   "spec": {
-                    "hidden": false,
                     "query": {
-                      "group": "prometheus",
                       "kind": "DataQuery",
+                      "group": "prometheus",
+                      "version": "v0",
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
@@ -1704,46 +1750,24 @@
                         "interval": "",
                         "legendFormat": "Critical Alerts"
                       },
-                      "version": "v0"
+                      "labels": {
+                        "grafana.app/export-label": "prometheus-1"
+                      }
                     },
-                    "refId": "A"
+                    "refId": "A",
+                    "hidden": false
                   }
                 }
               ],
-              "queryOptions": {},
-              "transformations": []
+              "transformations": [],
+              "queryOptions": {}
             }
           },
-          "description": "",
-          "id": 301,
-          "links": [],
-          "title": "Critical Alerts",
           "vizConfig": {
-            "group": "stat",
             "kind": "VizConfig",
+            "group": "stat",
+            "version": "13.0.1",
             "spec": {
-              "fieldConfig": {
-                "defaults": {
-                  "color": {
-                    "mode": "thresholds"
-                  },
-                  "noValue": "0",
-                  "thresholds": {
-                    "mode": "absolute",
-                    "steps": [
-                      {
-                        "color": "transparent",
-                        "value": 0
-                      },
-                      {
-                        "color": "red",
-                        "value": 1
-                      }
-                    ]
-                  }
-                },
-                "overrides": []
-              },
               "options": {
                 "colorMode": "background",
                 "graphMode": "none",
@@ -1761,15 +1785,40 @@
                 "text": {},
                 "textMode": "value",
                 "wideLayout": true
+              },
+              "fieldConfig": {
+                "defaults": {
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "value": 0,
+                        "color": "transparent"
+                      },
+                      {
+                        "value": 1,
+                        "color": "red"
+                      }
+                    ]
+                  },
+                  "color": {
+                    "mode": "thresholds"
+                  },
+                  "noValue": "0"
+                },
+                "overrides": []
               }
-            },
-            "version": "12.3.2"
+            }
           }
         }
       },
       "panel-303": {
         "kind": "Panel",
         "spec": {
+          "id": 303,
+          "title": "Warning Alerts",
+          "description": "",
+          "links": [],
           "data": {
             "kind": "QueryGroup",
             "spec": {
@@ -1777,10 +1826,10 @@
                 {
                   "kind": "PanelQuery",
                   "spec": {
-                    "hidden": false,
                     "query": {
-                      "group": "prometheus",
                       "kind": "DataQuery",
+                      "group": "prometheus",
+                      "version": "v0",
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
@@ -1789,46 +1838,24 @@
                         "interval": "",
                         "legendFormat": "Warning Alerts"
                       },
-                      "version": "v0"
+                      "labels": {
+                        "grafana.app/export-label": "prometheus-1"
+                      }
                     },
-                    "refId": "A"
+                    "refId": "A",
+                    "hidden": false
                   }
                 }
               ],
-              "queryOptions": {},
-              "transformations": []
+              "transformations": [],
+              "queryOptions": {}
             }
           },
-          "description": "",
-          "id": 303,
-          "links": [],
-          "title": "Warning Alerts",
           "vizConfig": {
-            "group": "stat",
             "kind": "VizConfig",
+            "group": "stat",
+            "version": "13.0.1",
             "spec": {
-              "fieldConfig": {
-                "defaults": {
-                  "color": {
-                    "mode": "thresholds"
-                  },
-                  "noValue": "0",
-                  "thresholds": {
-                    "mode": "absolute",
-                    "steps": [
-                      {
-                        "color": "transparent",
-                        "value": 0
-                      },
-                      {
-                        "color": "#EAB839",
-                        "value": 1
-                      }
-                    ]
-                  }
-                },
-                "overrides": []
-              },
               "options": {
                 "colorMode": "background",
                 "graphMode": "none",
@@ -1846,15 +1873,40 @@
                 "text": {},
                 "textMode": "value",
                 "wideLayout": true
+              },
+              "fieldConfig": {
+                "defaults": {
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "value": 0,
+                        "color": "transparent"
+                      },
+                      {
+                        "value": 1,
+                        "color": "#EAB839"
+                      }
+                    ]
+                  },
+                  "color": {
+                    "mode": "thresholds"
+                  },
+                  "noValue": "0"
+                },
+                "overrides": []
               }
-            },
-            "version": "12.3.2"
+            }
           }
         }
       },
       "panel-308": {
         "kind": "Panel",
         "spec": {
+          "id": 308,
+          "title": "Hosts Vendor",
+          "description": "The hosts distribution per manufacturer.",
+          "links": [],
           "data": {
             "kind": "QueryGroup",
             "spec": {
@@ -1862,10 +1914,10 @@
                 {
                   "kind": "PanelQuery",
                   "spec": {
-                    "hidden": false,
                     "query": {
-                      "group": "prometheus",
                       "kind": "DataQuery",
+                      "group": "prometheus",
+                      "version": "v0",
                       "spec": {
                         "exemplar": false,
                         "expr": "count by (vendor) (label_replace(hw_status{hw_type=\"enclosure\", state=\"present\"}, \"vendor\", \"Unknown\", \"vendor\", \"^$\"))",
@@ -1873,39 +1925,24 @@
                         "interval": "",
                         "legendFormat": "{{vendor}}"
                       },
-                      "version": "v0"
+                      "labels": {
+                        "grafana.app/export-label": "prometheus-1"
+                      }
                     },
-                    "refId": "A"
+                    "refId": "A",
+                    "hidden": false
                   }
                 }
               ],
-              "queryOptions": {},
-              "transformations": []
+              "transformations": [],
+              "queryOptions": {}
             }
           },
-          "description": "The hosts distribution per manufacturer.",
-          "id": 308,
-          "links": [],
-          "title": "Hosts Vendor",
           "vizConfig": {
-            "group": "piechart",
             "kind": "VizConfig",
+            "group": "piechart",
+            "version": "13.0.1",
             "spec": {
-              "fieldConfig": {
-                "defaults": {
-                  "color": {
-                    "mode": "palette-classic"
-                  },
-                  "custom": {
-                    "hideFrom": {
-                      "legend": false,
-                      "tooltip": false,
-                      "viz": false
-                    }
-                  }
-                },
-                "overrides": []
-              },
               "options": {
                 "displayLabels": [
                   "name",
@@ -1932,15 +1969,33 @@
                   "mode": "multi",
                   "sort": "none"
                 }
+              },
+              "fieldConfig": {
+                "defaults": {
+                  "color": {
+                    "mode": "palette-classic"
+                  },
+                  "custom": {
+                    "hideFrom": {
+                      "legend": false,
+                      "tooltip": false,
+                      "viz": false
+                    }
+                  }
+                },
+                "overrides": []
               }
-            },
-            "version": "12.3.2"
+            }
           }
         }
       },
       "panel-314": {
         "kind": "Panel",
         "spec": {
+          "id": 314,
+          "title": "",
+          "description": "",
+          "links": [],
           "data": {
             "kind": "QueryGroup",
             "spec": {
@@ -1948,10 +2003,10 @@
                 {
                   "kind": "PanelQuery",
                   "spec": {
-                    "hidden": false,
                     "query": {
-                      "group": "prometheus",
                       "kind": "DataQuery",
+                      "group": "prometheus",
+                      "version": "v0",
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
@@ -1961,18 +2016,21 @@
                         "interval": "",
                         "legendFormat": ""
                       },
-                      "version": "v0"
+                      "labels": {
+                        "grafana.app/export-label": "prometheus-1"
+                      }
                     },
-                    "refId": "A"
+                    "refId": "A",
+                    "hidden": false
                   }
                 },
                 {
                   "kind": "PanelQuery",
                   "spec": {
-                    "hidden": false,
                     "query": {
-                      "group": "prometheus",
                       "kind": "DataQuery",
+                      "group": "prometheus",
+                      "version": "v0",
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
@@ -1982,18 +2040,21 @@
                         "interval": "",
                         "legendFormat": ""
                       },
-                      "version": "v0"
+                      "labels": {
+                        "grafana.app/export-label": "prometheus-1"
+                      }
                     },
-                    "refId": "B"
+                    "refId": "B",
+                    "hidden": false
                   }
                 },
                 {
                   "kind": "PanelQuery",
                   "spec": {
-                    "hidden": false,
                     "query": {
-                      "group": "prometheus",
                       "kind": "DataQuery",
+                      "group": "prometheus",
+                      "version": "v0",
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
@@ -2003,18 +2064,21 @@
                         "interval": "",
                         "legendFormat": ""
                       },
-                      "version": "v0"
+                      "labels": {
+                        "grafana.app/export-label": "prometheus-1"
+                      }
                     },
-                    "refId": "C"
+                    "refId": "C",
+                    "hidden": false
                   }
                 },
                 {
                   "kind": "PanelQuery",
                   "spec": {
-                    "hidden": false,
                     "query": {
-                      "group": "prometheus",
                       "kind": "DataQuery",
+                      "group": "prometheus",
+                      "version": "v0",
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
@@ -2024,18 +2088,21 @@
                         "interval": "",
                         "legendFormat": ""
                       },
-                      "version": "v0"
+                      "labels": {
+                        "grafana.app/export-label": "prometheus-1"
+                      }
                     },
-                    "refId": "D"
+                    "refId": "D",
+                    "hidden": false
                   }
                 },
                 {
                   "kind": "PanelQuery",
                   "spec": {
-                    "hidden": false,
                     "query": {
-                      "group": "prometheus",
                       "kind": "DataQuery",
+                      "group": "prometheus",
+                      "version": "v0",
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
@@ -2045,18 +2112,21 @@
                         "interval": "",
                         "legendFormat": ""
                       },
-                      "version": "v0"
+                      "labels": {
+                        "grafana.app/export-label": "prometheus-1"
+                      }
                     },
-                    "refId": "E"
+                    "refId": "E",
+                    "hidden": false
                   }
                 },
                 {
                   "kind": "PanelQuery",
                   "spec": {
-                    "hidden": false,
                     "query": {
-                      "group": "prometheus",
                       "kind": "DataQuery",
+                      "group": "prometheus",
+                      "version": "v0",
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
@@ -2066,18 +2136,21 @@
                         "interval": "",
                         "legendFormat": ""
                       },
-                      "version": "v0"
+                      "labels": {
+                        "grafana.app/export-label": "prometheus-1"
+                      }
                     },
-                    "refId": "F"
+                    "refId": "F",
+                    "hidden": false
                   }
                 },
                 {
                   "kind": "PanelQuery",
                   "spec": {
-                    "hidden": false,
                     "query": {
-                      "group": "prometheus",
                       "kind": "DataQuery",
+                      "group": "prometheus",
+                      "version": "v0",
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
@@ -2087,18 +2160,21 @@
                         "interval": "",
                         "legendFormat": ""
                       },
-                      "version": "v0"
+                      "labels": {
+                        "grafana.app/export-label": "prometheus-1"
+                      }
                     },
-                    "refId": "G"
+                    "refId": "G",
+                    "hidden": false
                   }
                 },
                 {
                   "kind": "PanelQuery",
                   "spec": {
-                    "hidden": false,
                     "query": {
-                      "group": "prometheus",
                       "kind": "DataQuery",
+                      "group": "prometheus",
+                      "version": "v0",
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
@@ -2108,25 +2184,27 @@
                         "interval": "",
                         "legendFormat": ""
                       },
-                      "version": "v0"
+                      "labels": {
+                        "grafana.app/export-label": "prometheus-1"
+                      }
                     },
-                    "refId": "H"
+                    "refId": "H",
+                    "hidden": false
                   }
                 }
               ],
-              "queryOptions": {},
               "transformations": [
                 {
-                  "kind": "merge",
+                  "kind": "Transformation",
+                  "group": "merge",
                   "spec": {
-                    "id": "merge",
                     "options": {}
                   }
                 },
                 {
-                  "kind": "organize",
+                  "kind": "Transformation",
+                  "group": "organize",
                   "spec": {
-                    "id": "organize",
                     "options": {
                       "excludeByName": {
                         "Time": true,
@@ -2159,9 +2237,9 @@
                   }
                 },
                 {
-                  "kind": "sortBy",
+                  "kind": "Transformation",
+                  "group": "sortBy",
                   "spec": {
-                    "id": "sortBy",
                     "options": {
                       "fields": {},
                       "sort": [
@@ -2172,22 +2250,46 @@
                     }
                   }
                 }
-              ]
+              ],
+              "queryOptions": {}
             }
           },
-          "description": "",
-          "id": 314,
-          "links": [],
-          "title": "",
           "vizConfig": {
-            "group": "table",
             "kind": "VizConfig",
+            "group": "table",
+            "version": "13.0.1",
             "spec": {
+              "options": {
+                "cellHeight": "sm",
+                "enablePagination": false,
+                "showHeader": true,
+                "sortBy": [
+                  {
+                    "desc": false,
+                    "displayName": "Electricity Cost (per kWh)"
+                  }
+                ]
+              },
               "fieldConfig": {
                 "defaults": {
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "value": 0,
+                        "color": "green"
+                      }
+                    ]
+                  },
                   "color": {
                     "mode": "thresholds"
                   },
+                  "links": [
+                    {
+                      "title": "",
+                      "url": "/d/SHFBpSH7z/site-information?orgId=1&var-site=${__data.fields.site}"
+                    }
+                  ],
                   "custom": {
                     "align": "left",
                     "cellOptions": {
@@ -2198,21 +2300,6 @@
                       "reducers": []
                     },
                     "inspect": false
-                  },
-                  "links": [
-                    {
-                      "title": "",
-                      "url": "/d/SHFBpSH7z/site-information?orgId=1&var-site=${__data.fields.site}"
-                    }
-                  ],
-                  "thresholds": {
-                    "mode": "absolute",
-                    "steps": [
-                      {
-                        "color": "green",
-                        "value": 0
-                      }
-                    ]
                   }
                 },
                 "overrides": [
@@ -2544,26 +2631,18 @@
                     ]
                   }
                 ]
-              },
-              "options": {
-                "cellHeight": "sm",
-                "enablePagination": false,
-                "showHeader": true,
-                "sortBy": [
-                  {
-                    "desc": false,
-                    "displayName": "Electricity Cost (per kWh)"
-                  }
-                ]
               }
-            },
-            "version": "12.3.2"
+            }
           }
         }
       },
       "panel-317": {
         "kind": "Panel",
         "spec": {
+          "id": 317,
+          "title": "Yearly Consumption",
+          "description": "The overall power consumption reported for all sites during the last year.\n\nIf less than 365 days of data is available, this value is estimated based on past collected data.",
+          "links": [],
           "data": {
             "kind": "QueryGroup",
             "spec": {
@@ -2571,10 +2650,10 @@
                 {
                   "kind": "PanelQuery",
                   "spec": {
-                    "hidden": false,
                     "query": {
-                      "group": "prometheus",
                       "kind": "DataQuery",
+                      "group": "prometheus",
+                      "version": "v0",
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
@@ -2584,49 +2663,26 @@
                         "interval": "",
                         "legendFormat": "Yearly Consumption"
                       },
-                      "version": "v0"
+                      "labels": {
+                        "grafana.app/export-label": "prometheus-1"
+                      }
                     },
-                    "refId": "A"
+                    "refId": "A",
+                    "hidden": false
                   }
                 }
               ],
+              "transformations": [],
               "queryOptions": {
                 "interval": "5m"
-              },
-              "transformations": []
+              }
             }
           },
-          "description": "The overall power consumption reported for all sites during the last year.\n\nIf less than 365 days of data is available, this value is estimated based on past collected data.",
-          "id": 317,
-          "links": [],
-          "title": "Yearly Consumption",
           "vizConfig": {
-            "group": "stat",
             "kind": "VizConfig",
+            "group": "stat",
+            "version": "13.0.1",
             "spec": {
-              "fieldConfig": {
-                "defaults": {
-                  "color": {
-                    "fixedColor": "dark-blue",
-                    "mode": "fixed"
-                  },
-                  "thresholds": {
-                    "mode": "absolute",
-                    "steps": [
-                      {
-                        "color": "green",
-                        "value": 0
-                      },
-                      {
-                        "color": "green",
-                        "value": 80
-                      }
-                    ]
-                  },
-                  "unit": "watth"
-                },
-                "overrides": []
-              },
               "options": {
                 "colorMode": "background",
                 "graphMode": "none",
@@ -2644,15 +2700,41 @@
                 "text": {},
                 "textMode": "auto",
                 "wideLayout": true
+              },
+              "fieldConfig": {
+                "defaults": {
+                  "unit": "watth",
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "value": 0,
+                        "color": "green"
+                      },
+                      {
+                        "value": 80,
+                        "color": "green"
+                      }
+                    ]
+                  },
+                  "color": {
+                    "mode": "fixed",
+                    "fixedColor": "dark-blue"
+                  }
+                },
+                "overrides": []
               }
-            },
-            "version": "12.3.2"
+            }
           }
         }
       },
       "panel-318": {
         "kind": "Panel",
         "spec": {
+          "id": 318,
+          "title": "Yearly Cost",
+          "description": "The overall energy cost of all sites for the past year.\n\nIf less than 365 days of data is available, this value is estimated based on past collected data.",
+          "links": [],
           "data": {
             "kind": "QueryGroup",
             "spec": {
@@ -2660,10 +2742,10 @@
                 {
                   "kind": "PanelQuery",
                   "spec": {
-                    "hidden": false,
                     "query": {
-                      "group": "prometheus",
                       "kind": "DataQuery",
+                      "group": "prometheus",
+                      "version": "v0",
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
@@ -2672,45 +2754,26 @@
                         "interval": "",
                         "legendFormat": "Yearly Cost"
                       },
-                      "version": "v0"
+                      "labels": {
+                        "grafana.app/export-label": "prometheus-1"
+                      }
                     },
-                    "refId": "A"
+                    "refId": "A",
+                    "hidden": false
                   }
                 }
               ],
+              "transformations": [],
               "queryOptions": {
                 "interval": "5m"
-              },
-              "transformations": []
+              }
             }
           },
-          "description": "The overall energy cost of all sites for the past year.\n\nIf less than 365 days of data is available, this value is estimated based on past collected data.",
-          "id": 318,
-          "links": [],
-          "title": "Yearly Cost",
           "vizConfig": {
-            "group": "stat",
             "kind": "VizConfig",
+            "group": "stat",
+            "version": "13.0.1",
             "spec": {
-              "fieldConfig": {
-                "defaults": {
-                  "color": {
-                    "fixedColor": "dark-green",
-                    "mode": "fixed"
-                  },
-                  "thresholds": {
-                    "mode": "absolute",
-                    "steps": [
-                      {
-                        "color": "green",
-                        "value": 0
-                      }
-                    ]
-                  },
-                  "unit": "currencyUSD"
-                },
-                "overrides": []
-              },
               "options": {
                 "colorMode": "background",
                 "graphMode": "none",
@@ -2728,15 +2791,37 @@
                 "text": {},
                 "textMode": "auto",
                 "wideLayout": true
+              },
+              "fieldConfig": {
+                "defaults": {
+                  "unit": "currencyUSD",
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "value": 0,
+                        "color": "green"
+                      }
+                    ]
+                  },
+                  "color": {
+                    "mode": "fixed",
+                    "fixedColor": "dark-green"
+                  }
+                },
+                "overrides": []
               }
-            },
-            "version": "12.3.2"
+            }
           }
         }
       },
       "panel-319": {
         "kind": "Panel",
         "spec": {
+          "id": 319,
+          "title": "Monthly CO₂ Emissions",
+          "description": "The overall volume of CO₂ emitted by all the sites for the last 30 days.\n\nIf less than 30 days of data is available, this value is estimated based on the past collected data.",
+          "links": [],
           "data": {
             "kind": "QueryGroup",
             "spec": {
@@ -2744,10 +2829,10 @@
                 {
                   "kind": "PanelQuery",
                   "spec": {
-                    "hidden": false,
                     "query": {
-                      "group": "prometheus",
                       "kind": "DataQuery",
+                      "group": "prometheus",
+                      "version": "v0",
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
@@ -2756,45 +2841,26 @@
                         "interval": "",
                         "legendFormat": "Monthly CO₂ Emissions"
                       },
-                      "version": "v0"
+                      "labels": {
+                        "grafana.app/export-label": "prometheus-1"
+                      }
                     },
-                    "refId": "A"
+                    "refId": "A",
+                    "hidden": false
                   }
                 }
               ],
+              "transformations": [],
               "queryOptions": {
                 "interval": "5m"
-              },
-              "transformations": []
+              }
             }
           },
-          "description": "The overall volume of CO₂ emitted by all the sites for the last 30 days.\n\nIf less than 30 days of data is available, this value is estimated based on the past collected data.",
-          "id": 319,
-          "links": [],
-          "title": "Monthly CO₂ Emissions",
           "vizConfig": {
-            "group": "stat",
             "kind": "VizConfig",
+            "group": "stat",
+            "version": "13.0.1",
             "spec": {
-              "fieldConfig": {
-                "defaults": {
-                  "color": {
-                    "fixedColor": "#525252",
-                    "mode": "fixed"
-                  },
-                  "thresholds": {
-                    "mode": "absolute",
-                    "steps": [
-                      {
-                        "color": "dark-green",
-                        "value": 0
-                      }
-                    ]
-                  },
-                  "unit": "masst"
-                },
-                "overrides": []
-              },
               "options": {
                 "colorMode": "background",
                 "graphMode": "none",
@@ -2812,15 +2878,37 @@
                 "text": {},
                 "textMode": "auto",
                 "wideLayout": true
+              },
+              "fieldConfig": {
+                "defaults": {
+                  "unit": "masst",
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "value": 0,
+                        "color": "dark-green"
+                      }
+                    ]
+                  },
+                  "color": {
+                    "mode": "fixed",
+                    "fixedColor": "#525252"
+                  }
+                },
+                "overrides": []
               }
-            },
-            "version": "12.3.2"
+            }
           }
         }
       },
       "panel-320": {
         "kind": "Panel",
         "spec": {
+          "id": 320,
+          "title": "Monthly Consumption",
+          "description": "The overall power consumption reported for all sites during the last 30 days.\n\nIf less than 30 days of data is available, this value is estimated based on past collected data.",
+          "links": [],
           "data": {
             "kind": "QueryGroup",
             "spec": {
@@ -2828,10 +2916,10 @@
                 {
                   "kind": "PanelQuery",
                   "spec": {
-                    "hidden": false,
                     "query": {
-                      "group": "prometheus",
                       "kind": "DataQuery",
+                      "group": "prometheus",
+                      "version": "v0",
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
@@ -2841,49 +2929,26 @@
                         "interval": "",
                         "legendFormat": "Monthly Consumption"
                       },
-                      "version": "v0"
+                      "labels": {
+                        "grafana.app/export-label": "prometheus-1"
+                      }
                     },
-                    "refId": "A"
+                    "refId": "A",
+                    "hidden": false
                   }
                 }
               ],
+              "transformations": [],
               "queryOptions": {
                 "interval": "5m"
-              },
-              "transformations": []
+              }
             }
           },
-          "description": "The overall power consumption reported for all sites during the last 30 days.\n\nIf less than 30 days of data is available, this value is estimated based on past collected data.",
-          "id": 320,
-          "links": [],
-          "title": "Monthly Consumption",
           "vizConfig": {
-            "group": "stat",
             "kind": "VizConfig",
+            "group": "stat",
+            "version": "13.0.1",
             "spec": {
-              "fieldConfig": {
-                "defaults": {
-                  "color": {
-                    "fixedColor": "semi-dark-blue",
-                    "mode": "fixed"
-                  },
-                  "thresholds": {
-                    "mode": "absolute",
-                    "steps": [
-                      {
-                        "color": "green",
-                        "value": 0
-                      },
-                      {
-                        "color": "green",
-                        "value": 80
-                      }
-                    ]
-                  },
-                  "unit": "watth"
-                },
-                "overrides": []
-              },
               "options": {
                 "colorMode": "background",
                 "graphMode": "none",
@@ -2901,15 +2966,41 @@
                 "text": {},
                 "textMode": "auto",
                 "wideLayout": true
+              },
+              "fieldConfig": {
+                "defaults": {
+                  "unit": "watth",
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "value": 0,
+                        "color": "green"
+                      },
+                      {
+                        "value": 80,
+                        "color": "green"
+                      }
+                    ]
+                  },
+                  "color": {
+                    "mode": "fixed",
+                    "fixedColor": "semi-dark-blue"
+                  }
+                },
+                "overrides": []
               }
-            },
-            "version": "12.3.2"
+            }
           }
         }
       },
       "panel-321": {
         "kind": "Panel",
         "spec": {
+          "id": 321,
+          "title": "Monthly Cost",
+          "description": "The overall energy cost of all sites for the last 30 days.\n\nIf less than 30 days of data is available, this value is estimated based on past collected data.",
+          "links": [],
           "data": {
             "kind": "QueryGroup",
             "spec": {
@@ -2917,10 +3008,10 @@
                 {
                   "kind": "PanelQuery",
                   "spec": {
-                    "hidden": false,
                     "query": {
-                      "group": "prometheus",
                       "kind": "DataQuery",
+                      "group": "prometheus",
+                      "version": "v0",
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
@@ -2929,45 +3020,26 @@
                         "interval": "",
                         "legendFormat": "Monthly Cost"
                       },
-                      "version": "v0"
+                      "labels": {
+                        "grafana.app/export-label": "prometheus-1"
+                      }
                     },
-                    "refId": "A"
+                    "refId": "A",
+                    "hidden": false
                   }
                 }
               ],
+              "transformations": [],
               "queryOptions": {
                 "interval": "5m"
-              },
-              "transformations": []
+              }
             }
           },
-          "description": "The overall energy cost of all sites for the last 30 days.\n\nIf less than 30 days of data is available, this value is estimated based on past collected data.",
-          "id": 321,
-          "links": [],
-          "title": "Monthly Cost",
           "vizConfig": {
-            "group": "stat",
             "kind": "VizConfig",
+            "group": "stat",
+            "version": "13.0.1",
             "spec": {
-              "fieldConfig": {
-                "defaults": {
-                  "color": {
-                    "fixedColor": "semi-dark-green",
-                    "mode": "fixed"
-                  },
-                  "thresholds": {
-                    "mode": "absolute",
-                    "steps": [
-                      {
-                        "color": "green",
-                        "value": 0
-                      }
-                    ]
-                  },
-                  "unit": "currencyUSD"
-                },
-                "overrides": []
-              },
               "options": {
                 "colorMode": "background",
                 "graphMode": "none",
@@ -2985,15 +3057,37 @@
                 "text": {},
                 "textMode": "auto",
                 "wideLayout": true
+              },
+              "fieldConfig": {
+                "defaults": {
+                  "unit": "currencyUSD",
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "value": 0,
+                        "color": "green"
+                      }
+                    ]
+                  },
+                  "color": {
+                    "mode": "fixed",
+                    "fixedColor": "semi-dark-green"
+                  }
+                },
+                "overrides": []
               }
-            },
-            "version": "12.3.2"
+            }
           }
         }
       },
       "panel-322": {
         "kind": "Panel",
         "spec": {
+          "id": 322,
+          "title": "Yearly CO₂ Emissions",
+          "description": "The overall volume of CO₂ emitted by all the sites for the past year.\n\nIf less than 365 days of data is available, this value is estimated based on the past collected data.",
+          "links": [],
           "data": {
             "kind": "QueryGroup",
             "spec": {
@@ -3001,10 +3095,10 @@
                 {
                   "kind": "PanelQuery",
                   "spec": {
-                    "hidden": false,
                     "query": {
-                      "group": "prometheus",
                       "kind": "DataQuery",
+                      "group": "prometheus",
+                      "version": "v0",
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
@@ -3013,45 +3107,26 @@
                         "interval": "",
                         "legendFormat": "Yearly CO₂ Emissions"
                       },
-                      "version": "v0"
+                      "labels": {
+                        "grafana.app/export-label": "prometheus-1"
+                      }
                     },
-                    "refId": "A"
+                    "refId": "A",
+                    "hidden": false
                   }
                 }
               ],
+              "transformations": [],
               "queryOptions": {
                 "interval": "5m"
-              },
-              "transformations": []
+              }
             }
           },
-          "description": "The overall volume of CO₂ emitted by all the sites for the past year.\n\nIf less than 365 days of data is available, this value is estimated based on the past collected data.",
-          "id": 322,
-          "links": [],
-          "title": "Yearly CO₂ Emissions",
           "vizConfig": {
-            "group": "stat",
             "kind": "VizConfig",
+            "group": "stat",
+            "version": "13.0.1",
             "spec": {
-              "fieldConfig": {
-                "defaults": {
-                  "color": {
-                    "fixedColor": "#414141",
-                    "mode": "fixed"
-                  },
-                  "thresholds": {
-                    "mode": "absolute",
-                    "steps": [
-                      {
-                        "color": "dark-green",
-                        "value": 0
-                      }
-                    ]
-                  },
-                  "unit": "masst"
-                },
-                "overrides": []
-              },
               "options": {
                 "colorMode": "background",
                 "graphMode": "none",
@@ -3069,15 +3144,37 @@
                 "text": {},
                 "textMode": "auto",
                 "wideLayout": true
+              },
+              "fieldConfig": {
+                "defaults": {
+                  "unit": "masst",
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "value": 0,
+                        "color": "dark-green"
+                      }
+                    ]
+                  },
+                  "color": {
+                    "mode": "fixed",
+                    "fixedColor": "#414141"
+                  }
+                },
+                "overrides": []
               }
-            },
-            "version": "12.3.2"
+            }
           }
         }
       },
       "panel-328": {
         "kind": "Panel",
         "spec": {
+          "id": 328,
+          "title": "Daily Consumption",
+          "description": "The overall power consumption reported for all sites in the last 24 hours.\n\nIf less than 24 hours of data is available, this value is estimated based on the past collected data.",
+          "links": [],
           "data": {
             "kind": "QueryGroup",
             "spec": {
@@ -3085,10 +3182,10 @@
                 {
                   "kind": "PanelQuery",
                   "spec": {
-                    "hidden": false,
                     "query": {
-                      "group": "prometheus",
                       "kind": "DataQuery",
+                      "group": "prometheus",
+                      "version": "v0",
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
@@ -3098,47 +3195,24 @@
                         "interval": "",
                         "legendFormat": "Daily Consumption"
                       },
-                      "version": "v0"
+                      "labels": {
+                        "grafana.app/export-label": "prometheus-1"
+                      }
                     },
-                    "refId": "A"
+                    "refId": "A",
+                    "hidden": false
                   }
                 }
               ],
-              "queryOptions": {},
-              "transformations": []
+              "transformations": [],
+              "queryOptions": {}
             }
           },
-          "description": "The overall power consumption reported for all sites in the last 24 hours.\n\nIf less than 24 hours of data is available, this value is estimated based on the past collected data.",
-          "id": 328,
-          "links": [],
-          "title": "Daily Consumption",
           "vizConfig": {
-            "group": "stat",
             "kind": "VizConfig",
+            "group": "stat",
+            "version": "13.0.1",
             "spec": {
-              "fieldConfig": {
-                "defaults": {
-                  "color": {
-                    "fixedColor": "blue",
-                    "mode": "fixed"
-                  },
-                  "thresholds": {
-                    "mode": "absolute",
-                    "steps": [
-                      {
-                        "color": "green",
-                        "value": 0
-                      },
-                      {
-                        "color": "green",
-                        "value": 80
-                      }
-                    ]
-                  },
-                  "unit": "watth"
-                },
-                "overrides": []
-              },
               "options": {
                 "colorMode": "background",
                 "graphMode": "none",
@@ -3156,15 +3230,41 @@
                 "text": {},
                 "textMode": "auto",
                 "wideLayout": true
+              },
+              "fieldConfig": {
+                "defaults": {
+                  "unit": "watth",
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "value": 0,
+                        "color": "green"
+                      },
+                      {
+                        "value": 80,
+                        "color": "green"
+                      }
+                    ]
+                  },
+                  "color": {
+                    "mode": "fixed",
+                    "fixedColor": "blue"
+                  }
+                },
+                "overrides": []
               }
-            },
-            "version": "12.3.2"
+            }
           }
         }
       },
       "panel-330": {
         "kind": "Panel",
         "spec": {
+          "id": 330,
+          "title": "Today's Live Cost",
+          "description": "Today's total power cost for all sites.",
+          "links": [],
           "data": {
             "kind": "QueryGroup",
             "spec": {
@@ -3172,57 +3272,38 @@
                 {
                   "kind": "PanelQuery",
                   "spec": {
-                    "hidden": false,
                     "query": {
-                      "group": "prometheus",
                       "kind": "DataQuery",
+                      "group": "prometheus",
+                      "version": "v0",
                       "spec": {
                         "editorMode": "code",
                         "expr": "sum(sum by (site) (increase(hw_host_energy_joules_total[$__range])) * avg_over_time(avg by (site) (hw_site_pue_ratio)[$__range:5m]) * avg_over_time(avg by (site) (hw_site_electricity_cost)[$__range:5m])) / 3600 / 1000",
                         "legendFormat": "Today's Live Cost",
                         "range": true
                       },
-                      "version": "v0"
+                      "labels": {
+                        "grafana.app/export-label": "prometheus-1"
+                      }
                     },
-                    "refId": "A"
+                    "refId": "A",
+                    "hidden": false
                   }
                 }
               ],
+              "transformations": [],
               "queryOptions": {
-                "hideTimeOverride": true,
+                "timeFrom": "now/d",
                 "interval": "5m",
-                "timeFrom": "now/d"
-              },
-              "transformations": []
+                "hideTimeOverride": true
+              }
             }
           },
-          "description": "Today's total power cost for all sites.",
-          "id": 330,
-          "links": [],
-          "title": "Today's Live Cost",
           "vizConfig": {
-            "group": "stat",
             "kind": "VizConfig",
+            "group": "stat",
+            "version": "13.0.1",
             "spec": {
-              "fieldConfig": {
-                "defaults": {
-                  "color": {
-                    "fixedColor": "green",
-                    "mode": "fixed"
-                  },
-                  "thresholds": {
-                    "mode": "absolute",
-                    "steps": [
-                      {
-                        "color": "green",
-                        "value": 0
-                      }
-                    ]
-                  },
-                  "unit": "currencyUSD"
-                },
-                "overrides": []
-              },
               "options": {
                 "colorMode": "value",
                 "graphMode": "none",
@@ -3240,15 +3321,37 @@
                 "text": {},
                 "textMode": "auto",
                 "wideLayout": true
+              },
+              "fieldConfig": {
+                "defaults": {
+                  "unit": "currencyUSD",
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "value": 0,
+                        "color": "green"
+                      }
+                    ]
+                  },
+                  "color": {
+                    "mode": "fixed",
+                    "fixedColor": "green"
+                  }
+                },
+                "overrides": []
               }
-            },
-            "version": "12.3.2"
+            }
           }
         }
       },
       "panel-331": {
         "kind": "Panel",
         "spec": {
+          "id": 331,
+          "title": "Daily CO₂ Emissions",
+          "description": "The overall volume of CO₂ emitted by all the sites for the last 24 hours.\n\nIf less than 24 hours of data is available, this value is estimated based on the past collected data.",
+          "links": [],
           "data": {
             "kind": "QueryGroup",
             "spec": {
@@ -3256,10 +3359,10 @@
                 {
                   "kind": "PanelQuery",
                   "spec": {
-                    "hidden": false,
                     "query": {
-                      "group": "prometheus",
                       "kind": "DataQuery",
+                      "group": "prometheus",
+                      "version": "v0",
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
@@ -3268,45 +3371,26 @@
                         "interval": "",
                         "legendFormat": "Daily CO₂ Emissions"
                       },
-                      "version": "v0"
+                      "labels": {
+                        "grafana.app/export-label": "prometheus-1"
+                      }
                     },
-                    "refId": "A"
+                    "refId": "A",
+                    "hidden": false
                   }
                 }
               ],
+              "transformations": [],
               "queryOptions": {
                 "interval": "5m"
-              },
-              "transformations": []
+              }
             }
           },
-          "description": "The overall volume of CO₂ emitted by all the sites for the last 24 hours.\n\nIf less than 24 hours of data is available, this value is estimated based on the past collected data.",
-          "id": 331,
-          "links": [],
-          "title": "Daily CO₂ Emissions",
           "vizConfig": {
-            "group": "stat",
             "kind": "VizConfig",
+            "group": "stat",
+            "version": "13.0.1",
             "spec": {
-              "fieldConfig": {
-                "defaults": {
-                  "color": {
-                    "fixedColor": "#808080",
-                    "mode": "fixed"
-                  },
-                  "thresholds": {
-                    "mode": "absolute",
-                    "steps": [
-                      {
-                        "color": "dark-green",
-                        "value": 0
-                      }
-                    ]
-                  },
-                  "unit": "masst"
-                },
-                "overrides": []
-              },
               "options": {
                 "colorMode": "background",
                 "graphMode": "none",
@@ -3324,15 +3408,37 @@
                 "text": {},
                 "textMode": "auto",
                 "wideLayout": true
+              },
+              "fieldConfig": {
+                "defaults": {
+                  "unit": "masst",
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "value": 0,
+                        "color": "dark-green"
+                      }
+                    ]
+                  },
+                  "color": {
+                    "mode": "fixed",
+                    "fixedColor": "#808080"
+                  }
+                },
+                "overrides": []
               }
-            },
-            "version": "12.3.2"
+            }
           }
         }
       },
       "panel-333": {
         "kind": "Panel",
         "spec": {
+          "id": 333,
+          "title": "Daily Energy Consumption (last 30 days)",
+          "description": "The overall daily energy consumption for the past 30 days, as reported.",
+          "links": [],
           "data": {
             "kind": "QueryGroup",
             "spec": {
@@ -3340,10 +3446,10 @@
                 {
                   "kind": "PanelQuery",
                   "spec": {
-                    "hidden": false,
                     "query": {
-                      "group": "prometheus",
                       "kind": "DataQuery",
+                      "group": "prometheus",
+                      "version": "v0",
                       "spec": {
                         "editorMode": "code",
                         "exemplar": true,
@@ -3353,22 +3459,20 @@
                         "interval": "",
                         "legendFormat": "{{unit}}"
                       },
-                      "version": "v0"
+                      "labels": {
+                        "grafana.app/export-label": "prometheus-1"
+                      }
                     },
-                    "refId": "A"
+                    "refId": "A",
+                    "hidden": false
                   }
                 }
               ],
-              "queryOptions": {
-                "hideTimeOverride": true,
-                "timeFrom": "now-30d",
-                "timeShift": "1d"
-              },
               "transformations": [
                 {
-                  "kind": "filterByValue",
+                  "kind": "Transformation",
+                  "group": "filterByValue",
                   "spec": {
-                    "id": "filterByValue",
                     "options": {
                       "filters": [
                         {
@@ -3387,9 +3491,9 @@
                   }
                 },
                 {
-                  "kind": "filterFieldsByName",
+                  "kind": "Transformation",
+                  "group": "filterFieldsByName",
                   "spec": {
-                    "id": "filterFieldsByName",
                     "options": {
                       "include": {
                         "names": [
@@ -3401,9 +3505,9 @@
                   }
                 },
                 {
-                  "kind": "sortBy",
+                  "kind": "Transformation",
+                  "group": "sortBy",
                   "spec": {
-                    "id": "sortBy",
                     "options": {
                       "fields": {},
                       "sort": [
@@ -3416,9 +3520,9 @@
                   }
                 },
                 {
-                  "kind": "organize",
+                  "kind": "Transformation",
+                  "group": "organize",
                   "spec": {
-                    "id": "organize",
                     "options": {
                       "excludeByName": {
                         "Time": false,
@@ -3435,72 +3539,19 @@
                     }
                   }
                 }
-              ]
+              ],
+              "queryOptions": {
+                "timeFrom": "now-30d",
+                "timeShift": "1d",
+                "hideTimeOverride": true
+              }
             }
           },
-          "description": "The overall daily energy consumption for the past 30 days, as reported.",
-          "id": 333,
-          "links": [],
-          "title": "Daily Energy Consumption (last 30 days)",
           "vizConfig": {
-            "group": "barchart",
             "kind": "VizConfig",
+            "group": "barchart",
+            "version": "13.0.1",
             "spec": {
-              "fieldConfig": {
-                "defaults": {
-                  "color": {
-                    "fixedColor": "blue",
-                    "mode": "fixed"
-                  },
-                  "custom": {
-                    "axisBorderShow": false,
-                    "axisCenteredZero": false,
-                    "axisColorMode": "text",
-                    "axisLabel": "",
-                    "axisPlacement": "auto",
-                    "axisSoftMin": 0,
-                    "fillOpacity": 80,
-                    "gradientMode": "none",
-                    "hideFrom": {
-                      "legend": false,
-                      "tooltip": false,
-                      "viz": false
-                    },
-                    "lineWidth": 1,
-                    "scaleDistribution": {
-                      "type": "linear"
-                    },
-                    "thresholdsStyle": {
-                      "mode": "off"
-                    }
-                  },
-                  "displayName": "Daily Energy Consumption (last 30 days)",
-                  "thresholds": {
-                    "mode": "absolute",
-                    "steps": [
-                      {
-                        "color": "blue",
-                        "value": 0
-                      }
-                    ]
-                  },
-                  "unit": "watth"
-                },
-                "overrides": [
-                  {
-                    "matcher": {
-                      "id": "byName",
-                      "options": "Time"
-                    },
-                    "properties": [
-                      {
-                        "id": "unit",
-                        "value": "time:dddd DD/MM"
-                      }
-                    ]
-                  }
-                ]
-              },
               "options": {
                 "barRadius": 0,
                 "barWidth": 0.95,
@@ -3527,15 +3578,73 @@
                 },
                 "xTickLabelRotation": -45,
                 "xTickLabelSpacing": 0
+              },
+              "fieldConfig": {
+                "defaults": {
+                  "displayName": "Daily Energy Consumption (last 30 days)",
+                  "unit": "watth",
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "value": 0,
+                        "color": "blue"
+                      }
+                    ]
+                  },
+                  "color": {
+                    "mode": "fixed",
+                    "fixedColor": "blue"
+                  },
+                  "custom": {
+                    "axisBorderShow": false,
+                    "axisCenteredZero": false,
+                    "axisColorMode": "text",
+                    "axisLabel": "",
+                    "axisPlacement": "auto",
+                    "axisSoftMin": 0,
+                    "fillOpacity": 80,
+                    "gradientMode": "none",
+                    "hideFrom": {
+                      "legend": false,
+                      "tooltip": false,
+                      "viz": false
+                    },
+                    "lineWidth": 1,
+                    "scaleDistribution": {
+                      "type": "linear"
+                    },
+                    "thresholdsStyle": {
+                      "mode": "off"
+                    }
+                  }
+                },
+                "overrides": [
+                  {
+                    "matcher": {
+                      "id": "byName",
+                      "options": "Time"
+                    },
+                    "properties": [
+                      {
+                        "id": "unit",
+                        "value": "time:dddd DD/MM"
+                      }
+                    ]
+                  }
+                ]
               }
-            },
-            "version": "12.3.2"
+            }
           }
         }
       },
       "panel-348": {
         "kind": "Panel",
         "spec": {
+          "id": 348,
+          "title": "Collect Started",
+          "description": "Time since the collect of data by Hardware Sentry was first started.",
+          "links": [],
           "data": {
             "kind": "QueryGroup",
             "spec": {
@@ -3543,10 +3652,10 @@
                 {
                   "kind": "PanelQuery",
                   "spec": {
-                    "hidden": false,
                     "query": {
-                      "group": "prometheus",
                       "kind": "DataQuery",
+                      "group": "prometheus",
+                      "version": "v0",
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
@@ -3556,20 +3665,20 @@
                         "interval": "",
                         "legendFormat": "__auto"
                       },
-                      "version": "v0"
+                      "labels": {
+                        "grafana.app/export-label": "prometheus-1"
+                      }
                     },
-                    "refId": "A"
+                    "refId": "A",
+                    "hidden": false
                   }
                 }
               ],
-              "queryOptions": {
-                "interval": "1h"
-              },
               "transformations": [
                 {
-                  "kind": "calculateField",
+                  "kind": "Transformation",
+                  "group": "calculateField",
                   "spec": {
-                    "id": "calculateField",
                     "options": {
                       "alias": "",
                       "binary": {
@@ -3590,9 +3699,9 @@
                   }
                 },
                 {
-                  "kind": "organize",
+                  "kind": "Transformation",
+                  "group": "organize",
                   "spec": {
-                    "id": "organize",
                     "options": {
                       "excludeByName": {
                         "Time": true,
@@ -3665,49 +3774,17 @@
                     }
                   }
                 }
-              ]
+              ],
+              "queryOptions": {
+                "interval": "1h"
+              }
             }
           },
-          "description": "Time since the collect of data by Hardware Sentry was first started.",
-          "id": 348,
-          "links": [],
-          "title": "Collect Started",
           "vizConfig": {
-            "group": "stat",
             "kind": "VizConfig",
+            "group": "stat",
+            "version": "13.0.1",
             "spec": {
-              "fieldConfig": {
-                "defaults": {
-                  "color": {
-                    "fixedColor": "text",
-                    "mode": "fixed"
-                  },
-                  "thresholds": {
-                    "mode": "absolute",
-                    "steps": [
-                      {
-                        "color": "green",
-                        "value": 0
-                      }
-                    ]
-                  },
-                  "unit": "dateTimeFromNow"
-                },
-                "overrides": [
-                  {
-                    "matcher": {
-                      "id": "byName",
-                      "options": "Value * 1000"
-                    },
-                    "properties": [
-                      {
-                        "id": "displayName",
-                        "value": "Collect Started"
-                      }
-                    ]
-                  }
-                ]
-              },
               "options": {
                 "colorMode": "value",
                 "graphMode": "none",
@@ -3727,35 +3804,63 @@
                 },
                 "textMode": "auto",
                 "wideLayout": true
+              },
+              "fieldConfig": {
+                "defaults": {
+                  "unit": "dateTimeFromNow",
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "value": 0,
+                        "color": "green"
+                      }
+                    ]
+                  },
+                  "color": {
+                    "mode": "fixed",
+                    "fixedColor": "text"
+                  }
+                },
+                "overrides": [
+                  {
+                    "matcher": {
+                      "id": "byName",
+                      "options": "Value * 1000"
+                    },
+                    "properties": [
+                      {
+                        "id": "displayName",
+                        "value": "Collect Started"
+                      }
+                    ]
+                  }
+                ]
               }
-            },
-            "version": "12.3.2"
+            }
           }
         }
       },
       "panel-351": {
         "kind": "Panel",
         "spec": {
+          "id": 351,
+          "title": "",
+          "description": "",
+          "links": [],
           "data": {
             "kind": "QueryGroup",
             "spec": {
               "queries": [],
-              "queryOptions": {},
-              "transformations": []
+              "transformations": [],
+              "queryOptions": {}
             }
           },
-          "description": "",
-          "id": 351,
-          "links": [],
-          "title": "",
           "vizConfig": {
-            "group": "text",
             "kind": "VizConfig",
+            "group": "text",
+            "version": "13.0.1",
             "spec": {
-              "fieldConfig": {
-                "defaults": {},
-                "overrides": []
-              },
               "options": {
                 "code": {
                   "language": "plaintext",
@@ -3764,35 +3869,35 @@
                 },
                 "content": "<h3 style=\"background-color:DimGray\"><center>Live Data</center></h3>",
                 "mode": "html"
+              },
+              "fieldConfig": {
+                "defaults": {},
+                "overrides": []
               }
-            },
-            "version": "12.3.2"
+            }
           }
         }
       },
       "panel-352": {
         "kind": "Panel",
         "spec": {
+          "id": 352,
+          "title": "",
+          "description": "",
+          "links": [],
           "data": {
             "kind": "QueryGroup",
             "spec": {
               "queries": [],
-              "queryOptions": {},
-              "transformations": []
+              "transformations": [],
+              "queryOptions": {}
             }
           },
-          "description": "",
-          "id": 352,
-          "links": [],
-          "title": "",
           "vizConfig": {
-            "group": "text",
             "kind": "VizConfig",
+            "group": "text",
+            "version": "13.0.1",
             "spec": {
-              "fieldConfig": {
-                "defaults": {},
-                "overrides": []
-              },
               "options": {
                 "code": {
                   "language": "plaintext",
@@ -3801,15 +3906,22 @@
                 },
                 "content": "<h3 style=\"background-color:DimGray\"><center>Cumulative Data</center></h3>",
                 "mode": "html"
+              },
+              "fieldConfig": {
+                "defaults": {},
+                "overrides": []
               }
-            },
-            "version": "12.3.2"
+            }
           }
         }
       },
       "panel-359": {
         "kind": "Panel",
         "spec": {
+          "id": 359,
+          "title": "Coverage",
+          "description": "The percentage of monitored hosts.\n\nA monitored host is a host with at least one responding connector.",
+          "links": [],
           "data": {
             "kind": "QueryGroup",
             "spec": {
@@ -3817,10 +3929,10 @@
                 {
                   "kind": "PanelQuery",
                   "spec": {
-                    "hidden": false,
                     "query": {
-                      "group": "prometheus",
                       "kind": "DataQuery",
+                      "group": "prometheus",
+                      "version": "v0",
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
@@ -3829,54 +3941,26 @@
                         "interval": "",
                         "legendFormat": "Coverage"
                       },
-                      "version": "v0"
+                      "labels": {
+                        "grafana.app/export-label": "prometheus-1"
+                      }
                     },
-                    "refId": "A"
+                    "refId": "A",
+                    "hidden": false
                   }
                 }
               ],
+              "transformations": [],
               "queryOptions": {
                 "interval": "2m"
-              },
-              "transformations": []
+              }
             }
           },
-          "description": "The percentage of monitored hosts.\n\nA monitored host is a host with at least one responding connector.",
-          "id": 359,
-          "links": [],
-          "title": "Coverage",
           "vizConfig": {
-            "group": "stat",
             "kind": "VizConfig",
+            "group": "stat",
+            "version": "13.0.1",
             "spec": {
-              "fieldConfig": {
-                "defaults": {
-                  "color": {
-                    "mode": "thresholds"
-                  },
-                  "decimals": 0,
-                  "noValue": "0%",
-                  "thresholds": {
-                    "mode": "absolute",
-                    "steps": [
-                      {
-                        "color": "super-light-red",
-                        "value": 0
-                      },
-                      {
-                        "color": "super-light-yellow",
-                        "value": 0.5
-                      },
-                      {
-                        "color": "super-light-green",
-                        "value": 0.9
-                      }
-                    ]
-                  },
-                  "unit": "percentunit"
-                },
-                "overrides": []
-              },
               "options": {
                 "colorMode": "background",
                 "graphMode": "none",
@@ -3894,15 +3978,46 @@
                 "text": {},
                 "textMode": "auto",
                 "wideLayout": true
+              },
+              "fieldConfig": {
+                "defaults": {
+                  "unit": "percentunit",
+                  "decimals": 0,
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "value": 0,
+                        "color": "super-light-red"
+                      },
+                      {
+                        "value": 0.5,
+                        "color": "super-light-yellow"
+                      },
+                      {
+                        "value": 0.9,
+                        "color": "super-light-green"
+                      }
+                    ]
+                  },
+                  "color": {
+                    "mode": "thresholds"
+                  },
+                  "noValue": "0%"
+                },
+                "overrides": []
               }
-            },
-            "version": "12.3.2"
+            }
           }
         }
       },
       "panel-363": {
         "kind": "Panel",
         "spec": {
+          "id": 363,
+          "title": "Margin of Error",
+          "description": "The power consumption's margin of error.\n\nThis value is based on the number of hosts that report measured power consumptions and the number of hosts whose power consumption is estimated.\n\nWhen the power consumed by a host cannot be read, Hardware Sentry estimates this value based on the host's components (CPUs, disks, network interfaces, etc.) and their usage.",
+          "links": [],
           "data": {
             "kind": "QueryGroup",
             "spec": {
@@ -3910,10 +4025,10 @@
                 {
                   "kind": "PanelQuery",
                   "spec": {
-                    "hidden": false,
                     "query": {
-                      "group": "prometheus",
                       "kind": "DataQuery",
+                      "group": "prometheus",
+                      "version": "v0",
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
@@ -3922,64 +4037,36 @@
                         "legendFormat": "Margin of Error",
                         "range": false
                       },
-                      "version": "v0"
+                      "labels": {
+                        "grafana.app/export-label": "prometheus-1"
+                      }
                     },
-                    "refId": "A"
+                    "refId": "A",
+                    "hidden": false
                   }
                 }
               ],
-              "queryOptions": {
-                "interval": "2m"
-              },
               "transformations": [
                 {
-                  "kind": "reduce",
+                  "kind": "Transformation",
+                  "group": "reduce",
                   "spec": {
-                    "id": "reduce",
                     "options": {
                       "reducers": []
                     }
                   }
                 }
-              ]
+              ],
+              "queryOptions": {
+                "interval": "2m"
+              }
             }
           },
-          "description": "The power consumption's margin of error.\n\nThis value is based on the number of hosts that report measured power consumptions and the number of hosts whose power consumption is estimated.\n\nWhen the power consumed by a host cannot be read, Hardware Sentry estimates this value based on the host's components (CPUs, disks, network interfaces, etc.) and their usage.",
-          "id": 363,
-          "links": [],
-          "title": "Margin of Error",
           "vizConfig": {
-            "group": "stat",
             "kind": "VizConfig",
+            "group": "stat",
+            "version": "13.0.1",
             "spec": {
-              "fieldConfig": {
-                "defaults": {
-                  "color": {
-                    "mode": "thresholds"
-                  },
-                  "decimals": 0,
-                  "noValue": "25%",
-                  "thresholds": {
-                    "mode": "absolute",
-                    "steps": [
-                      {
-                        "color": "super-light-yellow",
-                        "value": 0
-                      },
-                      {
-                        "color": "super-light-green",
-                        "value": 10
-                      },
-                      {
-                        "color": "super-light-yellow",
-                        "value": 11
-                      }
-                    ]
-                  },
-                  "unit": "percent"
-                },
-                "overrides": []
-              },
               "options": {
                 "colorMode": "background",
                 "graphMode": "none",
@@ -3997,15 +4084,46 @@
                 "text": {},
                 "textMode": "auto",
                 "wideLayout": true
+              },
+              "fieldConfig": {
+                "defaults": {
+                  "unit": "percent",
+                  "decimals": 0,
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "value": 0,
+                        "color": "super-light-yellow"
+                      },
+                      {
+                        "value": 10,
+                        "color": "super-light-green"
+                      },
+                      {
+                        "value": 11,
+                        "color": "super-light-yellow"
+                      }
+                    ]
+                  },
+                  "color": {
+                    "mode": "thresholds"
+                  },
+                  "noValue": "25%"
+                },
+                "overrides": []
               }
-            },
-            "version": "12.3.2"
+            }
           }
         }
       },
       "panel-365": {
         "kind": "Panel",
         "spec": {
+          "id": 365,
+          "title": "Current Alerts",
+          "description": "",
+          "links": [],
           "data": {
             "kind": "QueryGroup",
             "spec": {
@@ -4013,10 +4131,10 @@
                 {
                   "kind": "PanelQuery",
                   "spec": {
-                    "hidden": false,
                     "query": {
-                      "group": "prometheus",
                       "kind": "DataQuery",
+                      "group": "prometheus",
+                      "version": "v0",
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
@@ -4026,18 +4144,20 @@
                         "interval": "",
                         "legendFormat": ""
                       },
-                      "version": "v0"
+                      "labels": {
+                        "grafana.app/export-label": "prometheus-1"
+                      }
                     },
-                    "refId": "A"
+                    "refId": "A",
+                    "hidden": false
                   }
                 }
               ],
-              "queryOptions": {},
               "transformations": [
                 {
-                  "kind": "filterFieldsByName",
+                  "kind": "Transformation",
+                  "group": "filterFieldsByName",
                   "spec": {
-                    "id": "filterFieldsByName",
                     "options": {
                       "include": {
                         "names": [
@@ -4055,9 +4175,9 @@
                   }
                 },
                 {
-                  "kind": "organize",
+                  "kind": "Transformation",
+                  "group": "organize",
                   "spec": {
-                    "id": "organize",
                     "options": {
                       "excludeByName": {
                         "Time": false,
@@ -4170,9 +4290,9 @@
                   }
                 },
                 {
-                  "kind": "sortBy",
+                  "kind": "Transformation",
+                  "group": "sortBy",
                   "spec": {
-                    "id": "sortBy",
                     "options": {
                       "fields": {},
                       "sort": [
@@ -4183,23 +4303,48 @@
                     }
                   }
                 }
-              ]
+              ],
+              "queryOptions": {}
             }
           },
-          "description": "",
-          "id": 365,
-          "links": [],
-          "title": "Current Alerts",
           "vizConfig": {
-            "group": "table",
             "kind": "VizConfig",
+            "group": "table",
+            "version": "13.0.1",
             "spec": {
+              "options": {
+                "cellHeight": "sm",
+                "enablePagination": false,
+                "showHeader": true,
+                "sortBy": [
+                  {
+                    "desc": false,
+                    "displayName": "Time"
+                  }
+                ]
+              },
               "fieldConfig": {
                 "defaults": {
-                  "color": {
-                    "fixedColor": "blue",
-                    "mode": "fixed"
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "value": 0,
+                        "color": "green"
+                      }
+                    ]
                   },
+                  "color": {
+                    "mode": "fixed",
+                    "fixedColor": "blue"
+                  },
+                  "links": [
+                    {
+                      "title": "Host",
+                      "url": "d/c2K8skm4k/host?orgId=1&var-host_name=${__data.fields.Hostname}&var-site=${__data.fields.Site}"
+                    }
+                  ],
+                  "noValue": "No alerts",
                   "custom": {
                     "align": "auto",
                     "cellOptions": {
@@ -4210,22 +4355,6 @@
                       "reducers": []
                     },
                     "inspect": false
-                  },
-                  "links": [
-                    {
-                      "title": "Host",
-                      "url": "d/c2K8skm4k/host?orgId=1&var-host_name=${__data.fields.Hostname}&var-site=${__data.fields.Site}"
-                    }
-                  ],
-                  "noValue": "No alerts",
-                  "thresholds": {
-                    "mode": "absolute",
-                    "steps": [
-                      {
-                        "color": "green",
-                        "value": 0
-                      }
-                    ]
                   }
                 },
                 "overrides": [
@@ -4321,26 +4450,18 @@
                     ]
                   }
                 ]
-              },
-              "options": {
-                "cellHeight": "sm",
-                "enablePagination": false,
-                "showHeader": true,
-                "sortBy": [
-                  {
-                    "desc": false,
-                    "displayName": "Time"
-                  }
-                ]
               }
-            },
-            "version": "12.3.2"
+            }
           }
         }
       },
       "panel-366": {
         "kind": "Panel",
         "spec": {
+          "id": 366,
+          "title": "Total Power * PUE",
+          "description": "Total current power usage across all sites, multiplied by the site's PUE, displayed as a graph.\n\nThis number represents the actual power usage of all sites. It takes into account the cooling and other overhead that supports the equipment.",
+          "links": [],
           "data": {
             "kind": "QueryGroup",
             "spec": {
@@ -4348,10 +4469,10 @@
                 {
                   "kind": "PanelQuery",
                   "spec": {
-                    "hidden": false,
                     "query": {
-                      "group": "prometheus",
                       "kind": "DataQuery",
+                      "group": "prometheus",
+                      "version": "v0",
                       "spec": {
                         "editorMode": "code",
                         "expr": "sum(sum by (site) (hw_host_power_watts) * avg by (site) (avg_over_time(hw_site_pue_ratio{site=~\"$site\"}[2h])))",
@@ -4359,31 +4480,64 @@
                         "legendFormat": "Total Power * PUE",
                         "range": true
                       },
-                      "version": "v0"
+                      "labels": {
+                        "grafana.app/export-label": "prometheus-1"
+                      }
                     },
-                    "refId": "A"
+                    "refId": "A",
+                    "hidden": false
                   }
                 }
               ],
+              "transformations": [],
               "queryOptions": {
                 "interval": "5m"
-              },
-              "transformations": []
+              }
             }
           },
-          "description": "Total current power usage across all sites, multiplied by the site's PUE, displayed as a graph.\n\nThis number represents the actual power usage of all sites. It takes into account the cooling and other overhead that supports the equipment.",
-          "id": 366,
-          "links": [],
-          "title": "Total Power * PUE",
           "vizConfig": {
-            "group": "timeseries",
             "kind": "VizConfig",
+            "group": "timeseries",
+            "version": "13.0.1",
             "spec": {
+              "options": {
+                "annotations": {
+                  "clustering": -1,
+                  "multiLane": false
+                },
+                "legend": {
+                  "calcs": [
+                    "min",
+                    "max",
+                    "last"
+                  ],
+                  "displayMode": "list",
+                  "placement": "bottom",
+                  "showLegend": false
+                },
+                "tooltip": {
+                  "hideZeros": false,
+                  "maxHeight": 600,
+                  "mode": "single",
+                  "sort": "none"
+                }
+              },
               "fieldConfig": {
                 "defaults": {
+                  "unit": "watt",
+                  "min": 0,
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "value": 0,
+                        "color": "blue"
+                      }
+                    ]
+                  },
                   "color": {
-                    "fixedColor": "blue",
-                    "mode": "fixed"
+                    "mode": "fixed",
+                    "fixedColor": "blue"
                   },
                   "custom": {
                     "axisBorderShow": false,
@@ -4423,47 +4577,21 @@
                     "thresholdsStyle": {
                       "mode": "off"
                     }
-                  },
-                  "min": 0,
-                  "thresholds": {
-                    "mode": "absolute",
-                    "steps": [
-                      {
-                        "color": "blue",
-                        "value": 0
-                      }
-                    ]
-                  },
-                  "unit": "watt"
+                  }
                 },
                 "overrides": []
-              },
-              "options": {
-                "legend": {
-                  "calcs": [
-                    "min",
-                    "max",
-                    "last"
-                  ],
-                  "displayMode": "list",
-                  "placement": "bottom",
-                  "showLegend": false
-                },
-                "tooltip": {
-                  "hideZeros": false,
-                  "maxHeight": 600,
-                  "mode": "single",
-                  "sort": "none"
-                }
               }
-            },
-            "version": "12.3.2"
+            }
           }
         }
       },
       "panel-367": {
         "kind": "Panel",
         "spec": {
+          "id": 367,
+          "title": "Today's Live Consumption ",
+          "description": "Today's total power consumption for all sites.",
+          "links": [],
           "data": {
             "kind": "QueryGroup",
             "spec": {
@@ -4471,57 +4599,38 @@
                 {
                   "kind": "PanelQuery",
                   "spec": {
-                    "hidden": false,
                     "query": {
-                      "group": "prometheus",
                       "kind": "DataQuery",
+                      "group": "prometheus",
+                      "version": "v0",
                       "spec": {
                         "editorMode": "code",
                         "expr": "sum(sum by (site) (increase(hw_host_energy_joules_total{site !=\"\"}[$__range])) * avg_over_time(avg by (site) (hw_site_pue_ratio)[$__range:5m])) / 3600",
                         "legendFormat": "Today's Live Consumption ",
                         "range": true
                       },
-                      "version": "v0"
+                      "labels": {
+                        "grafana.app/export-label": "prometheus-1"
+                      }
                     },
-                    "refId": "A"
+                    "refId": "A",
+                    "hidden": false
                   }
                 }
               ],
+              "transformations": [],
               "queryOptions": {
-                "hideTimeOverride": true,
+                "timeFrom": "now/d",
                 "interval": "5m",
-                "timeFrom": "now/d"
-              },
-              "transformations": []
+                "hideTimeOverride": true
+              }
             }
           },
-          "description": "Today's total power consumption for all sites.",
-          "id": 367,
-          "links": [],
-          "title": "Today's Live Consumption ",
           "vizConfig": {
-            "group": "stat",
             "kind": "VizConfig",
+            "group": "stat",
+            "version": "13.0.1",
             "spec": {
-              "fieldConfig": {
-                "defaults": {
-                  "color": {
-                    "fixedColor": "blue",
-                    "mode": "fixed"
-                  },
-                  "thresholds": {
-                    "mode": "absolute",
-                    "steps": [
-                      {
-                        "color": "green",
-                        "value": 0
-                      }
-                    ]
-                  },
-                  "unit": "watth"
-                },
-                "overrides": []
-              },
               "options": {
                 "colorMode": "value",
                 "graphMode": "none",
@@ -4539,15 +4648,37 @@
                 "text": {},
                 "textMode": "auto",
                 "wideLayout": true
+              },
+              "fieldConfig": {
+                "defaults": {
+                  "unit": "watth",
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "value": 0,
+                        "color": "green"
+                      }
+                    ]
+                  },
+                  "color": {
+                    "mode": "fixed",
+                    "fixedColor": "blue"
+                  }
+                },
+                "overrides": []
               }
-            },
-            "version": "12.3.2"
+            }
           }
         }
       },
       "panel-368": {
         "kind": "Panel",
         "spec": {
+          "id": 368,
+          "title": "Today's Live CO₂ Emissions",
+          "description": "Today's volume of CO₂ emissions for all sites.",
+          "links": [],
           "data": {
             "kind": "QueryGroup",
             "spec": {
@@ -4555,10 +4686,10 @@
                 {
                   "kind": "PanelQuery",
                   "spec": {
-                    "hidden": false,
                     "query": {
-                      "group": "prometheus",
                       "kind": "DataQuery",
+                      "group": "prometheus",
+                      "version": "v0",
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
@@ -4567,47 +4698,28 @@
                         "legendFormat": "Today's Live CO₂ Emissions",
                         "range": false
                       },
-                      "version": "v0"
+                      "labels": {
+                        "grafana.app/export-label": "prometheus-1"
+                      }
                     },
-                    "refId": "A"
+                    "refId": "A",
+                    "hidden": false
                   }
                 }
               ],
+              "transformations": [],
               "queryOptions": {
-                "hideTimeOverride": true,
+                "timeFrom": "now/d",
                 "interval": "5m",
-                "timeFrom": "now/d"
-              },
-              "transformations": []
+                "hideTimeOverride": true
+              }
             }
           },
-          "description": "Today's volume of CO₂ emissions for all sites.",
-          "id": 368,
-          "links": [],
-          "title": "Today's Live CO₂ Emissions",
           "vizConfig": {
-            "group": "stat",
             "kind": "VizConfig",
+            "group": "stat",
+            "version": "13.0.1",
             "spec": {
-              "fieldConfig": {
-                "defaults": {
-                  "color": {
-                    "fixedColor": "#808080",
-                    "mode": "fixed"
-                  },
-                  "thresholds": {
-                    "mode": "absolute",
-                    "steps": [
-                      {
-                        "color": "dark-green",
-                        "value": 0
-                      }
-                    ]
-                  },
-                  "unit": "masst"
-                },
-                "overrides": []
-              },
               "options": {
                 "colorMode": "value",
                 "graphMode": "none",
@@ -4625,15 +4737,37 @@
                 "text": {},
                 "textMode": "auto",
                 "wideLayout": true
+              },
+              "fieldConfig": {
+                "defaults": {
+                  "unit": "masst",
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "value": 0,
+                        "color": "dark-green"
+                      }
+                    ]
+                  },
+                  "color": {
+                    "mode": "fixed",
+                    "fixedColor": "#808080"
+                  }
+                },
+                "overrides": []
               }
-            },
-            "version": "12.3.2"
+            }
           }
         }
       },
       "panel-369": {
         "kind": "Panel",
         "spec": {
+          "id": 369,
+          "title": "Dashboard Version",
+          "description": "",
+          "links": [],
           "data": {
             "kind": "QueryGroup",
             "spec": {
@@ -4641,52 +4775,34 @@
                 {
                   "kind": "PanelQuery",
                   "spec": {
-                    "hidden": false,
                     "query": {
-                      "group": "prometheus",
                       "kind": "DataQuery",
+                      "group": "prometheus",
+                      "version": "v0",
                       "spec": {
                         "editorMode": "code",
                         "expr": "",
                         "legendFormat": "__auto",
                         "range": true
                       },
-                      "version": "v0"
+                      "labels": {
+                        "grafana.app/export-label": "prometheus-1"
+                      }
                     },
-                    "refId": "A"
+                    "refId": "A",
+                    "hidden": false
                   }
                 }
               ],
-              "queryOptions": {},
-              "transformations": []
+              "transformations": [],
+              "queryOptions": {}
             }
           },
-          "description": "",
-          "id": 369,
-          "links": [],
-          "title": "Dashboard Version",
           "vizConfig": {
-            "group": "stat",
             "kind": "VizConfig",
+            "group": "stat",
+            "version": "13.0.1",
             "spec": {
-              "fieldConfig": {
-                "defaults": {
-                  "color": {
-                    "mode": "thresholds"
-                  },
-                  "noValue": "2026.2",
-                  "thresholds": {
-                    "mode": "absolute",
-                    "steps": [
-                      {
-                        "color": "light-green",
-                        "value": 0
-                      }
-                    ]
-                  }
-                },
-                "overrides": []
-              },
               "options": {
                 "colorMode": "background",
                 "graphMode": "none",
@@ -4703,15 +4819,36 @@
                 "showPercentChange": false,
                 "textMode": "auto",
                 "wideLayout": true
+              },
+              "fieldConfig": {
+                "defaults": {
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "value": 0,
+                        "color": "light-green"
+                      }
+                    ]
+                  },
+                  "color": {
+                    "mode": "thresholds"
+                  },
+                  "noValue": "2026.3"
+                },
+                "overrides": []
               }
-            },
-            "version": "12.3.2"
+            }
           }
         }
       },
       "panel-99": {
         "kind": "Panel",
         "spec": {
+          "id": 99,
+          "title": "Daily Cost",
+          "description": "The overall energy cost of all sites for the last 24 hours.\n\nIf less than 24 hours of data is available, this value is estimated based on past collected data.",
+          "links": [],
           "data": {
             "kind": "QueryGroup",
             "spec": {
@@ -4719,10 +4856,10 @@
                 {
                   "kind": "PanelQuery",
                   "spec": {
-                    "hidden": false,
                     "query": {
-                      "group": "prometheus",
                       "kind": "DataQuery",
+                      "group": "prometheus",
+                      "version": "v0",
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
@@ -4731,45 +4868,26 @@
                         "interval": "",
                         "legendFormat": "Daily Cost"
                       },
-                      "version": "v0"
+                      "labels": {
+                        "grafana.app/export-label": "prometheus-1"
+                      }
                     },
-                    "refId": "A"
+                    "refId": "A",
+                    "hidden": false
                   }
                 }
               ],
+              "transformations": [],
               "queryOptions": {
                 "interval": "5m"
-              },
-              "transformations": []
+              }
             }
           },
-          "description": "The overall energy cost of all sites for the last 24 hours.\n\nIf less than 24 hours of data is available, this value is estimated based on past collected data.",
-          "id": 99,
-          "links": [],
-          "title": "Daily Cost",
           "vizConfig": {
-            "group": "stat",
             "kind": "VizConfig",
+            "group": "stat",
+            "version": "13.0.1",
             "spec": {
-              "fieldConfig": {
-                "defaults": {
-                  "color": {
-                    "fixedColor": "green",
-                    "mode": "fixed"
-                  },
-                  "thresholds": {
-                    "mode": "absolute",
-                    "steps": [
-                      {
-                        "color": "green",
-                        "value": 0
-                      }
-                    ]
-                  },
-                  "unit": "currencyUSD"
-                },
-                "overrides": []
-              },
               "options": {
                 "colorMode": "background",
                 "graphMode": "none",
@@ -4787,9 +4905,27 @@
                 "text": {},
                 "textMode": "auto",
                 "wideLayout": true
+              },
+              "fieldConfig": {
+                "defaults": {
+                  "unit": "currencyUSD",
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "value": 0,
+                        "color": "green"
+                      }
+                    ]
+                  },
+                  "color": {
+                    "mode": "fixed",
+                    "fixedColor": "green"
+                  }
+                },
+                "overrides": []
               }
-            },
-            "version": "12.3.2"
+            }
           }
         }
       }
@@ -4801,6 +4937,7 @@
           {
             "kind": "RowsLayoutRow",
             "spec": {
+              "title": "Overall Information",
               "collapse": false,
               "layout": {
                 "kind": "GridLayout",
@@ -4809,90 +4946,90 @@
                     {
                       "kind": "GridLayoutItem",
                       "spec": {
+                        "x": 0,
+                        "y": 0,
+                        "width": 2,
+                        "height": 4,
                         "element": {
                           "kind": "ElementReference",
                           "name": "panel-188"
-                        },
-                        "height": 4,
-                        "width": 2,
-                        "x": 0,
-                        "y": 0
+                        }
                       }
                     },
                     {
                       "kind": "GridLayoutItem",
                       "spec": {
+                        "x": 2,
+                        "y": 0,
+                        "width": 2,
+                        "height": 4,
                         "element": {
                           "kind": "ElementReference",
                           "name": "panel-359"
-                        },
-                        "height": 4,
-                        "width": 2,
-                        "x": 2,
-                        "y": 0
+                        }
                       }
                     },
                     {
                       "kind": "GridLayoutItem",
                       "spec": {
+                        "x": 4,
+                        "y": 0,
+                        "width": 2,
+                        "height": 4,
                         "element": {
                           "kind": "ElementReference",
                           "name": "panel-301"
-                        },
-                        "height": 4,
-                        "width": 2,
-                        "x": 4,
-                        "y": 0
+                        }
                       }
                     },
                     {
                       "kind": "GridLayoutItem",
                       "spec": {
+                        "x": 6,
+                        "y": 0,
+                        "width": 2,
+                        "height": 4,
                         "element": {
                           "kind": "ElementReference",
                           "name": "panel-303"
-                        },
-                        "height": 4,
-                        "width": 2,
-                        "x": 6,
-                        "y": 0
+                        }
                       }
                     },
                     {
                       "kind": "GridLayoutItem",
                       "spec": {
+                        "x": 8,
+                        "y": 0,
+                        "width": 16,
+                        "height": 8,
                         "element": {
                           "kind": "ElementReference",
                           "name": "panel-365"
-                        },
-                        "height": 8,
-                        "width": 16,
-                        "x": 8,
-                        "y": 0
+                        }
                       }
                     },
                     {
                       "kind": "GridLayoutItem",
                       "spec": {
+                        "x": 0,
+                        "y": 4,
+                        "width": 8,
+                        "height": 4,
                         "element": {
                           "kind": "ElementReference",
                           "name": "panel-162"
-                        },
-                        "height": 4,
-                        "width": 8,
-                        "x": 0,
-                        "y": 4
+                        }
                       }
                     }
                   ]
                 }
-              },
-              "title": "Overall Information"
+              }
             }
           },
           {
             "kind": "RowsLayoutRow",
             "spec": {
+              "title": "Power, Cost and CO₂ Emissions",
               "collapse": false,
               "layout": {
                 "kind": "GridLayout",
@@ -4901,246 +5038,246 @@
                     {
                       "kind": "GridLayoutItem",
                       "spec": {
+                        "x": 0,
+                        "y": 0,
+                        "width": 4,
+                        "height": 4,
                         "element": {
                           "kind": "ElementReference",
                           "name": "panel-181"
-                        },
-                        "height": 4,
-                        "width": 4,
-                        "x": 0,
-                        "y": 0
+                        }
                       }
                     },
                     {
                       "kind": "GridLayoutItem",
                       "spec": {
+                        "x": 4,
+                        "y": 0,
+                        "width": 8,
+                        "height": 11,
                         "element": {
                           "kind": "ElementReference",
                           "name": "panel-366"
-                        },
-                        "height": 11,
-                        "width": 8,
-                        "x": 4,
-                        "y": 0
+                        }
                       }
                     },
                     {
                       "kind": "GridLayoutItem",
                       "spec": {
+                        "x": 12,
+                        "y": 0,
+                        "width": 3,
+                        "height": 2,
                         "element": {
                           "kind": "ElementReference",
                           "name": "panel-351"
-                        },
-                        "height": 2,
-                        "width": 3,
-                        "x": 12,
-                        "y": 0
+                        }
                       }
                     },
                     {
                       "kind": "GridLayoutItem",
                       "spec": {
+                        "x": 15,
+                        "y": 0,
+                        "width": 9,
+                        "height": 2,
                         "element": {
                           "kind": "ElementReference",
                           "name": "panel-352"
-                        },
-                        "height": 2,
-                        "width": 9,
-                        "x": 15,
-                        "y": 0
+                        }
                       }
                     },
                     {
                       "kind": "GridLayoutItem",
                       "spec": {
+                        "x": 12,
+                        "y": 2,
+                        "width": 3,
+                        "height": 3,
                         "element": {
                           "kind": "ElementReference",
                           "name": "panel-367"
-                        },
-                        "height": 3,
-                        "width": 3,
-                        "x": 12,
-                        "y": 2
+                        }
                       }
                     },
                     {
                       "kind": "GridLayoutItem",
                       "spec": {
+                        "x": 15,
+                        "y": 2,
+                        "width": 3,
+                        "height": 3,
                         "element": {
                           "kind": "ElementReference",
                           "name": "panel-328"
-                        },
-                        "height": 3,
-                        "width": 3,
-                        "x": 15,
-                        "y": 2
+                        }
                       }
                     },
                     {
                       "kind": "GridLayoutItem",
                       "spec": {
+                        "x": 18,
+                        "y": 2,
+                        "width": 3,
+                        "height": 3,
                         "element": {
                           "kind": "ElementReference",
                           "name": "panel-99"
-                        },
-                        "height": 3,
-                        "width": 3,
-                        "x": 18,
-                        "y": 2
+                        }
                       }
                     },
                     {
                       "kind": "GridLayoutItem",
                       "spec": {
+                        "x": 21,
+                        "y": 2,
+                        "width": 3,
+                        "height": 3,
                         "element": {
                           "kind": "ElementReference",
                           "name": "panel-331"
-                        },
-                        "height": 3,
-                        "width": 3,
-                        "x": 21,
-                        "y": 2
+                        }
                       }
                     },
                     {
                       "kind": "GridLayoutItem",
                       "spec": {
+                        "x": 0,
+                        "y": 4,
+                        "width": 4,
+                        "height": 4,
                         "element": {
                           "kind": "ElementReference",
                           "name": "panel-155"
-                        },
-                        "height": 4,
-                        "width": 4,
-                        "x": 0,
-                        "y": 4
+                        }
                       }
                     },
                     {
                       "kind": "GridLayoutItem",
                       "spec": {
+                        "x": 12,
+                        "y": 5,
+                        "width": 3,
+                        "height": 3,
                         "element": {
                           "kind": "ElementReference",
                           "name": "panel-330"
-                        },
-                        "height": 3,
-                        "width": 3,
-                        "x": 12,
-                        "y": 5
+                        }
                       }
                     },
                     {
                       "kind": "GridLayoutItem",
                       "spec": {
+                        "x": 15,
+                        "y": 5,
+                        "width": 3,
+                        "height": 3,
                         "element": {
                           "kind": "ElementReference",
                           "name": "panel-320"
-                        },
-                        "height": 3,
-                        "width": 3,
-                        "x": 15,
-                        "y": 5
+                        }
                       }
                     },
                     {
                       "kind": "GridLayoutItem",
                       "spec": {
+                        "x": 18,
+                        "y": 5,
+                        "width": 3,
+                        "height": 3,
                         "element": {
                           "kind": "ElementReference",
                           "name": "panel-321"
-                        },
-                        "height": 3,
-                        "width": 3,
-                        "x": 18,
-                        "y": 5
+                        }
                       }
                     },
                     {
                       "kind": "GridLayoutItem",
                       "spec": {
+                        "x": 21,
+                        "y": 5,
+                        "width": 3,
+                        "height": 3,
                         "element": {
                           "kind": "ElementReference",
                           "name": "panel-319"
-                        },
-                        "height": 3,
-                        "width": 3,
-                        "x": 21,
-                        "y": 5
+                        }
                       }
                     },
                     {
                       "kind": "GridLayoutItem",
                       "spec": {
+                        "x": 0,
+                        "y": 8,
+                        "width": 4,
+                        "height": 3,
                         "element": {
                           "kind": "ElementReference",
                           "name": "panel-363"
-                        },
-                        "height": 3,
-                        "width": 4,
-                        "x": 0,
-                        "y": 8
+                        }
                       }
                     },
                     {
                       "kind": "GridLayoutItem",
                       "spec": {
+                        "x": 12,
+                        "y": 8,
+                        "width": 3,
+                        "height": 3,
                         "element": {
                           "kind": "ElementReference",
                           "name": "panel-368"
-                        },
-                        "height": 3,
-                        "width": 3,
-                        "x": 12,
-                        "y": 8
+                        }
                       }
                     },
                     {
                       "kind": "GridLayoutItem",
                       "spec": {
+                        "x": 15,
+                        "y": 8,
+                        "width": 3,
+                        "height": 3,
                         "element": {
                           "kind": "ElementReference",
                           "name": "panel-317"
-                        },
-                        "height": 3,
-                        "width": 3,
-                        "x": 15,
-                        "y": 8
+                        }
                       }
                     },
                     {
                       "kind": "GridLayoutItem",
                       "spec": {
+                        "x": 18,
+                        "y": 8,
+                        "width": 3,
+                        "height": 3,
                         "element": {
                           "kind": "ElementReference",
                           "name": "panel-318"
-                        },
-                        "height": 3,
-                        "width": 3,
-                        "x": 18,
-                        "y": 8
+                        }
                       }
                     },
                     {
                       "kind": "GridLayoutItem",
                       "spec": {
+                        "x": 21,
+                        "y": 8,
+                        "width": 3,
+                        "height": 3,
                         "element": {
                           "kind": "ElementReference",
                           "name": "panel-322"
-                        },
-                        "height": 3,
-                        "width": 3,
-                        "x": 21,
-                        "y": 8
+                        }
                       }
                     }
                   ]
                 }
-              },
-              "title": "Power, Cost and CO₂ Emissions"
+              }
             }
           },
           {
             "kind": "RowsLayoutRow",
             "spec": {
+              "title": "Sites",
               "collapse": false,
               "layout": {
                 "kind": "GridLayout",
@@ -5149,64 +5286,64 @@
                     {
                       "kind": "GridLayoutItem",
                       "spec": {
+                        "x": 0,
+                        "y": 0,
+                        "width": 24,
+                        "height": 5,
                         "element": {
                           "kind": "ElementReference",
                           "name": "panel-314"
-                        },
-                        "height": 5,
-                        "width": 24,
-                        "x": 0,
-                        "y": 0
+                        }
                       }
                     },
                     {
                       "kind": "GridLayoutItem",
                       "spec": {
+                        "x": 0,
+                        "y": 5,
+                        "width": 8,
+                        "height": 9,
                         "element": {
                           "kind": "ElementReference",
                           "name": "panel-119"
-                        },
-                        "height": 9,
-                        "width": 8,
-                        "x": 0,
-                        "y": 5
+                        }
                       }
                     },
                     {
                       "kind": "GridLayoutItem",
                       "spec": {
+                        "x": 8,
+                        "y": 5,
+                        "width": 8,
+                        "height": 9,
                         "element": {
                           "kind": "ElementReference",
                           "name": "panel-114"
-                        },
-                        "height": 9,
-                        "width": 8,
-                        "x": 8,
-                        "y": 5
+                        }
                       }
                     },
                     {
                       "kind": "GridLayoutItem",
                       "spec": {
+                        "x": 16,
+                        "y": 5,
+                        "width": 8,
+                        "height": 9,
                         "element": {
                           "kind": "ElementReference",
                           "name": "panel-115"
-                        },
-                        "height": 9,
-                        "width": 8,
-                        "x": 16,
-                        "y": 5
+                        }
                       }
                     }
                   ]
                 }
-              },
-              "title": "Sites"
+              }
             }
           },
           {
             "kind": "RowsLayoutRow",
             "spec": {
+              "title": "Power and Host Information",
               "collapse": false,
               "layout": {
                 "kind": "GridLayout",
@@ -5215,77 +5352,77 @@
                     {
                       "kind": "GridLayoutItem",
                       "spec": {
+                        "x": 0,
+                        "y": 0,
+                        "width": 5,
+                        "height": 9,
                         "element": {
                           "kind": "ElementReference",
                           "name": "panel-179"
-                        },
-                        "height": 9,
-                        "width": 5,
-                        "x": 0,
-                        "y": 0
+                        }
                       }
                     },
                     {
                       "kind": "GridLayoutItem",
                       "spec": {
+                        "x": 5,
+                        "y": 0,
+                        "width": 4,
+                        "height": 9,
                         "element": {
                           "kind": "ElementReference",
                           "name": "panel-177"
-                        },
-                        "height": 9,
-                        "width": 4,
-                        "x": 5,
-                        "y": 0
+                        }
                       }
                     },
                     {
                       "kind": "GridLayoutItem",
                       "spec": {
+                        "x": 9,
+                        "y": 0,
+                        "width": 5,
+                        "height": 9,
                         "element": {
                           "kind": "ElementReference",
                           "name": "panel-172"
-                        },
-                        "height": 9,
-                        "width": 5,
-                        "x": 9,
-                        "y": 0
+                        }
                       }
                     },
                     {
                       "kind": "GridLayoutItem",
                       "spec": {
+                        "x": 14,
+                        "y": 0,
+                        "width": 5,
+                        "height": 9,
                         "element": {
                           "kind": "ElementReference",
                           "name": "panel-168"
-                        },
-                        "height": 9,
-                        "width": 5,
-                        "x": 14,
-                        "y": 0
+                        }
                       }
                     },
                     {
                       "kind": "GridLayoutItem",
                       "spec": {
+                        "x": 19,
+                        "y": 0,
+                        "width": 5,
+                        "height": 9,
                         "element": {
                           "kind": "ElementReference",
                           "name": "panel-308"
-                        },
-                        "height": 9,
-                        "width": 5,
-                        "x": 19,
-                        "y": 0
+                        }
                       }
                     }
                   ]
                 }
-              },
-              "title": "Power and Host Information"
+              }
             }
           },
           {
             "kind": "RowsLayoutRow",
             "spec": {
+              "title": "Hosts Temperatures",
               "collapse": false,
               "layout": {
                 "kind": "GridLayout",
@@ -5294,38 +5431,38 @@
                     {
                       "kind": "GridLayoutItem",
                       "spec": {
+                        "x": 0,
+                        "y": 0,
+                        "width": 24,
+                        "height": 4,
                         "element": {
                           "kind": "ElementReference",
                           "name": "panel-277"
-                        },
-                        "height": 4,
-                        "width": 24,
-                        "x": 0,
-                        "y": 0
+                        }
                       }
                     },
                     {
                       "kind": "GridLayoutItem",
                       "spec": {
+                        "x": 0,
+                        "y": 4,
+                        "width": 24,
+                        "height": 4,
                         "element": {
                           "kind": "ElementReference",
                           "name": "panel-299"
-                        },
-                        "height": 4,
-                        "width": 24,
-                        "x": 0,
-                        "y": 4
+                        }
                       }
                     }
                   ]
                 }
-              },
-              "title": "Hosts Temperatures"
+              }
             }
           },
           {
             "kind": "RowsLayoutRow",
             "spec": {
+              "title": "History",
               "collapse": false,
               "layout": {
                 "kind": "GridLayout",
@@ -5334,25 +5471,25 @@
                     {
                       "kind": "GridLayoutItem",
                       "spec": {
+                        "x": 0,
+                        "y": 0,
+                        "width": 24,
+                        "height": 12,
                         "element": {
                           "kind": "ElementReference",
                           "name": "panel-333"
-                        },
-                        "height": 12,
-                        "width": 24,
-                        "x": 0,
-                        "y": 0
+                        }
                       }
                     }
                   ]
                 }
-              },
-              "title": "History"
+              }
             }
           },
           {
             "kind": "RowsLayoutRow",
             "spec": {
+              "title": "Hardware Sentry Agents Status",
               "collapse": false,
               "layout": {
                 "kind": "GridLayout",
@@ -5361,46 +5498,45 @@
                     {
                       "kind": "GridLayoutItem",
                       "spec": {
+                        "x": 0,
+                        "y": 0,
+                        "width": 3,
+                        "height": 4,
                         "element": {
                           "kind": "ElementReference",
                           "name": "panel-348"
-                        },
-                        "height": 4,
-                        "width": 3,
-                        "x": 0,
-                        "y": 0
+                        }
                       }
                     },
                     {
                       "kind": "GridLayoutItem",
                       "spec": {
+                        "x": 3,
+                        "y": 0,
+                        "width": 18,
+                        "height": 4,
                         "element": {
                           "kind": "ElementReference",
                           "name": "panel-206"
-                        },
-                        "height": 4,
-                        "width": 18,
-                        "x": 3,
-                        "y": 0
+                        }
                       }
                     },
                     {
                       "kind": "GridLayoutItem",
                       "spec": {
+                        "x": 21,
+                        "y": 0,
+                        "width": 3,
+                        "height": 4,
                         "element": {
                           "kind": "ElementReference",
                           "name": "panel-369"
-                        },
-                        "height": 4,
-                        "width": 3,
-                        "x": 21,
-                        "y": 0
+                        }
                       }
                     }
                   ]
                 }
-              },
-              "title": "Hardware Sentry Agents Status"
+              }
             }
           }
         ]
@@ -5408,18 +5544,18 @@
     },
     "links": [
       {
-        "asDropdown": false,
+        "title": "Site",
+        "type": "dashboards",
         "icon": "external link",
-        "includeVars": false,
-        "keepTime": false,
+        "tooltip": "",
+        "url": "",
         "tags": [
           "hw_site"
         ],
+        "asDropdown": false,
         "targetBlank": false,
-        "title": "Site",
-        "tooltip": "",
-        "type": "dashboards",
-        "url": ""
+        "includeVars": false,
+        "keepTime": false
       }
     ],
     "liveNow": false,
@@ -5428,6 +5564,9 @@
       "hw_main"
     ],
     "timeSettings": {
+      "timezone": "Europe/Paris",
+      "from": "now-7d",
+      "to": "now",
       "autoRefresh": "30s",
       "autoRefreshIntervals": [
         "5s",
@@ -5441,46 +5580,46 @@
         "2h",
         "1d"
       ],
-      "fiscalYearStartMonth": 0,
-      "from": "now-7d",
       "hideTimepicker": false,
-      "timezone": "Europe/Paris",
-      "to": "now"
+      "fiscalYearStartMonth": 0
     },
     "title": "Hardware Main (MetricsHub)",
     "variables": [
       {
         "kind": "QueryVariable",
         "spec": {
-          "allowCustomValue": true,
+          "name": "site",
           "current": {
             "text": "",
             "value": ""
           },
-          "definition": "label_values(metricshub_host_configured,site)",
-          "hide": "hideVariable",
-          "includeAll": true,
           "label": "site",
-          "multi": true,
-          "name": "site",
-          "options": [],
+          "hide": "hideVariable",
+          "refresh": "onDashboardLoad",
+          "skipUrlSync": false,
           "query": {
-            "group": "prometheus",
             "kind": "DataQuery",
+            "group": "prometheus",
+            "version": "v0",
             "spec": {
               "qryType": 1,
               "query": "label_values(metricshub_host_configured,site)",
               "refId": "PrometheusVariableQueryEditor-VariableQuery"
             },
-            "version": "v0"
+            "labels": {
+              "grafana.app/export-label": "prometheus-1"
+            }
           },
-          "refresh": "onDashboardLoad",
           "regex": "",
-          "skipUrlSync": false,
-          "sort": "alphabeticalDesc"
+          "regexApplyTo": "value",
+          "sort": "alphabeticalDesc",
+          "definition": "label_values(metricshub_host_configured,site)",
+          "options": [],
+          "multi": true,
+          "includeAll": true,
+          "allowCustomValue": true
         }
       }
     ]
-  },
-  "status": {}
+  }
 }
