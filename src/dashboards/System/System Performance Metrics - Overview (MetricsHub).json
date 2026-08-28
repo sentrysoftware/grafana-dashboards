@@ -1,9 +1,9 @@
 {
-  "apiVersion": "dashboard.grafana.app/v2beta1",
+  "apiVersion": "dashboard.grafana.app/v2",
   "kind": "Dashboard",
   "metadata": {
     "name": "addp7fx",
-    "generation": 4,
+    "generation": 10,
     "creationTimestamp": "2026-04-22T14:34:35Z",
     "labels": {},
     "annotations": {}
@@ -13,22 +13,25 @@
       {
         "kind": "AnnotationQuery",
         "spec": {
-          "builtIn": true,
-          "enable": true,
-          "hide": true,
-          "iconColor": "rgba(0, 211, 255, 1)",
-          "name": "Annotations & Alerts",
           "query": {
-            "group": "grafana",
             "kind": "DataQuery",
+            "group": "grafana",
+            "version": "v0",
             "spec": {
               "limit": 100,
               "matchAny": false,
               "tags": [],
               "type": "dashboard"
             },
-            "version": "v0"
-          }
+            "labels": {
+              "grafana.app/export-label": "grafana-1"
+            }
+          },
+          "enable": true,
+          "hide": true,
+          "iconColor": "rgba(0, 211, 255, 1)",
+          "name": "Annotations & Alerts",
+          "builtIn": true
         }
       }
     ],
@@ -39,31 +42,28 @@
       "panel-117": {
         "kind": "Panel",
         "spec": {
-          "data": {
-            "kind": "QueryGroup",
-            "spec": {
-              "queries": [],
-              "queryOptions": {},
-              "transformations": []
-            }
-          },
-          "description": "",
           "id": 117,
+          "title": "",
+          "description": "",
           "links": [
             {
               "title": "Hardware Sentry OpenTelemetry Collector",
               "url": "https://www.sentrysoftware.com/products/hardware-sentry-opentelemetry-collector.html"
             }
           ],
-          "title": "",
-          "vizConfig": {
-            "group": "text",
-            "kind": "VizConfig",
+          "data": {
+            "kind": "QueryGroup",
             "spec": {
-              "fieldConfig": {
-                "defaults": {},
-                "overrides": []
-              },
+              "queries": [],
+              "transformations": [],
+              "queryOptions": {}
+            }
+          },
+          "vizConfig": {
+            "kind": "VizConfig",
+            "group": "text",
+            "version": "13.0.1",
+            "spec": {
               "options": {
                 "code": {
                   "language": "plaintext",
@@ -72,15 +72,22 @@
                 },
                 "content": "<a href=\"https://metricshub.com/\" target=\"_blank\">\n  <div style=\"\n    display: block;\n    margin: 0 auto; \n    \n    background: transparent url(https://metricshub.com/images/logo-darkgrey.svg) no-repeat center center;\n    background-size: contain;\n    \n    width: 85px;   \n    height: 85px;\n    border-radius: 3px;\n  \">\n  </div>\n</a>",
                 "mode": "html"
+              },
+              "fieldConfig": {
+                "defaults": {},
+                "overrides": []
               }
-            },
-            "version": "12.3.2"
+            }
           }
         }
       },
       "panel-128": {
         "kind": "Panel",
         "spec": {
+          "id": 128,
+          "title": "Dashboard Version",
+          "description": "",
+          "links": [],
           "data": {
             "kind": "QueryGroup",
             "spec": {
@@ -88,51 +95,33 @@
                 {
                   "kind": "PanelQuery",
                   "spec": {
-                    "hidden": false,
                     "query": {
-                      "group": "prometheus",
                       "kind": "DataQuery",
+                      "group": "prometheus",
+                      "version": "v0",
                       "spec": {
                         "expr": "",
                         "instant": false,
                         "range": true
                       },
-                      "version": "v0"
+                      "labels": {
+                        "grafana.app/export-label": "prometheus-1"
+                      }
                     },
-                    "refId": "A"
+                    "refId": "A",
+                    "hidden": false
                   }
                 }
               ],
-              "queryOptions": {},
-              "transformations": []
+              "transformations": [],
+              "queryOptions": {}
             }
           },
-          "description": "",
-          "id": 128,
-          "links": [],
-          "title": "Dashboard",
           "vizConfig": {
-            "group": "stat",
             "kind": "VizConfig",
+            "group": "stat",
+            "version": "13.0.1",
             "spec": {
-              "fieldConfig": {
-                "defaults": {
-                  "color": {
-                    "mode": "thresholds"
-                  },
-                  "noValue": "2026.2",
-                  "thresholds": {
-                    "mode": "absolute",
-                    "steps": [
-                      {
-                        "color": "light-green",
-                        "value": 0
-                      }
-                    ]
-                  }
-                },
-                "overrides": []
-              },
               "options": {
                 "colorMode": "background",
                 "graphMode": "none",
@@ -149,15 +138,36 @@
                 "showPercentChange": false,
                 "textMode": "auto",
                 "wideLayout": true
+              },
+              "fieldConfig": {
+                "defaults": {
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "value": 0,
+                        "color": "light-green"
+                      }
+                    ]
+                  },
+                  "color": {
+                    "mode": "thresholds"
+                  },
+                  "noValue": "2026.3"
+                },
+                "overrides": []
               }
-            },
-            "version": "12.3.2"
+            }
           }
         }
       },
       "panel-139": {
         "kind": "Panel",
         "spec": {
+          "id": 139,
+          "title": "Critical Alerts",
+          "description": "",
+          "links": [],
           "data": {
             "kind": "QueryGroup",
             "spec": {
@@ -165,10 +175,10 @@
                 {
                   "kind": "PanelQuery",
                   "spec": {
-                    "hidden": false,
                     "query": {
-                      "group": "prometheus",
                       "kind": "DataQuery",
+                      "group": "prometheus",
+                      "version": "v0",
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
@@ -178,48 +188,26 @@
                         "legendFormat": "Critical Alerts",
                         "range": true
                       },
-                      "version": "v0"
+                      "labels": {
+                        "grafana.app/export-label": "prometheus-1"
+                      }
                     },
-                    "refId": "A"
+                    "refId": "A",
+                    "hidden": false
                   }
                 }
               ],
+              "transformations": [],
               "queryOptions": {
                 "maxDataPoints": 100
-              },
-              "transformations": []
+              }
             }
           },
-          "description": "",
-          "id": 139,
-          "links": [],
-          "title": "Critical Alerts",
           "vizConfig": {
-            "group": "stat",
             "kind": "VizConfig",
+            "group": "stat",
+            "version": "13.0.1",
             "spec": {
-              "fieldConfig": {
-                "defaults": {
-                  "color": {
-                    "mode": "thresholds"
-                  },
-                  "noValue": "0",
-                  "thresholds": {
-                    "mode": "absolute",
-                    "steps": [
-                      {
-                        "color": "transparent",
-                        "value": 0
-                      },
-                      {
-                        "color": "red",
-                        "value": 1
-                      }
-                    ]
-                  }
-                },
-                "overrides": []
-              },
               "options": {
                 "colorMode": "background",
                 "graphMode": "area",
@@ -237,15 +225,40 @@
                 "text": {},
                 "textMode": "value",
                 "wideLayout": true
+              },
+              "fieldConfig": {
+                "defaults": {
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "value": 0,
+                        "color": "transparent"
+                      },
+                      {
+                        "value": 1,
+                        "color": "red"
+                      }
+                    ]
+                  },
+                  "color": {
+                    "mode": "thresholds"
+                  },
+                  "noValue": "0"
+                },
+                "overrides": []
               }
-            },
-            "version": "12.3.2"
+            }
           }
         }
       },
       "panel-140": {
         "kind": "Panel",
         "spec": {
+          "id": 140,
+          "title": "Warnings",
+          "description": "",
+          "links": [],
           "data": {
             "kind": "QueryGroup",
             "spec": {
@@ -253,10 +266,10 @@
                 {
                   "kind": "PanelQuery",
                   "spec": {
-                    "hidden": false,
                     "query": {
-                      "group": "prometheus",
                       "kind": "DataQuery",
+                      "group": "prometheus",
+                      "version": "v0",
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
@@ -266,48 +279,26 @@
                         "legendFormat": "Warning Alerts",
                         "range": true
                       },
-                      "version": "v0"
+                      "labels": {
+                        "grafana.app/export-label": "prometheus-1"
+                      }
                     },
-                    "refId": "A"
+                    "refId": "A",
+                    "hidden": false
                   }
                 }
               ],
+              "transformations": [],
               "queryOptions": {
                 "maxDataPoints": 100
-              },
-              "transformations": []
+              }
             }
           },
-          "description": "",
-          "id": 140,
-          "links": [],
-          "title": "Warnings",
           "vizConfig": {
-            "group": "stat",
             "kind": "VizConfig",
+            "group": "stat",
+            "version": "13.0.1",
             "spec": {
-              "fieldConfig": {
-                "defaults": {
-                  "color": {
-                    "mode": "thresholds"
-                  },
-                  "noValue": "0",
-                  "thresholds": {
-                    "mode": "absolute",
-                    "steps": [
-                      {
-                        "color": "transparent",
-                        "value": 0
-                      },
-                      {
-                        "color": "orange",
-                        "value": 1
-                      }
-                    ]
-                  }
-                },
-                "overrides": []
-              },
               "options": {
                 "colorMode": "background",
                 "graphMode": "area",
@@ -325,15 +316,40 @@
                 "text": {},
                 "textMode": "value",
                 "wideLayout": true
+              },
+              "fieldConfig": {
+                "defaults": {
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "value": 0,
+                        "color": "transparent"
+                      },
+                      {
+                        "value": 1,
+                        "color": "orange"
+                      }
+                    ]
+                  },
+                  "color": {
+                    "mode": "thresholds"
+                  },
+                  "noValue": "0"
+                },
+                "overrides": []
               }
-            },
-            "version": "12.3.2"
+            }
           }
         }
       },
       "panel-141": {
         "kind": "Panel",
         "spec": {
+          "id": 141,
+          "title": "Hosts",
+          "description": "Total number of monitored hosts.",
+          "links": [],
           "data": {
             "kind": "QueryGroup",
             "spec": {
@@ -341,10 +357,10 @@
                 {
                   "kind": "PanelQuery",
                   "spec": {
-                    "hidden": false,
                     "query": {
-                      "group": "prometheus",
                       "kind": "DataQuery",
+                      "group": "prometheus",
+                      "version": "v0",
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
@@ -353,45 +369,26 @@
                         "interval": "",
                         "legendFormat": "Hosts"
                       },
-                      "version": "v0"
+                      "labels": {
+                        "grafana.app/export-label": "prometheus-1"
+                      }
                     },
-                    "refId": "A"
+                    "refId": "A",
+                    "hidden": false
                   }
                 }
               ],
+              "transformations": [],
               "queryOptions": {
                 "interval": "2m"
-              },
-              "transformations": []
+              }
             }
           },
-          "description": "Total number of monitored hosts.",
-          "id": 141,
-          "links": [],
-          "title": "Hosts",
           "vizConfig": {
-            "group": "stat",
             "kind": "VizConfig",
+            "group": "stat",
+            "version": "13.0.1",
             "spec": {
-              "fieldConfig": {
-                "defaults": {
-                  "color": {
-                    "fixedColor": "blue",
-                    "mode": "fixed"
-                  },
-                  "thresholds": {
-                    "mode": "absolute",
-                    "steps": [
-                      {
-                        "color": "blue",
-                        "value": 0
-                      }
-                    ]
-                  },
-                  "unit": "none"
-                },
-                "overrides": []
-              },
               "options": {
                 "colorMode": "background",
                 "graphMode": "none",
@@ -409,15 +406,37 @@
                 "text": {},
                 "textMode": "auto",
                 "wideLayout": true
+              },
+              "fieldConfig": {
+                "defaults": {
+                  "unit": "none",
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "value": 0,
+                        "color": "blue"
+                      }
+                    ]
+                  },
+                  "color": {
+                    "mode": "fixed",
+                    "fixedColor": "blue"
+                  }
+                },
+                "overrides": []
               }
-            },
-            "version": "12.3.2"
+            }
           }
         }
       },
       "panel-143": {
         "kind": "Panel",
         "spec": {
+          "id": 143,
+          "title": "Filesystems - Top 5 Utilization",
+          "description": "",
+          "links": [],
           "data": {
             "kind": "QueryGroup",
             "spec": {
@@ -425,10 +444,10 @@
                 {
                   "kind": "PanelQuery",
                   "spec": {
-                    "hidden": false,
                     "query": {
-                      "group": "prometheus",
                       "kind": "DataQuery",
+                      "group": "prometheus",
+                      "version": "v0",
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
@@ -438,18 +457,21 @@
                         "legendFormat": "__auto",
                         "range": false
                       },
-                      "version": "v0"
+                      "labels": {
+                        "grafana.app/export-label": "prometheus-1"
+                      }
                     },
-                    "refId": "UtilizationRatio"
+                    "refId": "UtilizationRatio",
+                    "hidden": false
                   }
                 },
                 {
                   "kind": "PanelQuery",
                   "spec": {
-                    "hidden": false,
                     "query": {
-                      "group": "prometheus",
                       "kind": "DataQuery",
+                      "group": "prometheus",
+                      "version": "v0",
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
@@ -459,18 +481,21 @@
                         "legendFormat": "__auto",
                         "range": false
                       },
-                      "version": "v0"
+                      "labels": {
+                        "grafana.app/export-label": "prometheus-1"
+                      }
                     },
-                    "refId": "Capacity"
+                    "refId": "Capacity",
+                    "hidden": false
                   }
                 },
                 {
                   "kind": "PanelQuery",
                   "spec": {
-                    "hidden": false,
                     "query": {
-                      "group": "prometheus",
                       "kind": "DataQuery",
+                      "group": "prometheus",
+                      "version": "v0",
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
@@ -480,18 +505,21 @@
                         "legendFormat": "__auto",
                         "range": false
                       },
-                      "version": "v0"
+                      "labels": {
+                        "grafana.app/export-label": "prometheus-1"
+                      }
                     },
-                    "refId": "Free"
+                    "refId": "Free",
+                    "hidden": false
                   }
                 },
                 {
                   "kind": "PanelQuery",
                   "spec": {
-                    "hidden": false,
                     "query": {
-                      "group": "prometheus",
                       "kind": "DataQuery",
+                      "group": "prometheus",
+                      "version": "v0",
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
@@ -501,18 +529,21 @@
                         "legendFormat": "__auto",
                         "range": false
                       },
-                      "version": "v0"
+                      "labels": {
+                        "grafana.app/export-label": "prometheus-1"
+                      }
                     },
-                    "refId": "Change"
+                    "refId": "Change",
+                    "hidden": false
                   }
                 },
                 {
                   "kind": "PanelQuery",
                   "spec": {
-                    "hidden": false,
                     "query": {
-                      "group": "prometheus",
                       "kind": "DataQuery",
+                      "group": "prometheus",
+                      "version": "v0",
                       "spec": {
                         "editorMode": "code",
                         "expr": "label_join(\r\n     sum by (site, host_name, system_device) (\r\n           system_filesystem_utilization_ratio{system_filesystem_state=~\"used|reserved\", system_filesystem_type !~\"$filesystemFilter\"}\r\n     ),\r\n     \"id\", \":\", \"host_name\", \"system_device\"\r\n)",
@@ -520,18 +551,21 @@
                         "legendFormat": "__auto",
                         "range": true
                       },
-                      "version": "v0"
+                      "labels": {
+                        "grafana.app/export-label": "prometheus-1"
+                      }
                     },
-                    "refId": "Usage"
+                    "refId": "Usage",
+                    "hidden": false
                   }
                 },
                 {
                   "kind": "PanelQuery",
                   "spec": {
-                    "hidden": false,
                     "query": {
-                      "group": "prometheus",
                       "kind": "DataQuery",
+                      "group": "prometheus",
+                      "version": "v0",
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
@@ -541,18 +575,21 @@
                         "legendFormat": "__auto",
                         "range": false
                       },
-                      "version": "v0"
+                      "labels": {
+                        "grafana.app/export-label": "prometheus-1"
+                      }
                     },
-                    "refId": "GrowthRate"
+                    "refId": "GrowthRate",
+                    "hidden": false
                   }
                 },
                 {
                   "kind": "PanelQuery",
                   "spec": {
-                    "hidden": false,
                     "query": {
-                      "group": "prometheus",
                       "kind": "DataQuery",
+                      "group": "prometheus",
+                      "version": "v0",
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
@@ -562,18 +599,20 @@
                         "legendFormat": "__auto",
                         "range": false
                       },
-                      "version": "v0"
+                      "labels": {
+                        "grafana.app/export-label": "prometheus-1"
+                      }
                     },
-                    "refId": "TimeUntilSaturation"
+                    "refId": "TimeUntilSaturation",
+                    "hidden": false
                   }
                 }
               ],
-              "queryOptions": {},
               "transformations": [
                 {
-                  "kind": "timeSeriesTable",
+                  "kind": "Transformation",
+                  "group": "timeSeriesTable",
                   "spec": {
-                    "id": "timeSeriesTable",
                     "options": {
                       "B": {
                         "timeField": "Time"
@@ -585,9 +624,9 @@
                   }
                 },
                 {
-                  "kind": "joinByField",
+                  "kind": "Transformation",
+                  "group": "joinByField",
                   "spec": {
-                    "id": "joinByField",
                     "options": {
                       "byField": "id",
                       "mode": "outer"
@@ -595,9 +634,9 @@
                   }
                 },
                 {
-                  "kind": "sortBy",
+                  "kind": "Transformation",
+                  "group": "sortBy",
                   "spec": {
-                    "id": "sortBy",
                     "options": {
                       "fields": {},
                       "sort": [
@@ -610,18 +649,18 @@
                   }
                 },
                 {
-                  "kind": "limit",
+                  "kind": "Transformation",
+                  "group": "limit",
                   "spec": {
-                    "id": "limit",
                     "options": {
                       "limitField": "5"
                     }
                   }
                 },
                 {
-                  "kind": "organize",
+                  "kind": "Transformation",
+                  "group": "organize",
                   "spec": {
-                    "id": "organize",
                     "options": {
                       "excludeByName": {
                         "Capacity": false,
@@ -797,22 +836,47 @@
                     }
                   }
                 }
-              ]
+              ],
+              "queryOptions": {}
             }
           },
-          "description": "",
-          "id": 143,
-          "links": [],
-          "title": "Filesystems - Top 5 Utilization",
           "vizConfig": {
-            "group": "table",
             "kind": "VizConfig",
+            "group": "table",
+            "version": "13.0.1",
             "spec": {
+              "options": {
+                "cellHeight": "sm",
+                "enablePagination": false,
+                "showHeader": true,
+                "sortBy": [
+                  {
+                    "desc": true,
+                    "displayName": "Utilization"
+                  }
+                ]
+              },
               "fieldConfig": {
                 "defaults": {
+                  "unit": "bytes",
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "value": 0,
+                        "color": "green"
+                      }
+                    ]
+                  },
                   "color": {
                     "mode": "thresholds"
                   },
+                  "links": [
+                    {
+                      "title": "Host",
+                      "url": "d/ad9xq42/system-performance-metrics-metricshub?orgId=1&var-host_name=${__data.fields.Hostname}"
+                    }
+                  ],
                   "custom": {
                     "align": "center",
                     "cellOptions": {
@@ -823,23 +887,7 @@
                       "reducers": []
                     },
                     "inspect": false
-                  },
-                  "links": [
-                    {
-                      "title": "Host",
-                      "url": "d/eWQoMUTIk/system-performance-metrics-metricshub?orgId=1&var-host_name=${__data.fields.Hostname}"
-                    }
-                  ],
-                  "thresholds": {
-                    "mode": "absolute",
-                    "steps": [
-                      {
-                        "color": "green",
-                        "value": 0
-                      }
-                    ]
-                  },
-                  "unit": "bytes"
+                  }
                 },
                 "overrides": [
                   {
@@ -1119,26 +1167,18 @@
                     ]
                   }
                 ]
-              },
-              "options": {
-                "cellHeight": "sm",
-                "enablePagination": false,
-                "showHeader": true,
-                "sortBy": [
-                  {
-                    "desc": true,
-                    "displayName": "Utilization"
-                  }
-                ]
               }
-            },
-            "version": "12.3.2"
+            }
           }
         }
       },
       "panel-145": {
         "kind": "Panel",
         "spec": {
+          "id": 145,
+          "title": "",
+          "description": "",
+          "links": [],
           "data": {
             "kind": "QueryGroup",
             "spec": {
@@ -1146,10 +1186,10 @@
                 {
                   "kind": "PanelQuery",
                   "spec": {
-                    "hidden": true,
                     "query": {
-                      "group": "prometheus",
                       "kind": "DataQuery",
+                      "group": "prometheus",
+                      "version": "v0",
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
@@ -1159,18 +1199,21 @@
                         "legendFormat": "__auto",
                         "range": false
                       },
-                      "version": "v0"
+                      "labels": {
+                        "grafana.app/export-label": "prometheus-1"
+                      }
                     },
-                    "refId": "ProtocolsUp"
+                    "refId": "ProtocolsUp",
+                    "hidden": true
                   }
                 },
                 {
                   "kind": "PanelQuery",
                   "spec": {
-                    "hidden": false,
                     "query": {
-                      "group": "prometheus",
                       "kind": "DataQuery",
+                      "group": "prometheus",
+                      "version": "v0",
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
@@ -1180,18 +1223,21 @@
                         "legendFormat": "__auto",
                         "range": false
                       },
-                      "version": "v0"
+                      "labels": {
+                        "grafana.app/export-label": "prometheus-1"
+                      }
                     },
-                    "refId": "ProtocolsDown"
+                    "refId": "ProtocolsDown",
+                    "hidden": false
                   }
                 },
                 {
                   "kind": "PanelQuery",
                   "spec": {
-                    "hidden": false,
                     "query": {
-                      "group": "prometheus",
                       "kind": "DataQuery",
+                      "group": "prometheus",
+                      "version": "v0",
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
@@ -1201,18 +1247,21 @@
                         "legendFormat": "__auto",
                         "range": false
                       },
-                      "version": "v0"
+                      "labels": {
+                        "grafana.app/export-label": "prometheus-1"
+                      }
                     },
-                    "refId": "Generic"
+                    "refId": "Generic",
+                    "hidden": false
                   }
                 },
                 {
                   "kind": "PanelQuery",
                   "spec": {
-                    "hidden": false,
                     "query": {
-                      "group": "prometheus",
                       "kind": "DataQuery",
+                      "group": "prometheus",
+                      "version": "v0",
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
@@ -1222,18 +1271,21 @@
                         "legendFormat": "__auto",
                         "range": false
                       },
-                      "version": "v0"
+                      "labels": {
+                        "grafana.app/export-label": "prometheus-1"
+                      }
                     },
-                    "refId": "CriticalAlerts"
+                    "refId": "CriticalAlerts",
+                    "hidden": false
                   }
                 },
                 {
                   "kind": "PanelQuery",
                   "spec": {
-                    "hidden": false,
                     "query": {
-                      "group": "prometheus",
                       "kind": "DataQuery",
+                      "group": "prometheus",
+                      "version": "v0",
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
@@ -1243,18 +1295,21 @@
                         "legendFormat": "__auto",
                         "range": false
                       },
-                      "version": "v0"
+                      "labels": {
+                        "grafana.app/export-label": "prometheus-1"
+                      }
                     },
-                    "refId": "WarningAlerts"
+                    "refId": "WarningAlerts",
+                    "hidden": false
                   }
                 },
                 {
                   "kind": "PanelQuery",
                   "spec": {
-                    "hidden": false,
                     "query": {
-                      "group": "prometheus",
                       "kind": "DataQuery",
+                      "group": "prometheus",
+                      "version": "v0",
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
@@ -1264,18 +1319,21 @@
                         "legendFormat": "__auto",
                         "range": false
                       },
-                      "version": "v0"
+                      "labels": {
+                        "grafana.app/export-label": "prometheus-1"
+                      }
                     },
-                    "refId": "Memory"
+                    "refId": "Memory",
+                    "hidden": false
                   }
                 },
                 {
                   "kind": "PanelQuery",
                   "spec": {
-                    "hidden": false,
                     "query": {
-                      "group": "prometheus",
                       "kind": "DataQuery",
+                      "group": "prometheus",
+                      "version": "v0",
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
@@ -1285,18 +1343,21 @@
                         "legendFormat": "__auto",
                         "range": false
                       },
-                      "version": "v0"
+                      "labels": {
+                        "grafana.app/export-label": "prometheus-1"
+                      }
                     },
-                    "refId": "CPU"
+                    "refId": "CPU",
+                    "hidden": false
                   }
                 },
                 {
                   "kind": "PanelQuery",
                   "spec": {
-                    "hidden": false,
                     "query": {
-                      "group": "prometheus",
                       "kind": "DataQuery",
+                      "group": "prometheus",
+                      "version": "v0",
                       "spec": {
                         "editorMode": "code",
                         "expr": "sum(metricshub_host_up) by (host_name) * 100 / count(metricshub_host_up) by (host_name)",
@@ -1305,18 +1366,21 @@
                         "legendFormat": "__auto",
                         "range": true
                       },
-                      "version": "v0"
+                      "labels": {
+                        "grafana.app/export-label": "prometheus-1"
+                      }
                     },
-                    "refId": "ProtocolUpPct"
+                    "refId": "ProtocolUpPct",
+                    "hidden": false
                   }
                 },
                 {
                   "kind": "PanelQuery",
                   "spec": {
-                    "hidden": true,
                     "query": {
-                      "group": "prometheus",
                       "kind": "DataQuery",
+                      "group": "prometheus",
+                      "version": "v0",
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
@@ -1326,18 +1390,21 @@
                         "legendFormat": "__auto",
                         "range": true
                       },
-                      "version": "v0"
+                      "labels": {
+                        "grafana.app/export-label": "prometheus-1"
+                      }
                     },
-                    "refId": "ProtocolUpPctValue"
+                    "refId": "ProtocolUpPctValue",
+                    "hidden": true
                   }
                 },
                 {
                   "kind": "PanelQuery",
                   "spec": {
-                    "hidden": false,
                     "query": {
-                      "group": "prometheus",
                       "kind": "DataQuery",
+                      "group": "prometheus",
+                      "version": "v0",
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
@@ -1347,20 +1414,20 @@
                         "legendFormat": "__auto",
                         "range": true
                       },
-                      "version": "v0"
+                      "labels": {
+                        "grafana.app/export-label": "prometheus-1"
+                      }
                     },
-                    "refId": "Ping"
+                    "refId": "Ping",
+                    "hidden": false
                   }
                 }
               ],
-              "queryOptions": {
-                "interval": "15min"
-              },
               "transformations": [
                 {
-                  "kind": "timeSeriesTable",
+                  "kind": "Transformation",
+                  "group": "timeSeriesTable",
                   "spec": {
-                    "id": "timeSeriesTable",
                     "options": {
                       "Ping": {
                         "timeField": "Time"
@@ -1372,9 +1439,9 @@
                   }
                 },
                 {
-                  "kind": "joinByField",
+                  "kind": "Transformation",
+                  "group": "joinByField",
                   "spec": {
-                    "id": "joinByField",
                     "options": {
                       "byField": "host_name",
                       "mode": "outer"
@@ -1382,9 +1449,9 @@
                   }
                 },
                 {
-                  "kind": "filterByValue",
+                  "kind": "Transformation",
+                  "group": "filterByValue",
                   "spec": {
-                    "id": "filterByValue",
                     "options": {
                       "filters": [
                         {
@@ -1401,9 +1468,9 @@
                   }
                 },
                 {
-                  "kind": "organize",
+                  "kind": "Transformation",
+                  "group": "organize",
                   "spec": {
-                    "id": "organize",
                     "options": {
                       "excludeByName": {
                         "Time 1": true,
@@ -1485,9 +1552,9 @@
                   }
                 },
                 {
-                  "kind": "sortBy",
+                  "kind": "Transformation",
+                  "group": "sortBy",
                   "spec": {
-                    "id": "sortBy",
                     "options": {
                       "fields": {},
                       "sort": [
@@ -1499,22 +1566,48 @@
                     }
                   }
                 }
-              ]
+              ],
+              "queryOptions": {
+                "interval": "15min"
+              }
             }
           },
-          "description": "",
-          "id": 145,
-          "links": [],
-          "title": "",
           "vizConfig": {
-            "group": "table",
             "kind": "VizConfig",
+            "group": "table",
+            "version": "13.0.1",
             "spec": {
+              "options": {
+                "cellHeight": "sm",
+                "showHeader": true,
+                "sortBy": [
+                  {
+                    "desc": true,
+                    "displayName": "Uptime"
+                  }
+                ]
+              },
               "fieldConfig": {
                 "defaults": {
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "value": 0,
+                        "color": "green"
+                      }
+                    ]
+                  },
                   "color": {
                     "mode": "thresholds"
                   },
+                  "links": [
+                    {
+                      "targetBlank": false,
+                      "title": "Host",
+                      "url": "d/ad9xq42/system-performance-metrics-metricshub?orgId=1&var-host_name=${__data.fields.Hostname}"
+                    }
+                  ],
                   "custom": {
                     "align": "auto",
                     "cellOptions": {
@@ -1524,22 +1617,6 @@
                       "reducers": []
                     },
                     "inspect": false
-                  },
-                  "links": [
-                    {
-                      "targetBlank": false,
-                      "title": "Host",
-                      "url": "d/eWQoMUTIk/system-performance-metrics-metricshub?orgId=1&var-host_name=${__data.fields.Hostname}"
-                    }
-                  ],
-                  "thresholds": {
-                    "mode": "absolute",
-                    "steps": [
-                      {
-                        "color": "green",
-                        "value": 0
-                      }
-                    ]
                   }
                 },
                 "overrides": [
@@ -2074,25 +2151,18 @@
                     ]
                   }
                 ]
-              },
-              "options": {
-                "cellHeight": "sm",
-                "showHeader": true,
-                "sortBy": [
-                  {
-                    "desc": true,
-                    "displayName": "Uptime"
-                  }
-                ]
               }
-            },
-            "version": "12.3.2"
+            }
           }
         }
       },
       "panel-147": {
         "kind": "Panel",
         "spec": {
+          "id": 147,
+          "title": "Unhealthy Hosts (%)",
+          "description": "Percentage of Hosts with at least one warning, one critical alert or one protocol down.",
+          "links": [],
           "data": {
             "kind": "QueryGroup",
             "spec": {
@@ -2100,10 +2170,10 @@
                 {
                   "kind": "PanelQuery",
                   "spec": {
-                    "hidden": false,
                     "query": {
-                      "group": "prometheus",
                       "kind": "DataQuery",
+                      "group": "prometheus",
+                      "version": "v0",
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
@@ -2113,49 +2183,27 @@
                         "legendFormat": "__auto",
                         "range": true
                       },
-                      "version": "v0"
+                      "labels": {
+                        "grafana.app/export-label": "prometheus-1"
+                      }
                     },
-                    "refId": "A"
+                    "refId": "A",
+                    "hidden": false
                   }
                 }
               ],
+              "transformations": [],
               "queryOptions": {
-                "interval": "5min",
-                "maxDataPoints": 100
-              },
-              "transformations": []
+                "maxDataPoints": 100,
+                "interval": "5min"
+              }
             }
           },
-          "description": "Percentage of Hosts with at least one warning, one critical alert or one protocol down.",
-          "id": 147,
-          "links": [],
-          "title": "Unhealthy Hosts (%)",
           "vizConfig": {
-            "group": "stat",
             "kind": "VizConfig",
+            "group": "stat",
+            "version": "13.0.1",
             "spec": {
-              "fieldConfig": {
-                "defaults": {
-                  "color": {
-                    "mode": "thresholds"
-                  },
-                  "thresholds": {
-                    "mode": "absolute",
-                    "steps": [
-                      {
-                        "color": "green",
-                        "value": 0
-                      },
-                      {
-                        "color": "orange",
-                        "value": 1
-                      }
-                    ]
-                  },
-                  "unit": "percent"
-                },
-                "overrides": []
-              },
               "options": {
                 "colorMode": "background",
                 "graphMode": "area",
@@ -2172,15 +2220,40 @@
                 "showPercentChange": false,
                 "textMode": "auto",
                 "wideLayout": true
+              },
+              "fieldConfig": {
+                "defaults": {
+                  "unit": "percent",
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "value": 0,
+                        "color": "green"
+                      },
+                      {
+                        "value": 1,
+                        "color": "orange"
+                      }
+                    ]
+                  },
+                  "color": {
+                    "mode": "thresholds"
+                  }
+                },
+                "overrides": []
               }
-            },
-            "version": "12.3.2"
+            }
           }
         }
       },
       "panel-148": {
         "kind": "Panel",
         "spec": {
+          "id": 148,
+          "title": "Current Issues",
+          "description": "",
+          "links": [],
           "data": {
             "kind": "QueryGroup",
             "spec": {
@@ -2188,10 +2261,10 @@
                 {
                   "kind": "PanelQuery",
                   "spec": {
-                    "hidden": false,
                     "query": {
-                      "group": "prometheus",
                       "kind": "DataQuery",
+                      "group": "prometheus",
+                      "version": "v0",
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
@@ -2201,18 +2274,21 @@
                         "legendFormat": "__auto",
                         "range": false
                       },
-                      "version": "v0"
+                      "labels": {
+                        "grafana.app/export-label": "prometheus-1"
+                      }
                     },
-                    "refId": "ProtocolErrors"
+                    "refId": "ProtocolErrors",
+                    "hidden": false
                   }
                 },
                 {
                   "kind": "PanelQuery",
                   "spec": {
-                    "hidden": false,
                     "query": {
-                      "group": "prometheus",
                       "kind": "DataQuery",
+                      "group": "prometheus",
+                      "version": "v0",
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
@@ -2222,18 +2298,21 @@
                         "legendFormat": "__auto",
                         "range": false
                       },
-                      "version": "v0"
+                      "labels": {
+                        "grafana.app/export-label": "prometheus-1"
+                      }
                     },
-                    "refId": "CriticalAlerts"
+                    "refId": "CriticalAlerts",
+                    "hidden": false
                   }
                 },
                 {
                   "kind": "PanelQuery",
                   "spec": {
-                    "hidden": false,
                     "query": {
-                      "group": "prometheus",
                       "kind": "DataQuery",
+                      "group": "prometheus",
+                      "version": "v0",
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
@@ -2243,18 +2322,21 @@
                         "legendFormat": "__auto",
                         "range": false
                       },
-                      "version": "v0"
+                      "labels": {
+                        "grafana.app/export-label": "prometheus-1"
+                      }
                     },
-                    "refId": "Warnings"
+                    "refId": "Warnings",
+                    "hidden": false
                   }
                 },
                 {
                   "kind": "PanelQuery",
                   "spec": {
-                    "hidden": false,
                     "query": {
-                      "group": "prometheus",
                       "kind": "DataQuery",
+                      "group": "prometheus",
+                      "version": "v0",
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
@@ -2264,18 +2346,20 @@
                         "legendFormat": "__auto",
                         "range": false
                       },
-                      "version": "v0"
+                      "labels": {
+                        "grafana.app/export-label": "prometheus-1"
+                      }
                     },
-                    "refId": "OperatingSystem"
+                    "refId": "OperatingSystem",
+                    "hidden": false
                   }
                 }
               ],
-              "queryOptions": {},
               "transformations": [
                 {
-                  "kind": "joinByField",
+                  "kind": "Transformation",
+                  "group": "joinByField",
                   "spec": {
-                    "id": "joinByField",
                     "options": {
                       "byField": "host_name",
                       "mode": "outer"
@@ -2283,9 +2367,9 @@
                   }
                 },
                 {
-                  "kind": "filterByValue",
+                  "kind": "Transformation",
+                  "group": "filterByValue",
                   "spec": {
-                    "id": "filterByValue",
                     "options": {
                       "filters": [
                         {
@@ -2322,9 +2406,9 @@
                   }
                 },
                 {
-                  "kind": "filterFieldsByName",
+                  "kind": "Transformation",
+                  "group": "filterFieldsByName",
                   "spec": {
-                    "id": "filterFieldsByName",
                     "options": {
                       "byVariable": false,
                       "include": {
@@ -2341,9 +2425,9 @@
                   }
                 },
                 {
-                  "kind": "organize",
+                  "kind": "Transformation",
+                  "group": "organize",
                   "spec": {
-                    "id": "organize",
                     "options": {
                       "excludeByName": {
                         "Time 1": true,
@@ -2373,9 +2457,9 @@
                   }
                 },
                 {
-                  "kind": "sortBy",
+                  "kind": "Transformation",
+                  "group": "sortBy",
                   "spec": {
-                    "id": "sortBy",
                     "options": {
                       "fields": {},
                       "sort": [
@@ -2386,22 +2470,47 @@
                     }
                   }
                 }
-              ]
+              ],
+              "queryOptions": {}
             }
           },
-          "description": "",
-          "id": 148,
-          "links": [],
-          "title": "Current Issues",
           "vizConfig": {
-            "group": "table",
             "kind": "VizConfig",
+            "group": "table",
+            "version": "13.0.1",
             "spec": {
+              "options": {
+                "cellHeight": "sm",
+                "showHeader": true,
+                "sortBy": [
+                  {
+                    "desc": true,
+                    "displayName": "Critical Alerts"
+                  }
+                ]
+              },
               "fieldConfig": {
                 "defaults": {
+                  "decimals": 1,
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "value": 0,
+                        "color": "green"
+                      }
+                    ]
+                  },
                   "color": {
                     "mode": "thresholds"
                   },
+                  "links": [
+                    {
+                      "title": "Host",
+                      "url": "d/ad9xq42/system-performance-metrics-metricshub?orgId=1&var-host_name=${__data.fields.Hostname}"
+                    }
+                  ],
+                  "noValue": "0",
                   "custom": {
                     "align": "center",
                     "cellOptions": {
@@ -2411,23 +2520,6 @@
                       "reducers": []
                     },
                     "inspect": false
-                  },
-                  "decimals": 1,
-                  "links": [
-                    {
-                      "title": "Host",
-                      "url": "d/eWQoMUTIk/system-performance-metrics-metricshub?orgId=1&var-host_name=${__data.fields.Hostname}"
-                    }
-                  ],
-                  "noValue": "0",
-                  "thresholds": {
-                    "mode": "absolute",
-                    "steps": [
-                      {
-                        "color": "green",
-                        "value": 0
-                      }
-                    ]
                   }
                 },
                 "overrides": [
@@ -2606,25 +2698,18 @@
                     ]
                   }
                 ]
-              },
-              "options": {
-                "cellHeight": "sm",
-                "showHeader": true,
-                "sortBy": [
-                  {
-                    "desc": true,
-                    "displayName": "Critical Alerts"
-                  }
-                ]
               }
-            },
-            "version": "12.3.2"
+            }
           }
         }
       },
       "panel-149": {
         "kind": "Panel",
         "spec": {
+          "id": 149,
+          "title": "Unhealthy Hosts",
+          "description": "Number of Hosts with at least one warning, one critical alert or one protocol down.",
+          "links": [],
           "data": {
             "kind": "QueryGroup",
             "spec": {
@@ -2632,10 +2717,10 @@
                 {
                   "kind": "PanelQuery",
                   "spec": {
-                    "hidden": false,
                     "query": {
-                      "group": "prometheus",
                       "kind": "DataQuery",
+                      "group": "prometheus",
+                      "version": "v0",
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
@@ -2645,49 +2730,27 @@
                         "legendFormat": "__auto",
                         "range": true
                       },
-                      "version": "v0"
+                      "labels": {
+                        "grafana.app/export-label": "prometheus-1"
+                      }
                     },
-                    "refId": "A"
+                    "refId": "A",
+                    "hidden": false
                   }
                 }
               ],
+              "transformations": [],
               "queryOptions": {
-                "interval": "5min",
-                "maxDataPoints": 100
-              },
-              "transformations": []
+                "maxDataPoints": 100,
+                "interval": "5min"
+              }
             }
           },
-          "description": "Number of Hosts with at least one warning, one critical alert or one protocol down.",
-          "id": 149,
-          "links": [],
-          "title": "Unhealthy Hosts",
           "vizConfig": {
-            "group": "stat",
             "kind": "VizConfig",
+            "group": "stat",
+            "version": "13.0.1",
             "spec": {
-              "fieldConfig": {
-                "defaults": {
-                  "color": {
-                    "mode": "thresholds"
-                  },
-                  "thresholds": {
-                    "mode": "absolute",
-                    "steps": [
-                      {
-                        "color": "green",
-                        "value": 0
-                      },
-                      {
-                        "color": "orange",
-                        "value": 1
-                      }
-                    ]
-                  },
-                  "unit": "none"
-                },
-                "overrides": []
-              },
               "options": {
                 "colorMode": "background",
                 "graphMode": "area",
@@ -2704,15 +2767,40 @@
                 "showPercentChange": false,
                 "textMode": "auto",
                 "wideLayout": true
+              },
+              "fieldConfig": {
+                "defaults": {
+                  "unit": "none",
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "value": 0,
+                        "color": "green"
+                      },
+                      {
+                        "value": 1,
+                        "color": "orange"
+                      }
+                    ]
+                  },
+                  "color": {
+                    "mode": "thresholds"
+                  }
+                },
+                "overrides": []
               }
-            },
-            "version": "12.3.2"
+            }
           }
         }
       },
       "panel-150": {
         "kind": "Panel",
         "spec": {
+          "id": 150,
+          "title": "",
+          "description": "",
+          "links": [],
           "data": {
             "kind": "QueryGroup",
             "spec": {
@@ -2720,10 +2808,10 @@
                 {
                   "kind": "PanelQuery",
                   "spec": {
-                    "hidden": false,
                     "query": {
-                      "group": "prometheus",
                       "kind": "DataQuery",
+                      "group": "prometheus",
+                      "version": "v0",
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
@@ -2733,18 +2821,21 @@
                         "legendFormat": "__auto",
                         "range": false
                       },
-                      "version": "v0"
+                      "labels": {
+                        "grafana.app/export-label": "prometheus-1"
+                      }
                     },
-                    "refId": "UnhealthyHostsPctByOs"
+                    "refId": "UnhealthyHostsPctByOs",
+                    "hidden": false
                   }
                 },
                 {
                   "kind": "PanelQuery",
                   "spec": {
-                    "hidden": false,
                     "query": {
-                      "group": "prometheus",
                       "kind": "DataQuery",
+                      "group": "prometheus",
+                      "version": "v0",
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
@@ -2754,18 +2845,21 @@
                         "legendFormat": "__auto",
                         "range": false
                       },
-                      "version": "v0"
+                      "labels": {
+                        "grafana.app/export-label": "prometheus-1"
+                      }
                     },
-                    "refId": "OsList"
+                    "refId": "OsList",
+                    "hidden": false
                   }
                 },
                 {
                   "kind": "PanelQuery",
                   "spec": {
-                    "hidden": false,
                     "query": {
-                      "group": "prometheus",
                       "kind": "DataQuery",
+                      "group": "prometheus",
+                      "version": "v0",
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
@@ -2775,18 +2869,21 @@
                         "legendFormat": "__auto",
                         "range": false
                       },
-                      "version": "v0"
+                      "labels": {
+                        "grafana.app/export-label": "prometheus-1"
+                      }
                     },
-                    "refId": "HostCountPctByOs"
+                    "refId": "HostCountPctByOs",
+                    "hidden": false
                   }
                 },
                 {
                   "kind": "PanelQuery",
                   "spec": {
-                    "hidden": false,
                     "query": {
-                      "group": "prometheus",
                       "kind": "DataQuery",
+                      "group": "prometheus",
+                      "version": "v0",
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
@@ -2796,18 +2893,21 @@
                         "legendFormat": "__auto",
                         "range": false
                       },
-                      "version": "v0"
+                      "labels": {
+                        "grafana.app/export-label": "prometheus-1"
+                      }
                     },
-                    "refId": "HostCountByOS"
+                    "refId": "HostCountByOS",
+                    "hidden": false
                   }
                 },
                 {
                   "kind": "PanelQuery",
                   "spec": {
-                    "hidden": false,
                     "query": {
-                      "group": "prometheus",
                       "kind": "DataQuery",
+                      "group": "prometheus",
+                      "version": "v0",
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
@@ -2817,18 +2917,20 @@
                         "legendFormat": "__auto",
                         "range": false
                       },
-                      "version": "v0"
+                      "labels": {
+                        "grafana.app/export-label": "prometheus-1"
+                      }
                     },
-                    "refId": "UnhealthyHostsByOs"
+                    "refId": "UnhealthyHostsByOs",
+                    "hidden": false
                   }
                 }
               ],
-              "queryOptions": {},
               "transformations": [
                 {
-                  "kind": "joinByField",
+                  "kind": "Transformation",
+                  "group": "joinByField",
                   "spec": {
-                    "id": "joinByField",
                     "options": {
                       "byField": "os_type",
                       "mode": "outer"
@@ -2836,10 +2938,10 @@
                   }
                 },
                 {
-                  "kind": "filterByValue",
+                  "kind": "Transformation",
+                  "group": "filterByValue",
                   "spec": {
                     "disabled": true,
-                    "id": "filterByValue",
                     "options": {
                       "filters": [
                         {
@@ -2858,9 +2960,9 @@
                   }
                 },
                 {
-                  "kind": "organize",
+                  "kind": "Transformation",
+                  "group": "organize",
                   "spec": {
-                    "id": "organize",
                     "options": {
                       "excludeByName": {
                         "Time 1": true,
@@ -2899,19 +3001,37 @@
                     }
                   }
                 }
-              ]
+              ],
+              "queryOptions": {}
             }
           },
-          "description": "",
-          "id": 150,
-          "links": [],
-          "title": "",
           "vizConfig": {
-            "group": "table",
             "kind": "VizConfig",
+            "group": "table",
+            "version": "13.0.1",
             "spec": {
+              "options": {
+                "cellHeight": "sm",
+                "showHeader": true,
+                "sortBy": [
+                  {
+                    "desc": false,
+                    "displayName": "System"
+                  }
+                ]
+              },
               "fieldConfig": {
                 "defaults": {
+                  "decimals": 0,
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "value": 0,
+                        "color": "green"
+                      }
+                    ]
+                  },
                   "color": {
                     "mode": "thresholds"
                   },
@@ -2924,16 +3044,6 @@
                       "reducers": []
                     },
                     "inspect": false
-                  },
-                  "decimals": 0,
-                  "thresholds": {
-                    "mode": "absolute",
-                    "steps": [
-                      {
-                        "color": "green",
-                        "value": 0
-                      }
-                    ]
                   }
                 },
                 "overrides": [
@@ -3135,25 +3245,18 @@
                     ]
                   }
                 ]
-              },
-              "options": {
-                "cellHeight": "sm",
-                "showHeader": true,
-                "sortBy": [
-                  {
-                    "desc": false,
-                    "displayName": "System"
-                  }
-                ]
               }
-            },
-            "version": "12.3.2"
+            }
           }
         }
       },
       "panel-151": {
         "kind": "Panel",
         "spec": {
+          "id": 151,
+          "title": "Failed Protocols",
+          "description": "",
+          "links": [],
           "data": {
             "kind": "QueryGroup",
             "spec": {
@@ -3161,10 +3264,10 @@
                 {
                   "kind": "PanelQuery",
                   "spec": {
-                    "hidden": false,
                     "query": {
-                      "group": "prometheus",
                       "kind": "DataQuery",
+                      "group": "prometheus",
+                      "version": "v0",
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
@@ -3174,46 +3277,24 @@
                         "legendFormat": "__auto",
                         "range": true
                       },
-                      "version": "v0"
+                      "labels": {
+                        "grafana.app/export-label": "prometheus-1"
+                      }
                     },
-                    "refId": "A"
+                    "refId": "A",
+                    "hidden": false
                   }
                 }
               ],
-              "queryOptions": {},
-              "transformations": []
+              "transformations": [],
+              "queryOptions": {}
             }
           },
-          "description": "",
-          "id": 151,
-          "links": [],
-          "title": "Failed Protocols",
           "vizConfig": {
-            "group": "stat",
             "kind": "VizConfig",
+            "group": "stat",
+            "version": "13.0.1",
             "spec": {
-              "fieldConfig": {
-                "defaults": {
-                  "color": {
-                    "mode": "thresholds"
-                  },
-                  "noValue": "0",
-                  "thresholds": {
-                    "mode": "absolute",
-                    "steps": [
-                      {
-                        "color": "transparent",
-                        "value": 0
-                      },
-                      {
-                        "color": "red",
-                        "value": 1
-                      }
-                    ]
-                  }
-                },
-                "overrides": []
-              },
               "options": {
                 "colorMode": "background",
                 "graphMode": "area",
@@ -3231,15 +3312,40 @@
                 "text": {},
                 "textMode": "value",
                 "wideLayout": true
+              },
+              "fieldConfig": {
+                "defaults": {
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "value": 0,
+                        "color": "transparent"
+                      },
+                      {
+                        "value": 1,
+                        "color": "red"
+                      }
+                    ]
+                  },
+                  "color": {
+                    "mode": "thresholds"
+                  },
+                  "noValue": "0"
+                },
+                "overrides": []
               }
-            },
-            "version": "12.3.2"
+            }
           }
         }
       },
       "panel-157": {
         "kind": "Panel",
         "spec": {
+          "id": 157,
+          "title": "Top Drives by Utilization",
+          "description": "",
+          "links": [],
           "data": {
             "kind": "QueryGroup",
             "spec": {
@@ -3247,10 +3353,10 @@
                 {
                   "kind": "PanelQuery",
                   "spec": {
-                    "hidden": false,
                     "query": {
-                      "group": "prometheus",
                       "kind": "DataQuery",
+                      "group": "prometheus",
+                      "version": "v0",
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
@@ -3259,59 +3365,24 @@
                         "legendFormat": "{{host_name}} - {{system_device}}",
                         "range": false
                       },
-                      "version": "v0"
+                      "labels": {
+                        "grafana.app/export-label": "prometheus-1"
+                      }
                     },
-                    "refId": "A"
+                    "refId": "A",
+                    "hidden": false
                   }
                 }
               ],
-              "queryOptions": {},
-              "transformations": []
+              "transformations": [],
+              "queryOptions": {}
             }
           },
-          "description": "",
-          "id": 157,
-          "links": [],
-          "title": "Top Drives by Utilization",
           "vizConfig": {
-            "group": "bargauge",
             "kind": "VizConfig",
+            "group": "bargauge",
+            "version": "13.0.1",
             "spec": {
-              "fieldConfig": {
-                "defaults": {
-                  "color": {
-                    "fixedColor": "blue",
-                    "mode": "thresholds"
-                  },
-                  "links": [
-                    {
-                      "title": "Host",
-                      "url": "d/eWQoMUTIk/system?orgId=1&var-host_name=${__field.labels.host_name}"
-                    }
-                  ],
-                  "max": 1,
-                  "min": 0,
-                  "thresholds": {
-                    "mode": "absolute",
-                    "steps": [
-                      {
-                        "color": "green",
-                        "value": 0
-                      },
-                      {
-                        "color": "orange",
-                        "value": 0.6
-                      },
-                      {
-                        "color": "red",
-                        "value": 0.8
-                      }
-                    ]
-                  },
-                  "unit": "percentunit"
-                },
-                "overrides": []
-              },
               "options": {
                 "displayMode": "lcd",
                 "legend": {
@@ -3335,15 +3406,53 @@
                 "showUnfilled": true,
                 "sizing": "auto",
                 "valueMode": "color"
+              },
+              "fieldConfig": {
+                "defaults": {
+                  "unit": "percentunit",
+                  "min": 0,
+                  "max": 1,
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "value": 0,
+                        "color": "green"
+                      },
+                      {
+                        "value": 0.6,
+                        "color": "orange"
+                      },
+                      {
+                        "value": 0.8,
+                        "color": "red"
+                      }
+                    ]
+                  },
+                  "color": {
+                    "mode": "thresholds",
+                    "fixedColor": "blue"
+                  },
+                  "links": [
+                    {
+                      "title": "Host",
+                      "url": "d/ad9xq42/system?orgId=1&var-host_name=${__field.labels.host_name}"
+                    }
+                  ]
+                },
+                "overrides": []
               }
-            },
-            "version": "12.3.2"
+            }
           }
         }
       },
       "panel-163": {
         "kind": "Panel",
         "spec": {
+          "id": 163,
+          "title": "Total Host Network Activity - Heatmap",
+          "description": "",
+          "links": [],
           "data": {
             "kind": "QueryGroup",
             "spec": {
@@ -3351,10 +3460,10 @@
                 {
                   "kind": "PanelQuery",
                   "spec": {
-                    "hidden": false,
                     "query": {
-                      "group": "prometheus",
                       "kind": "DataQuery",
+                      "group": "prometheus",
+                      "version": "v0",
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
@@ -3363,48 +3472,24 @@
                         "legendFormat": "__auto",
                         "range": false
                       },
-                      "version": "v0"
+                      "labels": {
+                        "grafana.app/export-label": "prometheus-1"
+                      }
                     },
-                    "refId": "A"
+                    "refId": "A",
+                    "hidden": false
                   }
                 }
               ],
-              "queryOptions": {},
-              "transformations": []
+              "transformations": [],
+              "queryOptions": {}
             }
           },
-          "description": "",
-          "id": 163,
-          "links": [],
-          "title": "Total Host Network Activity - Heatmap",
           "vizConfig": {
-            "group": "stat",
             "kind": "VizConfig",
+            "group": "stat",
+            "version": "13.0.1",
             "spec": {
-              "fieldConfig": {
-                "defaults": {
-                  "color": {
-                    "mode": "continuous-blues"
-                  },
-                  "links": [
-                    {
-                      "title": "Host",
-                      "url": "d/eWQoMUTIk/system?orgId=1&var-host_name=${__field.labels.host_name}"
-                    }
-                  ],
-                  "thresholds": {
-                    "mode": "absolute",
-                    "steps": [
-                      {
-                        "color": "green",
-                        "value": 0
-                      }
-                    ]
-                  },
-                  "unit": "bytes"
-                },
-                "overrides": []
-              },
               "options": {
                 "colorMode": "background",
                 "graphMode": "area",
@@ -3421,15 +3506,42 @@
                 "showPercentChange": false,
                 "textMode": "auto",
                 "wideLayout": true
+              },
+              "fieldConfig": {
+                "defaults": {
+                  "unit": "bytes",
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "value": 0,
+                        "color": "green"
+                      }
+                    ]
+                  },
+                  "color": {
+                    "mode": "continuous-blues"
+                  },
+                  "links": [
+                    {
+                      "title": "Host",
+                      "url": "d/ad9xq42/system?orgId=1&var-host_name=${__field.labels.host_name}"
+                    }
+                  ]
+                },
+                "overrides": []
               }
-            },
-            "version": "12.3.2"
+            }
           }
         }
       },
       "panel-164": {
         "kind": "Panel",
         "spec": {
+          "id": 164,
+          "title": "Total Host Disk Activity - Heatmap",
+          "description": "",
+          "links": [],
           "data": {
             "kind": "QueryGroup",
             "spec": {
@@ -3437,10 +3549,10 @@
                 {
                   "kind": "PanelQuery",
                   "spec": {
-                    "hidden": false,
                     "query": {
-                      "group": "prometheus",
                       "kind": "DataQuery",
+                      "group": "prometheus",
+                      "version": "v0",
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
@@ -3449,48 +3561,24 @@
                         "legendFormat": "__auto",
                         "range": false
                       },
-                      "version": "v0"
+                      "labels": {
+                        "grafana.app/export-label": "prometheus-1"
+                      }
                     },
-                    "refId": "A"
+                    "refId": "A",
+                    "hidden": false
                   }
                 }
               ],
-              "queryOptions": {},
-              "transformations": []
+              "transformations": [],
+              "queryOptions": {}
             }
           },
-          "description": "",
-          "id": 164,
-          "links": [],
-          "title": "Total Host Disk Activity - Heatmap",
           "vizConfig": {
-            "group": "stat",
             "kind": "VizConfig",
+            "group": "stat",
+            "version": "13.0.1",
             "spec": {
-              "fieldConfig": {
-                "defaults": {
-                  "color": {
-                    "mode": "continuous-purples"
-                  },
-                  "links": [
-                    {
-                      "title": "Host",
-                      "url": "d/eWQoMUTIk/system?orgId=1&var-host_name=${__field.labels.host_name}"
-                    }
-                  ],
-                  "thresholds": {
-                    "mode": "absolute",
-                    "steps": [
-                      {
-                        "color": "purple",
-                        "value": 0
-                      }
-                    ]
-                  },
-                  "unit": "bytes"
-                },
-                "overrides": []
-              },
               "options": {
                 "colorMode": "background",
                 "graphMode": "area",
@@ -3507,15 +3595,42 @@
                 "showPercentChange": false,
                 "textMode": "auto",
                 "wideLayout": true
+              },
+              "fieldConfig": {
+                "defaults": {
+                  "unit": "bytes",
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "value": 0,
+                        "color": "purple"
+                      }
+                    ]
+                  },
+                  "color": {
+                    "mode": "continuous-purples"
+                  },
+                  "links": [
+                    {
+                      "title": "Host",
+                      "url": "d/ad9xq42/system?orgId=1&var-host_name=${__field.labels.host_name}"
+                    }
+                  ]
+                },
+                "overrides": []
               }
-            },
-            "version": "12.3.2"
+            }
           }
         }
       },
       "panel-166": {
         "kind": "Panel",
         "spec": {
+          "id": 166,
+          "title": "Top Network Interfaces by Traffic",
+          "description": "",
+          "links": [],
           "data": {
             "kind": "QueryGroup",
             "spec": {
@@ -3523,10 +3638,10 @@
                 {
                   "kind": "PanelQuery",
                   "spec": {
-                    "hidden": false,
                     "query": {
-                      "group": "prometheus",
                       "kind": "DataQuery",
+                      "group": "prometheus",
+                      "version": "v0",
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
@@ -3535,62 +3650,24 @@
                         "legendFormat": "{{host_name}} - {{network_interface_name}}",
                         "range": false
                       },
-                      "version": "v0"
+                      "labels": {
+                        "grafana.app/export-label": "prometheus-1"
+                      }
                     },
-                    "refId": "A"
+                    "refId": "A",
+                    "hidden": false
                   }
                 }
               ],
-              "queryOptions": {},
-              "transformations": []
+              "transformations": [],
+              "queryOptions": {}
             }
           },
-          "description": "",
-          "id": 166,
-          "links": [],
-          "title": "Top Network Interfaces by Traffic",
           "vizConfig": {
-            "group": "bargauge",
             "kind": "VizConfig",
+            "group": "bargauge",
+            "version": "13.0.1",
             "spec": {
-              "fieldConfig": {
-                "defaults": {
-                  "color": {
-                    "fixedColor": "blue",
-                    "mode": "thresholds"
-                  },
-                  "links": [
-                    {
-                      "title": "Host",
-                      "url": "d/eWQoMUTIk/system?orgId=1&var-host_name=${__field.labels.host_name}"
-                    }
-                  ],
-                  "min": 0,
-                  "thresholds": {
-                    "mode": "absolute",
-                    "steps": [
-                      {
-                        "color": "light-blue",
-                        "value": 0
-                      },
-                      {
-                        "color": "blue",
-                        "value": 62500000
-                      },
-                      {
-                        "color": "semi-dark-blue",
-                        "value": 87500000
-                      },
-                      {
-                        "color": "dark-blue",
-                        "value": 106250000
-                      }
-                    ]
-                  },
-                  "unit": "bytes"
-                },
-                "overrides": []
-              },
               "options": {
                 "displayMode": "gradient",
                 "legend": {
@@ -3614,15 +3691,56 @@
                 "showUnfilled": true,
                 "sizing": "auto",
                 "valueMode": "color"
+              },
+              "fieldConfig": {
+                "defaults": {
+                  "unit": "bytes",
+                  "min": 0,
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "value": 0,
+                        "color": "light-blue"
+                      },
+                      {
+                        "value": 62500000,
+                        "color": "blue"
+                      },
+                      {
+                        "value": 87500000,
+                        "color": "semi-dark-blue"
+                      },
+                      {
+                        "value": 106250000,
+                        "color": "dark-blue"
+                      }
+                    ]
+                  },
+                  "color": {
+                    "mode": "thresholds",
+                    "fixedColor": "blue"
+                  },
+                  "links": [
+                    {
+                      "title": "Host",
+                      "url": "d/ad9xq42/system?orgId=1&var-host_name=${__field.labels.host_name}"
+                    }
+                  ]
+                },
+                "overrides": []
               }
-            },
-            "version": "12.3.2"
+            }
           }
         }
       },
       "panel-167": {
         "kind": "Panel",
         "spec": {
+          "id": 167,
+          "title": "Top Network Interfaces by Utilization",
+          "description": "",
+          "links": [],
           "data": {
             "kind": "QueryGroup",
             "spec": {
@@ -3630,10 +3748,10 @@
                 {
                   "kind": "PanelQuery",
                   "spec": {
-                    "hidden": false,
                     "query": {
-                      "group": "prometheus",
                       "kind": "DataQuery",
+                      "group": "prometheus",
+                      "version": "v0",
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
@@ -3642,59 +3760,24 @@
                         "legendFormat": "{{host_name}} - {{network_interface_name}}",
                         "range": false
                       },
-                      "version": "v0"
+                      "labels": {
+                        "grafana.app/export-label": "prometheus-1"
+                      }
                     },
-                    "refId": "A"
+                    "refId": "A",
+                    "hidden": false
                   }
                 }
               ],
-              "queryOptions": {},
-              "transformations": []
+              "transformations": [],
+              "queryOptions": {}
             }
           },
-          "description": "",
-          "id": 167,
-          "links": [],
-          "title": "Top Network Interfaces by Utilization",
           "vizConfig": {
-            "group": "bargauge",
             "kind": "VizConfig",
+            "group": "bargauge",
+            "version": "13.0.1",
             "spec": {
-              "fieldConfig": {
-                "defaults": {
-                  "color": {
-                    "fixedColor": "blue",
-                    "mode": "thresholds"
-                  },
-                  "links": [
-                    {
-                      "title": "Host",
-                      "url": "d/eWQoMUTIk/system?orgId=1&var-host_name=${__field.labels.host_name}"
-                    }
-                  ],
-                  "max": 1,
-                  "min": 0,
-                  "thresholds": {
-                    "mode": "absolute",
-                    "steps": [
-                      {
-                        "color": "green",
-                        "value": 0
-                      },
-                      {
-                        "color": "orange",
-                        "value": 0.5
-                      },
-                      {
-                        "color": "red",
-                        "value": 0.8
-                      }
-                    ]
-                  },
-                  "unit": "percentunit"
-                },
-                "overrides": []
-              },
               "options": {
                 "displayMode": "lcd",
                 "legend": {
@@ -3718,15 +3801,53 @@
                 "showUnfilled": false,
                 "sizing": "auto",
                 "valueMode": "color"
+              },
+              "fieldConfig": {
+                "defaults": {
+                  "unit": "percentunit",
+                  "min": 0,
+                  "max": 1,
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "value": 0,
+                        "color": "green"
+                      },
+                      {
+                        "value": 0.5,
+                        "color": "orange"
+                      },
+                      {
+                        "value": 0.8,
+                        "color": "red"
+                      }
+                    ]
+                  },
+                  "color": {
+                    "mode": "thresholds",
+                    "fixedColor": "blue"
+                  },
+                  "links": [
+                    {
+                      "title": "Host",
+                      "url": "d/ad9xq42/system?orgId=1&var-host_name=${__field.labels.host_name}"
+                    }
+                  ]
+                },
+                "overrides": []
               }
-            },
-            "version": "12.3.2"
+            }
           }
         }
       },
       "panel-168": {
         "kind": "Panel",
         "spec": {
+          "id": 168,
+          "title": "Top Drives by Traffic",
+          "description": "",
+          "links": [],
           "data": {
             "kind": "QueryGroup",
             "spec": {
@@ -3734,10 +3855,10 @@
                 {
                   "kind": "PanelQuery",
                   "spec": {
-                    "hidden": false,
                     "query": {
-                      "group": "prometheus",
                       "kind": "DataQuery",
+                      "group": "prometheus",
+                      "version": "v0",
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
@@ -3746,62 +3867,24 @@
                         "legendFormat": "{{host_name}} - {{system_device}}",
                         "range": false
                       },
-                      "version": "v0"
+                      "labels": {
+                        "grafana.app/export-label": "prometheus-1"
+                      }
                     },
-                    "refId": "A"
+                    "refId": "A",
+                    "hidden": false
                   }
                 }
               ],
-              "queryOptions": {},
-              "transformations": []
+              "transformations": [],
+              "queryOptions": {}
             }
           },
-          "description": "",
-          "id": 168,
-          "links": [],
-          "title": "Top Drives by Traffic",
           "vizConfig": {
-            "group": "bargauge",
             "kind": "VizConfig",
+            "group": "bargauge",
+            "version": "13.0.1",
             "spec": {
-              "fieldConfig": {
-                "defaults": {
-                  "color": {
-                    "fixedColor": "blue",
-                    "mode": "thresholds"
-                  },
-                  "links": [
-                    {
-                      "title": "Host",
-                      "url": "d/eWQoMUTIk/system?orgId=1&var-host_name=${__field.labels.host_name}"
-                    }
-                  ],
-                  "min": 0,
-                  "thresholds": {
-                    "mode": "absolute",
-                    "steps": [
-                      {
-                        "color": "light-purple",
-                        "value": 0
-                      },
-                      {
-                        "color": "purple",
-                        "value": 25000000
-                      },
-                      {
-                        "color": "semi-dark-purple",
-                        "value": 50000000
-                      },
-                      {
-                        "color": "dark-purple",
-                        "value": 75000000
-                      }
-                    ]
-                  },
-                  "unit": "binBps"
-                },
-                "overrides": []
-              },
               "options": {
                 "displayMode": "gradient",
                 "legend": {
@@ -3825,15 +3908,56 @@
                 "showUnfilled": true,
                 "sizing": "auto",
                 "valueMode": "color"
+              },
+              "fieldConfig": {
+                "defaults": {
+                  "unit": "binBps",
+                  "min": 0,
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "value": 0,
+                        "color": "light-purple"
+                      },
+                      {
+                        "value": 25000000,
+                        "color": "purple"
+                      },
+                      {
+                        "value": 50000000,
+                        "color": "semi-dark-purple"
+                      },
+                      {
+                        "value": 75000000,
+                        "color": "dark-purple"
+                      }
+                    ]
+                  },
+                  "color": {
+                    "mode": "thresholds",
+                    "fixedColor": "blue"
+                  },
+                  "links": [
+                    {
+                      "title": "Host",
+                      "url": "d/ad9xq42/system?orgId=1&var-host_name=${__field.labels.host_name}"
+                    }
+                  ]
+                },
+                "overrides": []
               }
-            },
-            "version": "12.3.2"
+            }
           }
         }
       },
       "panel-173": {
         "kind": "Panel",
         "spec": {
+          "id": 173,
+          "title": "Earliest Saturation Time",
+          "description": "",
+          "links": [],
           "data": {
             "kind": "QueryGroup",
             "spec": {
@@ -3841,10 +3965,10 @@
                 {
                   "kind": "PanelQuery",
                   "spec": {
-                    "hidden": false,
                     "query": {
-                      "group": "prometheus",
                       "kind": "DataQuery",
+                      "group": "prometheus",
+                      "version": "v0",
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
@@ -3854,25 +3978,27 @@
                         "legendFormat": "__auto",
                         "range": false
                       },
-                      "version": "v0"
+                      "labels": {
+                        "grafana.app/export-label": "prometheus-1"
+                      }
                     },
-                    "refId": "A"
+                    "refId": "A",
+                    "hidden": false
                   }
                 }
               ],
-              "queryOptions": {},
               "transformations": [
                 {
-                  "kind": "labelsToFields",
+                  "kind": "Transformation",
+                  "group": "labelsToFields",
                   "spec": {
-                    "id": "labelsToFields",
                     "options": {}
                   }
                 },
                 {
-                  "kind": "organize",
+                  "kind": "Transformation",
+                  "group": "organize",
                   "spec": {
-                    "id": "organize",
                     "options": {
                       "excludeByName": {
                         "Time": true,
@@ -3897,22 +4023,39 @@
                     }
                   }
                 }
-              ]
+              ],
+              "queryOptions": {}
             }
           },
-          "description": "",
-          "id": 173,
-          "links": [],
-          "title": "Earliest Saturation Time",
           "vizConfig": {
-            "group": "table",
             "kind": "VizConfig",
+            "group": "table",
+            "version": "13.0.1",
             "spec": {
+              "options": {
+                "cellHeight": "sm",
+                "showHeader": true
+              },
               "fieldConfig": {
                 "defaults": {
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "value": 0,
+                        "color": "green"
+                      }
+                    ]
+                  },
                   "color": {
                     "mode": "thresholds"
                   },
+                  "links": [
+                    {
+                      "title": "Host",
+                      "url": "d/ad9xq42/system-performance-metrics-metricshub?orgId=1&var-host_name=${__data.fields.Hostname}"
+                    }
+                  ],
                   "custom": {
                     "align": "center",
                     "cellOptions": {
@@ -3922,21 +4065,6 @@
                       "reducers": []
                     },
                     "inspect": false
-                  },
-                  "links": [
-                    {
-                      "title": "Host",
-                      "url": "d/eWQoMUTIk/system-performance-metrics-metricshub?orgId=1&var-host_name=${__data.fields.Hostname}"
-                    }
-                  ],
-                  "thresholds": {
-                    "mode": "absolute",
-                    "steps": [
-                      {
-                        "color": "green",
-                        "value": 0
-                      }
-                    ]
                   }
                 },
                 "overrides": [
@@ -3997,39 +4125,31 @@
                     ]
                   }
                 ]
-              },
-              "options": {
-                "cellHeight": "sm",
-                "showHeader": true
               }
-            },
-            "version": "12.3.2"
+            }
           }
         }
       },
       "panel-175": {
         "kind": "Panel",
         "spec": {
+          "id": 175,
+          "title": "Current Alerts",
+          "description": "",
+          "links": [],
           "data": {
             "kind": "QueryGroup",
             "spec": {
               "queries": [],
-              "queryOptions": {},
-              "transformations": []
+              "transformations": [],
+              "queryOptions": {}
             }
           },
-          "description": "",
-          "id": 175,
-          "links": [],
-          "title": "Current Alerts",
           "vizConfig": {
-            "group": "alertlist",
             "kind": "VizConfig",
+            "group": "alertlist",
+            "version": "13.0.1",
             "spec": {
-              "fieldConfig": {
-                "defaults": {},
-                "overrides": []
-              },
               "options": {
                 "alertInstanceLabelFilter": "",
                 "alertName": "MetricsHub-System",
@@ -4039,6 +4159,21 @@
                 "maxItems": 20,
                 "showInactiveAlerts": false,
                 "sortOrder": 1,
+                "statColorMode": "none",
+                "statThresholds": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": 0
+                    },
+                    {
+                      "color": "red",
+                      "value": 80
+                    }
+                  ]
+                },
+                "statValueMappings": [],
                 "stateFilter": {
                   "error": true,
                   "firing": true,
@@ -4048,15 +4183,22 @@
                   "recovering": true
                 },
                 "viewMode": "list"
+              },
+              "fieldConfig": {
+                "defaults": {},
+                "overrides": []
               }
-            },
-            "version": "12.3.2"
+            }
           }
         }
       },
       "panel-35": {
         "kind": "Panel",
         "spec": {
+          "id": 35,
+          "title": "",
+          "description": "",
+          "links": [],
           "data": {
             "kind": "QueryGroup",
             "spec": {
@@ -4064,10 +4206,10 @@
                 {
                   "kind": "PanelQuery",
                   "spec": {
-                    "hidden": false,
                     "query": {
-                      "group": "prometheus",
                       "kind": "DataQuery",
+                      "group": "prometheus",
+                      "version": "v0",
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
@@ -4077,18 +4219,20 @@
                         "legendFormat": "__auto",
                         "range": false
                       },
-                      "version": "v0"
+                      "labels": {
+                        "grafana.app/export-label": "prometheus-1"
+                      }
                     },
-                    "refId": "A"
+                    "refId": "A",
+                    "hidden": false
                   }
                 }
               ],
-              "queryOptions": {},
               "transformations": [
                 {
-                  "kind": "calculateField",
+                  "kind": "Transformation",
+                  "group": "calculateField",
                   "spec": {
-                    "id": "calculateField",
                     "options": {
                       "alias": "Last Collect",
                       "binary": {
@@ -4114,9 +4258,9 @@
                   }
                 },
                 {
-                  "kind": "convertFieldType",
+                  "kind": "Transformation",
+                  "group": "convertFieldType",
                   "spec": {
-                    "id": "convertFieldType",
                     "options": {
                       "conversions": [
                         {
@@ -4130,9 +4274,9 @@
                   }
                 },
                 {
-                  "kind": "formatTime",
+                  "kind": "Transformation",
+                  "group": "formatTime",
                   "spec": {
-                    "id": "formatTime",
                     "options": {
                       "outputFormat": "MM-DD HH:mm:ss",
                       "timeField": "Last Collect",
@@ -4141,9 +4285,9 @@
                   }
                 },
                 {
-                  "kind": "organize",
+                  "kind": "Transformation",
+                  "group": "organize",
                   "spec": {
-                    "id": "organize",
                     "options": {
                       "excludeByName": {
                         "Time": true,
@@ -4193,19 +4337,46 @@
                     }
                   }
                 }
-              ]
+              ],
+              "queryOptions": {}
             }
           },
-          "description": "",
-          "id": 35,
-          "links": [],
-          "title": "",
           "vizConfig": {
-            "group": "table",
             "kind": "VizConfig",
+            "group": "table",
+            "version": "13.0.1",
             "spec": {
+              "options": {
+                "cellHeight": "sm",
+                "showHeader": true,
+                "sortBy": []
+              },
               "fieldConfig": {
                 "defaults": {
+                  "mappings": [
+                    {
+                      "type": "value",
+                      "options": {
+                        "linux": {
+                          "text": "https://dl.sentrysoftware.com/public/linux-logo-mh.svg",
+                          "index": 1
+                        },
+                        "windows": {
+                          "text": "https://dl.sentrysoftware.com/public/windows-logo-mh.svg",
+                          "index": 0
+                        }
+                      }
+                    }
+                  ],
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "value": 0,
+                        "color": "green"
+                      }
+                    ]
+                  },
                   "color": {
                     "mode": "thresholds"
                   },
@@ -4219,30 +4390,6 @@
                       "reducers": []
                     },
                     "inspect": false
-                  },
-                  "mappings": [
-                    {
-                      "options": {
-                        "linux": {
-                          "index": 1,
-                          "text": "https://dl.sentrysoftware.com/public/linux-logo-mh.svg"
-                        },
-                        "windows": {
-                          "index": 0,
-                          "text": "https://dl.sentrysoftware.com/public/windows-logo-mh.svg"
-                        }
-                      },
-                      "type": "value"
-                    }
-                  ],
-                  "thresholds": {
-                    "mode": "absolute",
-                    "steps": [
-                      {
-                        "color": "green",
-                        "value": 0
-                      }
-                    ]
                   }
                 },
                 "overrides": [
@@ -4297,14 +4444,8 @@
                     ]
                   }
                 ]
-              },
-              "options": {
-                "cellHeight": "sm",
-                "showHeader": true,
-                "sortBy": []
               }
-            },
-            "version": "12.3.2"
+            }
           }
         }
       }
@@ -4316,6 +4457,7 @@
           {
             "kind": "RowsLayoutRow",
             "spec": {
+              "title": "Overview & Current Issues",
               "collapse": false,
               "layout": {
                 "kind": "GridLayout",
@@ -4324,129 +4466,129 @@
                     {
                       "kind": "GridLayoutItem",
                       "spec": {
+                        "x": 0,
+                        "y": 0,
+                        "width": 3,
+                        "height": 3,
                         "element": {
                           "kind": "ElementReference",
                           "name": "panel-139"
-                        },
-                        "height": 3,
-                        "width": 3,
-                        "x": 0,
-                        "y": 0
+                        }
                       }
                     },
                     {
                       "kind": "GridLayoutItem",
                       "spec": {
+                        "x": 3,
+                        "y": 0,
+                        "width": 11,
+                        "height": 9,
                         "element": {
                           "kind": "ElementReference",
                           "name": "panel-148"
-                        },
-                        "height": 9,
-                        "width": 11,
-                        "x": 3,
-                        "y": 0
+                        }
                       }
                     },
                     {
                       "kind": "GridLayoutItem",
                       "spec": {
+                        "x": 14,
+                        "y": 0,
+                        "width": 2,
+                        "height": 3,
                         "element": {
                           "kind": "ElementReference",
                           "name": "panel-141"
-                        },
-                        "height": 3,
-                        "width": 2,
-                        "x": 14,
-                        "y": 0
+                        }
                       }
                     },
                     {
                       "kind": "GridLayoutItem",
                       "spec": {
+                        "x": 16,
+                        "y": 0,
+                        "width": 3,
+                        "height": 3,
                         "element": {
                           "kind": "ElementReference",
                           "name": "panel-149"
-                        },
-                        "height": 3,
-                        "width": 3,
-                        "x": 16,
-                        "y": 0
+                        }
                       }
                     },
                     {
                       "kind": "GridLayoutItem",
                       "spec": {
+                        "x": 19,
+                        "y": 0,
+                        "width": 3,
+                        "height": 3,
                         "element": {
                           "kind": "ElementReference",
                           "name": "panel-147"
-                        },
-                        "height": 3,
-                        "width": 3,
-                        "x": 19,
-                        "y": 0
+                        }
                       }
                     },
                     {
                       "kind": "GridLayoutItem",
                       "spec": {
+                        "x": 22,
+                        "y": 0,
+                        "width": 2,
+                        "height": 3,
                         "element": {
                           "kind": "ElementReference",
                           "name": "panel-117"
-                        },
-                        "height": 3,
-                        "width": 2,
-                        "x": 22,
-                        "y": 0
+                        }
                       }
                     },
                     {
                       "kind": "GridLayoutItem",
                       "spec": {
+                        "x": 0,
+                        "y": 3,
+                        "width": 3,
+                        "height": 3,
                         "element": {
                           "kind": "ElementReference",
                           "name": "panel-140"
-                        },
-                        "height": 3,
-                        "width": 3,
-                        "x": 0,
-                        "y": 3
+                        }
                       }
                     },
                     {
                       "kind": "GridLayoutItem",
                       "spec": {
+                        "x": 14,
+                        "y": 3,
+                        "width": 10,
+                        "height": 6,
                         "element": {
                           "kind": "ElementReference",
                           "name": "panel-150"
-                        },
-                        "height": 6,
-                        "width": 10,
-                        "x": 14,
-                        "y": 3
+                        }
                       }
                     },
                     {
                       "kind": "GridLayoutItem",
                       "spec": {
+                        "x": 0,
+                        "y": 6,
+                        "width": 3,
+                        "height": 3,
                         "element": {
                           "kind": "ElementReference",
                           "name": "panel-151"
-                        },
-                        "height": 3,
-                        "width": 3,
-                        "x": 0,
-                        "y": 6
+                        }
                       }
                     }
                   ]
                 }
-              },
-              "title": "Overview & Current Issues"
+              }
             }
           },
           {
             "kind": "RowsLayoutRow",
             "spec": {
+              "title": "Alerts",
               "collapse": false,
               "layout": {
                 "kind": "GridLayout",
@@ -4455,25 +4597,25 @@
                     {
                       "kind": "GridLayoutItem",
                       "spec": {
+                        "x": 0,
+                        "y": 0,
+                        "width": 24,
+                        "height": 8,
                         "element": {
                           "kind": "ElementReference",
                           "name": "panel-175"
-                        },
-                        "height": 8,
-                        "width": 24,
-                        "x": 0,
-                        "y": 0
+                        }
                       }
                     }
                   ]
                 }
-              },
-              "title": "Alerts"
+              }
             }
           },
           {
             "kind": "RowsLayoutRow",
             "spec": {
+              "title": "Hosts",
               "collapse": false,
               "layout": {
                 "kind": "GridLayout",
@@ -4482,25 +4624,25 @@
                     {
                       "kind": "GridLayoutItem",
                       "spec": {
+                        "x": 0,
+                        "y": 0,
+                        "width": 24,
+                        "height": 15,
                         "element": {
                           "kind": "ElementReference",
                           "name": "panel-145"
-                        },
-                        "height": 15,
-                        "width": 24,
-                        "x": 0,
-                        "y": 0
+                        }
                       }
                     }
                   ]
                 }
-              },
-              "title": "Hosts"
+              }
             }
           },
           {
             "kind": "RowsLayoutRow",
             "spec": {
+              "title": "Filesystems",
               "collapse": false,
               "layout": {
                 "kind": "GridLayout",
@@ -4509,38 +4651,38 @@
                     {
                       "kind": "GridLayoutItem",
                       "spec": {
+                        "x": 0,
+                        "y": 0,
+                        "width": 15,
+                        "height": 7,
                         "element": {
                           "kind": "ElementReference",
                           "name": "panel-143"
-                        },
-                        "height": 7,
-                        "width": 15,
-                        "x": 0,
-                        "y": 0
+                        }
                       }
                     },
                     {
                       "kind": "GridLayoutItem",
                       "spec": {
+                        "x": 15,
+                        "y": 0,
+                        "width": 9,
+                        "height": 7,
                         "element": {
                           "kind": "ElementReference",
                           "name": "panel-173"
-                        },
-                        "height": 7,
-                        "width": 9,
-                        "x": 15,
-                        "y": 0
+                        }
                       }
                     }
                   ]
                 }
-              },
-              "title": "Filesystems"
+              }
             }
           },
           {
             "kind": "RowsLayoutRow",
             "spec": {
+              "title": "Disk Activity",
               "collapse": false,
               "layout": {
                 "kind": "GridLayout",
@@ -4549,51 +4691,51 @@
                     {
                       "kind": "GridLayoutItem",
                       "spec": {
+                        "x": 0,
+                        "y": 0,
+                        "width": 6,
+                        "height": 8,
                         "element": {
                           "kind": "ElementReference",
                           "name": "panel-168"
-                        },
-                        "height": 8,
-                        "width": 6,
-                        "x": 0,
-                        "y": 0
+                        }
                       }
                     },
                     {
                       "kind": "GridLayoutItem",
                       "spec": {
+                        "x": 6,
+                        "y": 0,
+                        "width": 6,
+                        "height": 8,
                         "element": {
                           "kind": "ElementReference",
                           "name": "panel-157"
-                        },
-                        "height": 8,
-                        "width": 6,
-                        "x": 6,
-                        "y": 0
+                        }
                       }
                     },
                     {
                       "kind": "GridLayoutItem",
                       "spec": {
+                        "x": 12,
+                        "y": 0,
+                        "width": 12,
+                        "height": 8,
                         "element": {
                           "kind": "ElementReference",
                           "name": "panel-164"
-                        },
-                        "height": 8,
-                        "width": 12,
-                        "x": 12,
-                        "y": 0
+                        }
                       }
                     }
                   ]
                 }
-              },
-              "title": "Disk Activity"
+              }
             }
           },
           {
             "kind": "RowsLayoutRow",
             "spec": {
+              "title": "Network Activity",
               "collapse": false,
               "layout": {
                 "kind": "GridLayout",
@@ -4602,51 +4744,51 @@
                     {
                       "kind": "GridLayoutItem",
                       "spec": {
+                        "x": 0,
+                        "y": 0,
+                        "width": 6,
+                        "height": 8,
                         "element": {
                           "kind": "ElementReference",
                           "name": "panel-166"
-                        },
-                        "height": 8,
-                        "width": 6,
-                        "x": 0,
-                        "y": 0
+                        }
                       }
                     },
                     {
                       "kind": "GridLayoutItem",
                       "spec": {
+                        "x": 6,
+                        "y": 0,
+                        "width": 6,
+                        "height": 8,
                         "element": {
                           "kind": "ElementReference",
                           "name": "panel-167"
-                        },
-                        "height": 8,
-                        "width": 6,
-                        "x": 6,
-                        "y": 0
+                        }
                       }
                     },
                     {
                       "kind": "GridLayoutItem",
                       "spec": {
+                        "x": 12,
+                        "y": 0,
+                        "width": 12,
+                        "height": 8,
                         "element": {
                           "kind": "ElementReference",
                           "name": "panel-163"
-                        },
-                        "height": 8,
-                        "width": 12,
-                        "x": 12,
-                        "y": 0
+                        }
                       }
                     }
                   ]
                 }
-              },
-              "title": "Network Activity"
+              }
             }
           },
           {
             "kind": "RowsLayoutRow",
             "spec": {
+              "title": "MetricsHub Agents Information",
               "collapse": false,
               "layout": {
                 "kind": "GridLayout",
@@ -4655,33 +4797,32 @@
                     {
                       "kind": "GridLayoutItem",
                       "spec": {
+                        "x": 0,
+                        "y": 0,
+                        "width": 21,
+                        "height": 4,
                         "element": {
                           "kind": "ElementReference",
                           "name": "panel-35"
-                        },
-                        "height": 4,
-                        "width": 22,
-                        "x": 0,
-                        "y": 0
+                        }
                       }
                     },
                     {
                       "kind": "GridLayoutItem",
                       "spec": {
+                        "x": 21,
+                        "y": 0,
+                        "width": 3,
+                        "height": 4,
                         "element": {
                           "kind": "ElementReference",
                           "name": "panel-128"
-                        },
-                        "height": 4,
-                        "width": 2,
-                        "x": 22,
-                        "y": 0
+                        }
                       }
                     }
                   ]
                 }
-              },
-              "title": "MetricsHub Agents Information"
+              }
             }
           }
         ]
@@ -4694,6 +4835,9 @@
       "System Overview"
     ],
     "timeSettings": {
+      "timezone": "browser",
+      "from": "now-7d",
+      "to": "now",
       "autoRefresh": "30s",
       "autoRefreshIntervals": [
         "5s",
@@ -4707,60 +4851,57 @@
         "2h",
         "1d"
       ],
-      "fiscalYearStartMonth": 0,
-      "from": "now-7d",
       "hideTimepicker": false,
-      "timezone": "",
-      "to": "now"
+      "fiscalYearStartMonth": 0
     },
     "title": "System Performance Metrics - Overview (MetricsHub)",
     "variables": [
       {
         "kind": "TextVariable",
         "spec": {
+          "name": "filesystemFilter",
           "current": {
             "text": ".*tmpfs|nfs.*|overlay",
             "value": ".*tmpfs|nfs.*|overlay"
           },
-          "description": "Excludes all filesystems whose type matches the specified regular expression",
-          "hide": "hideVariable",
-          "label": "Exclude Filesystem Types",
-          "name": "filesystemFilter",
           "query": ".*tmpfs|nfs.*|overlay",
-          "skipUrlSync": false
+          "label": "Exclude Filesystem Types",
+          "hide": "hideVariable",
+          "skipUrlSync": false,
+          "description": "Excludes all filesystems whose type matches the specified regular expression"
         }
       },
       {
         "kind": "QueryVariable",
         "spec": {
-          "allowCustomValue": true,
+          "name": "system",
           "current": {
             "text": "",
             "value": ""
           },
-          "definition": "label_values(system_uptime_seconds,os_type)",
           "hide": "hideVariable",
-          "includeAll": true,
-          "multi": true,
-          "name": "system",
-          "options": [],
+          "refresh": "onDashboardLoad",
+          "skipUrlSync": false,
           "query": {
-            "group": "prometheus",
             "kind": "DataQuery",
+            "group": "prometheus",
+            "version": "v0",
             "spec": {
               "qryType": 1,
               "query": "label_values(system_uptime_seconds,os_type)",
               "refId": "PrometheusVariableQueryEditor-VariableQuery"
-            },
-            "version": "v0"
+            }
           },
-          "refresh": "onDashboardLoad",
           "regex": "",
-          "skipUrlSync": false,
-          "sort": "disabled"
+          "regexApplyTo": "value",
+          "sort": "disabled",
+          "definition": "label_values(system_uptime_seconds,os_type)",
+          "options": [],
+          "multi": true,
+          "includeAll": true,
+          "allowCustomValue": true
         }
       }
     ]
-  },
-  "status": {}
+  }
 }
